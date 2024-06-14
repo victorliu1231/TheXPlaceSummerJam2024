@@ -1,0 +1,13 @@
+to-do list
+- after every level, minute hand ticks by one
+- second hand ticks every second
+
+ask
+- Carl how do you get a sprite to pivot around an edge (e.g. a clock hand)
+
+add
+- tutorial
+- particle effects
+- sfx
+- main menu
+- high score system
