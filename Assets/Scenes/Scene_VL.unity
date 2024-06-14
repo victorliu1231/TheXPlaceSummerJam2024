@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -348,6 +349,23 @@ MonoBehaviour:
   player: {fileID: 552248129}
   offset: {x: 0, y: 0, z: -10}
   smoothSpeed: 0.125
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 870b9a8f0f82f4f56800cc427bcd1025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scanLineJitter: 0
+  _verticalJump: 0
+  _horizontalShake: 0
+  _colorDrift: 0
+  _shader: {fileID: 4800000, guid: da33272284ea24f208f36998880990be, type: 3}
 --- !u!1 &549954125
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,9 +856,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a397bdd756e5484d99f468cfac8aab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inNextStageTransition: 0
+  nextStageShake: 0.2
+  nextStageTransitionDuration: 2
   secondHand: {fileID: 694751884}
   minuteHand: {fileID: 619006799}
   hourHand: {fileID: 134947912}
+  stageText: {fileID: 2110351976}
+  glitch: {fileID: 519420034}
   timeSlowdowns:
   - 1
   - 2
@@ -850,6 +873,7 @@ MonoBehaviour:
   - 40
   - 60
   stage: 0
+  currentTime: 0
 --- !u!1 &854151132
 GameObject:
   m_ObjectHideFlags: 0
@@ -1114,7 +1138,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -2080,8 +2104,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -719.8, y: 403.22}
-  m_SizeDelta: {x: 458.39, y: 257.57}
+  m_AnchoredPosition: {x: -882.79, y: 496.5}
+  m_SizeDelta: {x: 132.4, y: 71.01}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2110351976
 MonoBehaviour:
@@ -2105,8 +2129,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Stage 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 27f54c9130c9748c9be53df11fa03382, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_fontAsset: {fileID: 11400000, guid: cf570010b29d0e647ae3c3613344e498, type: 2}
+  m_sharedMaterial: {fileID: -8391152487728178958, guid: cf570010b29d0e647ae3c3613344e498, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2156,7 +2180,7 @@ MonoBehaviour:
   checkPaddingRequired: 0
   m_isRichText: 1
   m_parseCtrlCharacters: 1
-  m_isOrthographic: 0
+  m_isOrthographic: 1
   m_isCullingEnabled: 0
   m_horizontalMapping: 0
   m_verticalMapping: 0
@@ -2169,7 +2193,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2110351977

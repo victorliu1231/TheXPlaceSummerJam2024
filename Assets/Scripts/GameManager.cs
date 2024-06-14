@@ -1,13 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using Kino;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Cutscene")]
+    public bool inNextStageTransition = false;
+    public float nextStageShake = 0.1f;
+    public float nextStageTransitionDuration = 1f;
     [Header("Time")]
     public Transform secondHand;
     public Transform minuteHand;
     public Transform hourHand;
+    public TextMeshProUGUI stageText;
+    public AnalogGlitch glitch;
     public const int hoursInDay = 12, minutesInHour = 60, secondsInMinute = 60;
     [Tooltip("The time slow multiplier for the game. 1 is normal time, 2 is twice as slow, 3 is three times as slow, etc.")]
     public float[] timeSlowdowns = new float[3]{1f, 2f, 3f};
@@ -16,8 +24,22 @@ public class GameManager : MonoBehaviour
     [Tooltip("The stage of the level you are on. 0 is the first stage, 1 is the second stage, etc.")]
     public int stage = 0;
     float totalTime = 0f;
-    float currentTime = 0f;
+    public float currentTime = 0f;
     const float hoursToDegrees = 360f / hoursInDay, minutesToDegrees = 360 / minutesInHour, secondsToDegrees = 360 / secondsInMinute;
+
+    void Start(){
+        ResetLevel();
+    }
+
+    public void ResetLevel(){
+        stage = 0;
+        currentTime = 0f;
+        stageText.text = "Stage 1";
+        glitch.scanLineJitter = 0f;
+        glitch.horizontalShake = 0f;
+        glitch.colorDrift = 0f;
+        glitch.verticalJump = 0f;
+    }
 
     float GetHour(){
         return (currentTime / secondsInMinute / minutesInHour) % hoursInDay;
@@ -34,14 +56,34 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         totalTime += Time.deltaTime;
-        currentTime += Time.deltaTime / timeSlowdowns[stage];
-        hourHand.localRotation = Quaternion.Euler(0, 0, -GetHour()*hoursToDegrees);
-        minuteHand.localRotation = Quaternion.Euler(0, 0, -GetMinute()*minutesToDegrees);
-        secondHand.localRotation = Quaternion.Euler(0, 0, -GetSecond()*secondsToDegrees);
-        if (currentTime >= stageEndTimes[stage]){
-            stage++;
+        if (!inNextStageTransition){
+            currentTime += Time.deltaTime / timeSlowdowns[stage];
+            hourHand.localRotation = Quaternion.Euler(0, 0, -GetHour()*hoursToDegrees);
+            minuteHand.localRotation = Quaternion.Euler(0, 0, -GetMinute()*minutesToDegrees);
+            secondHand.localRotation = Quaternion.Euler(0, 0, -GetSecond()*secondsToDegrees);
+            if (currentTime >= stageEndTimes[stage]){
+                StartCoroutine(NextStage());
+            }
         }
     }
 
+    IEnumerator NextStage(){
+        inNextStageTransition = true;
+        stage++;
+        stageText.text = "Stage " + (stage+1);
+        glitch.horizontalShake = nextStageShake;
+        glitch.scanLineJitter += 0.15f;
+        glitch.colorDrift = 1f;
+        glitch.verticalJump = 1f;
+        yield return new WaitForSeconds(nextStageTransitionDuration);
+        glitch.horizontalShake = 0f;
+        glitch.colorDrift = 0f;
+        glitch.verticalJump = 0f;
+        inNextStageTransition = false;
+    }
 
+    [ContextMenu("Test Next Stage")]
+    public void TestNextStage(){
+        StartCoroutine(NextStage());
+    }
 }
