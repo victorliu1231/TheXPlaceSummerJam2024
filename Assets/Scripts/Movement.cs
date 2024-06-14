@@ -35,4 +35,10 @@ public class Movement : MonoBehaviour
         }
         transform.position = new Vector3(transform.position.x + horizontal, transform.position.y + vertical, transform.position.z);
     }
+
+    void OnCollisionExit2D(Collision2D collision){
+        if (collision.gameObject.tag == "Wall"){
+            transform.rotation = Quaternion.identity;
+        }
+    }
 }

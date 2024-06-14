@@ -1,6 +1,7 @@
 to-do list
 - after every level, minute hand ticks by one
 - second hand ticks every second
+- hour hand has functionality with different maps (black hole, galaxy)
 
 ask
 - Carl how do you get a sprite to pivot around an edge (e.g. a clock hand)
