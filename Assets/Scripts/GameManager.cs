@@ -6,26 +6,29 @@ using Kino;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Cutscene")]
+    [Header("Level")]
+    public int level = 0;
+    public float nextLevelTransitionDuration = 2f;
+    public TextMeshProUGUI levelText;
+    [Header("Stage")]
     public bool inNextStageTransition = false;
-    public float nextStageShake = 0.1f;
-    public float nextStageTransitionDuration = 1f;
+    public float nextStageTransitionDuration = 2f;
+    public int stage = 0;
+    [Tooltip("The time slow multiplier for the game. 1 is normal time, 2 is twice as slow, 3 is three times as slow, etc.")]
+    public float[] timeSlowdowns = new float[3]{1f, 2f, 3f};
+    [Tooltip("The time in seconds that each stage ends at.")]
+    public float[] stageEndTimes = new float[3]{20f, 40f, 60f};
     [Header("Time")]
     public Transform secondHand;
     public Transform minuteHand;
     public Transform hourHand;
     public TextMeshProUGUI stageText;
-    public AnalogGlitch glitch;
     public const int hoursInDay = 12, minutesInHour = 60, secondsInMinute = 60;
-    [Tooltip("The time slow multiplier for the game. 1 is normal time, 2 is twice as slow, 3 is three times as slow, etc.")]
-    public float[] timeSlowdowns = new float[3]{1f, 2f, 3f};
-    [Tooltip("The time in seconds that each stage ends at.")]
-    public float[] stageEndTimes = new float[3]{20f, 40f, 60f};
-    [Tooltip("The stage of the level you are on. 0 is the first stage, 1 is the second stage, etc.")]
-    public int stage = 0;
     float totalTime = 0f;
     public float currentTime = 0f;
     const float hoursToDegrees = 360f / hoursInDay, minutesToDegrees = 360 / minutesInHour, secondsToDegrees = 360 / secondsInMinute;
+    [Header("Misc")]
+    public AnalogGlitch glitch;
 
     void Start(){
         ResetLevel();
@@ -35,6 +38,7 @@ public class GameManager : MonoBehaviour
         stage = 0;
         currentTime = 0f;
         stageText.text = "Stage 1";
+        levelText.text = "Level 1";
         glitch.scanLineJitter = 0f;
         glitch.horizontalShake = 0f;
         glitch.colorDrift = 0f;
@@ -65,13 +69,17 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(NextStage());
             }
         }
+        if (currentTime >= 60f){
+            ResetLevel();
+            StartCoroutine(NextLevel());
+        }
     }
 
     IEnumerator NextStage(){
         inNextStageTransition = true;
         stage++;
         stageText.text = "Stage " + (stage+1);
-        glitch.horizontalShake = nextStageShake;
+        glitch.horizontalShake = 0.1f;
         glitch.scanLineJitter += 0.15f;
         glitch.colorDrift = 1f;
         glitch.verticalJump = 1f;
@@ -85,5 +93,20 @@ public class GameManager : MonoBehaviour
     [ContextMenu("Test Next Stage")]
     public void TestNextStage(){
         StartCoroutine(NextStage());
+    }
+
+    IEnumerator NextLevel(){
+        level++;
+        levelText.text = "Level " + (level + 1);
+        glitch.scanLineJitter = 1f;
+        glitch.verticalJump = 1f;
+        yield return new WaitForSeconds(nextLevelTransitionDuration);
+        glitch.scanLineJitter = 0f;
+        glitch.verticalJump = 0f;
+    }
+
+    [ContextMenu("Test Next Level")]
+    public void TestNextLevel(){
+        StartCoroutine(NextLevel());
     }
 }
