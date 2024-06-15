@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1030178012815371284}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -138,7 +138,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -168,7 +168,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownDuration: 0.5
   weaponType: 0
-  animName: Club_Attack
+  minRotateAngle: -45
+  maxRotateAngle: 45
   meleeDamage: 10
   meleeAnimationTime: 0.4
   hitParticles: {fileID: 3588011392971140670}
@@ -202,7 +203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7485119826907495160, guid: bc39da201042b5e47833da1d5b7ed317, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.435
       objectReference: {fileID: 0}
     - target: {fileID: 7485119826907495160, guid: bc39da201042b5e47833da1d5b7ed317, type: 3}
       propertyPath: m_LocalPosition.y

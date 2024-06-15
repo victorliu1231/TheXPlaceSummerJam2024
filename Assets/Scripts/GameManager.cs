@@ -6,6 +6,8 @@ using Kino;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager _instance;
+	public static GameManager Instance { get { return _instance; } }
     [Header("Level")]
     public int level = 0;
     public float nextLevelTransitionDuration = 2f;
@@ -30,9 +32,17 @@ public class GameManager : MonoBehaviour
     public AnalogGlitch glitch;
     public bool inTransition = false;
 
-    void Start(){
-        ResetLevel();
-        StartCoroutine(TickSecondHand());
+    void Awake() {
+        if (_instance != null && _instance != this) {
+            Destroy(this.gameObject);
+        }
+        else {
+            _instance = this;
+            DontDestroyOnLoad(_instance);
+
+            ResetLevel();
+            StartCoroutine(TickSecondHand());
+        }
     }
 
     public void ResetLevel(){

@@ -18,9 +18,9 @@ public class Enemy : Entity
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other){
-        if (other.tag == "Player"){
-            other.GetComponent<Player>().TakeDamage(damage, transform.position);
+    void OnCollisionEnter2D(Collision2D other){
+        if (other.gameObject.tag == "Player"){
+            other.gameObject.GetComponent<Player>().TakeDamage(damage, transform.position);
         }
     }
 }

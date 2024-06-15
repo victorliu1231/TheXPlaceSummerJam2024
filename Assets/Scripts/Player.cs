@@ -10,24 +10,28 @@ public class Player : Entity
     public Transform upWeaponBinding;
     public Transform downWeaponBinding;
 
+
     void Start(){
         base.Start();
         anim = GetComponent<Animator>();
+        weaponInHand = GetComponentInChildren<Weapon>();
+        if (weaponInHand != null) weaponInHand.transform.SetParent(sideWeaponBinding);
     }
 
     // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal") * speed;
-        float vertical = Input.GetAxis("Vertical") * speed;
-        if (anim != null){
+        if (!GameManager.Instance.inTransition){
+            float horizontal = Input.GetAxis("Horizontal") * speed;
+            float vertical = Input.GetAxis("Vertical") * speed;
             if (horizontal != 0){
                 anim.Play("Player_Run_Right");
                 Vector3 newScale = transform.localScale;
                 newScale.x = horizontal < 0 ? -1f : 1f;
                 transform.localScale = newScale;
+                weaponInHand.transform.SetParent(sideWeaponBinding);
             }
-            else if (vertical > 0){
+            if (vertical > 0){
                 anim.Play("Player_Run_Up");
                 weaponInHand.transform.SetParent(upWeaponBinding);
             }
@@ -35,12 +39,8 @@ public class Player : Entity
                 anim.Play("Player_Run_Down");
                 weaponInHand.transform.SetParent(downWeaponBinding);
             }
-            else {
-                anim.Play("Player_Idle");
-                weaponInHand.transform.SetParent(sideWeaponBinding);
-            }
+            transform.position = new Vector3(transform.position.x + horizontal, transform.position.y + vertical, transform.position.z);
         }
-        transform.position = new Vector3(transform.position.x + horizontal, transform.position.y + vertical, transform.position.z);
     }
 
     void OnCollisionExit2D(Collision2D collision){

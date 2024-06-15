@@ -20,9 +20,9 @@ public class Bullet : MonoBehaviour
         transform.position = new Vector3(transform.position.x + speed * Time.deltaTime, transform.position.y, transform.position.z);
     }
 
-    void OnTriggerEnter2D(Collider2D other){
-        if (other.tag == "Enemy" || other.tag == "Wall"){
-            if (other.tag == "Enemy") other.GetComponent<Enemy>().TakeDamage(damage, transform.position);
+    void OnCollisionEnter2D(Collision2D other){
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Wall"){
+            if (other.gameObject.tag == "Enemy") other.gameObject.GetComponent<Enemy>().TakeDamage(damage, transform.position);
             if (hitParticles != null) hitParticles.Play();
             spriteRenderer.enabled = false;
             Destroy(gameObject, hitParticleLifetime);

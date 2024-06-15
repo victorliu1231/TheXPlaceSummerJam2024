@@ -8,26 +8,34 @@ public class Weapon : MonoBehaviour
     public float cooldownDuration;
     public enum WeaponType {Melee, Ranged};
     public WeaponType weaponType;
+    public float minRotateAngle;
+    public float maxRotateAngle;
     private Animator anim;
     private float cooldownTimer = 0f;
+    private Transform player;
 
     public void Start(){
         anim = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
     public void Update()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 lookDir = mousePos - transform.position;
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
-        cooldownTimer += Time.deltaTime;
+        if (!GameManager.Instance.inTransition){
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 lookDir = (mousePos - transform.position) * player.localScale.x;
+            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+            if (angle < minRotateAngle) angle = minRotateAngle;
+            if (angle > maxRotateAngle) angle = maxRotateAngle;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+            cooldownTimer += Time.deltaTime;
 
-        if (Input.GetMouseButtonDown(0)){
-            if (cooldownTimer >= cooldownDuration){
-                Attack();
-                cooldownTimer = 0f;
+            if (Input.GetMouseButtonDown(0)){
+                if (cooldownTimer >= cooldownDuration){
+                    Attack();
+                    cooldownTimer = 0f;
+                }
             }
         }
     }

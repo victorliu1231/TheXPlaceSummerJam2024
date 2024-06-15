@@ -2,8 +2,7 @@ to-do list
 - hour hand has functionality with different maps (black hole, galaxy)
 - endless wave of mobs spawning around circle of clock
 - port over mmprogressbar and mmhealthbar scripts?
-- fix ui with weapon rotations not working properly when movement direction changes
-- fix outer clock no longer being collidable
+- fix ui with weapons looking weird when looking up and down
 
 add
 - tutorial

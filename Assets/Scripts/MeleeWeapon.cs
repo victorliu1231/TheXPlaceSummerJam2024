@@ -27,10 +27,14 @@ public class MeleeWeapon : Weapon
         collider.enabled = false;
     }
 
-    void OnTriggerEnter2D(Collider2D other){
-        if (other.tag == "Enemy" || other.tag == "Wall"){
-            if (other.tag == "Enemy") other.GetComponent<Enemy>().TakeDamage(meleeDamage, transform.position);
-            if (hitParticles != null) hitParticles.Play();
+    void OnCollisionEnter2D(Collision2D other){
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Wall"){
+            if (other.gameObject.tag == "Enemy") other.gameObject.GetComponent<Enemy>().TakeDamage(meleeDamage, transform.position);
+            Invoke("PlayParticles", meleeAnimationTime);
         }
+    }
+
+    void PlayParticles(){
+        if (hitParticles != null) hitParticles.Play();
     }
 }

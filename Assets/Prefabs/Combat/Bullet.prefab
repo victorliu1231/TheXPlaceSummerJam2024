@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6807006906863952783}
   - component: {fileID: 7546781710895800468}
   - component: {fileID: 2814110576402638877}
+  - component: {fileID: 8476782201863692484}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -99,10 +100,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  speed: 0.1
+  speed: 10
   lifetime: 5
   hitParticles: {fileID: 7275417440578314907}
   hitParticleLifetime: 0.5
+--- !u!65 &8476782201863692484
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5488736018931721027}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.24, y: 0.12, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6552417555271235253
 PrefabInstance:
   m_ObjectHideFlags: 0
