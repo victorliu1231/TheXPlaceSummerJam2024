@@ -144,7 +144,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.3148148, y: 0.35291234}
     oldSize: {x: 1.09375, y: 1.0375}
     newSize: {x: 3.5, y: 3.32}
     adaptiveTilingThreshold: 0.5
@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownDuration: 0.5
   weaponType: 0
+  animName: Club_Attack
   meleeDamage: 10
   meleeAnimationTime: 0.4
   hitParticles: {fileID: 3588011392971140670}

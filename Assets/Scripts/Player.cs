@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player : Entity
 {
     private Animator anim;
-    private SpriteRenderer spriteRenderer;
     public Weapon weaponInHand;
     public Transform sideWeaponBinding;
     public Transform upWeaponBinding;
@@ -14,7 +13,6 @@ public class Player : Entity
     void Start(){
         base.Start();
         anim = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -25,7 +23,9 @@ public class Player : Entity
         if (anim != null){
             if (horizontal != 0){
                 anim.Play("Player_Run_Right");
-                if (spriteRenderer != null) spriteRenderer.flipX = horizontal < 0;
+                Vector3 newScale = transform.localScale;
+                newScale.x = horizontal < 0 ? -1f : 1f;
+                transform.localScale = newScale;
             }
             else if (vertical > 0){
                 anim.Play("Player_Run_Up");

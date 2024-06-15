@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other){
         if (other.tag == "Enemy" || other.tag == "Wall"){
-            other.GetComponent<Enemy>().TakeDamage(damage, transform.position);
+            if (other.tag == "Enemy") other.GetComponent<Enemy>().TakeDamage(damage, transform.position);
             if (hitParticles != null) hitParticles.Play();
             spriteRenderer.enabled = false;
             Destroy(gameObject, hitParticleLifetime);

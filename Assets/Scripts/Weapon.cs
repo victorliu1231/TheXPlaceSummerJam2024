@@ -9,11 +9,10 @@ public class Weapon : MonoBehaviour
     public enum WeaponType {Melee, Ranged};
     public WeaponType weaponType;
     private Animator anim;
-    private Collider2D collider;
+    private float cooldownTimer = 0f;
 
     public void Start(){
         anim = GetComponent<Animator>();
-        anim.enabled = false;
     }
 
     // Update is called once per frame
@@ -23,12 +22,19 @@ public class Weapon : MonoBehaviour
         Vector3 lookDir = mousePos - transform.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
+        cooldownTimer += Time.deltaTime;
 
         if (Input.GetMouseButtonDown(0)){
-            if (anim != null){
-                anim.enabled = false;
-                anim.enabled = true;
+            if (cooldownTimer >= cooldownDuration){
+                Attack();
+                cooldownTimer = 0f;
             }
+        }
+    }
+
+    public virtual void Attack(){
+        if (anim != null){
+            anim.SetTrigger("Active");
         }
     }
 }

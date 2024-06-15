@@ -11,14 +11,9 @@ public class RangedWeapon : Weapon
         base.Start();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        base.Update();
-
-        if (Input.GetMouseButtonDown(0)){
-            if (weaponType == WeaponType.Ranged) RangedAttack();
-        }
+    public override void Attack(){
+        base.Attack();
+        if (weaponType == WeaponType.Ranged) RangedAttack();
     }
 
     void RangedAttack(){

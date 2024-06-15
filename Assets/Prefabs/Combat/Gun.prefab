@@ -121,4 +121,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownDuration: 0.5
   weaponType: 1
+  animName: Gun_Fire
   bulletPrefab: {fileID: 5488736018931721027, guid: cdf623efaa86af7458efbba1e4a533d3, type: 3}

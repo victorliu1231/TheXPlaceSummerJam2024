@@ -16,14 +16,9 @@ public class MeleeWeapon : Weapon
         if (collider != null) collider.enabled = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        base.Update();
-
-        if (Input.GetMouseButtonDown(0)){
-            if (weaponType == WeaponType.Melee) StartCoroutine(MeleeAttack());
-        }
+    public override void Attack(){
+        base.Attack();
+        if (weaponType == WeaponType.Melee) StartCoroutine(MeleeAttack());
     }
 
     IEnumerator MeleeAttack(){
@@ -34,7 +29,7 @@ public class MeleeWeapon : Weapon
 
     void OnTriggerEnter2D(Collider2D other){
         if (other.tag == "Enemy" || other.tag == "Wall"){
-            other.GetComponent<Enemy>().TakeDamage(meleeDamage, transform.position);
+            if (other.tag == "Enemy") other.GetComponent<Enemy>().TakeDamage(meleeDamage, transform.position);
             if (hitParticles != null) hitParticles.Play();
         }
     }
