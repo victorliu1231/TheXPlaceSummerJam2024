@@ -10,6 +10,7 @@ public class Weapon : MonoBehaviour
     public WeaponType weaponType;
     public float minRotateAngle;
     public float maxRotateAngle;
+    public GameObject weaponCollectible;
     private Animator anim;
     private float cooldownTimer = 0f;
     private Transform player;

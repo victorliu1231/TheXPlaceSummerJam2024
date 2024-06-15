@@ -17,11 +17,14 @@ public class Bullet : MonoBehaviour
     }
 
     void Update(){
-        transform.position = new Vector3(transform.position.x + speed * Time.deltaTime, transform.position.y, transform.position.z);
+        // Move transform based on rotation
+        transform.position += transform.right * speed * Time.deltaTime;
     }
 
     void OnCollisionEnter2D(Collision2D other){
+        Debug.Log("ok");
         if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Wall"){
+            Debug.Log("why");
             if (other.gameObject.tag == "Enemy") other.gameObject.GetComponent<Enemy>().TakeDamage(damage, transform.position);
             if (hitParticles != null) hitParticles.Play();
             spriteRenderer.enabled = false;

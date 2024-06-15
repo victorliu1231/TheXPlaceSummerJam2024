@@ -11,14 +11,17 @@ public class Entity : MonoBehaviour
     public bool canTakeKnockback = true;
     public float knockbackForce;
     public ParticleSystem damagedParticles;
+    public MMHealthBar healthbar;
 
     public void Start(){
         currentHealth = maxHealth;
+        if (healthbar == null) healthbar = GetComponentInChildren<MMHealthBar>();
     }
 
     public void TakeDamage(float damage, Vector2 attackerPosition){
         if (!invincible){
             currentHealth -= damage;
+            healthbar.UpdateBar(currentHealth, 0, maxHealth, true);
             if (currentHealth <= 0){
                 Die();
             }

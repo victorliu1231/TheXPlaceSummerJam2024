@@ -53,4 +53,20 @@ public class Player : Entity
             transform.rotation = Quaternion.identity;
         }
     }
+
+    void OnTriggerEnter2D(Collider2D collider){
+        if (collider.gameObject.tag == "Collectible"){
+            WeaponCollectible weaponCollectible = collider.gameObject.GetComponent<WeaponCollectible>();
+            if (weaponCollectible != null){
+                Transform bindingParent = weaponInHand.transform.parent;
+                GameObject droppedWeaponCollectible = Instantiate(weaponInHand.weaponCollectible, transform.position, Quaternion.identity);
+                // Need below statemate to prevent the weapon from being collected again
+                droppedWeaponCollectible.GetComponent<WeaponCollectible>().isCollectible = false;
+
+                weaponInHand = weaponCollectible.weaponPrefab.GetComponent<Weapon>();
+                weaponInHand.transform.SetParent(bindingParent);
+                Destroy(collider.gameObject);
+            }
+        }
+    }
 }

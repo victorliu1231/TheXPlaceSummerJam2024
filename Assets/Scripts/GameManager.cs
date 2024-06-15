@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
         stage++;
         stageText.text = "Stage " + (stage+1);
         glitch.horizontalShake = 0.1f;
-        glitch.scanLineJitter += 0.15f;
+        glitch.scanLineJitter += 0.1f;
         glitch.colorDrift = 1f;
         glitch.verticalJump = 0.4f;
         yield return new WaitForSeconds(nextStageTransitionDuration);

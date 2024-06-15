@@ -1,8 +1,10 @@
 to-do list
 - hour hand has functionality with different maps (black hole, galaxy)
-- endless wave of mobs spawning around circle of clock
-- port over mmprogressbar and mmhealthbar scripts?
+- healthbar for player weird
 - fix ui with guns looking weird when looking up and down
+- have enemies also do weaponinhand
+- bullets not colliding with walls
+- rebalance hit radii
 
 add
 - tutorial
