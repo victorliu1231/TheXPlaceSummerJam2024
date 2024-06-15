@@ -26,8 +26,13 @@ public class Weapon : MonoBehaviour
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3 lookDir = (mousePos - transform.position) * player.localScale.x;
             float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
-            if (angle < minRotateAngle) angle = minRotateAngle;
-            if (angle > maxRotateAngle) angle = maxRotateAngle;
+            float rePositionAngle;
+            Player playerComponent = player.GetComponent<Player>();
+            if (playerComponent.faceDirection == Player.FaceDirection.Left || playerComponent.faceDirection == Player.FaceDirection.Right) rePositionAngle = 0f;
+            else if (playerComponent.faceDirection == Player.FaceDirection.Up) rePositionAngle = 90f;
+            else rePositionAngle = -90f;
+            if (angle < minRotateAngle + rePositionAngle) angle = minRotateAngle + rePositionAngle;
+            if (angle > maxRotateAngle + rePositionAngle) angle = maxRotateAngle + rePositionAngle;
             transform.rotation = Quaternion.Euler(0, 0, angle);
             cooldownTimer += Time.deltaTime;
 
