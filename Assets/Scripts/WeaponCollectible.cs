@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponCollectible : MonoBehaviour{
-    public Weapon weaponPrefab;
-    public bool isCollectible = true;
+    public GameObject weaponPrefab;
+    private Collider2D collider;
 
-    void OnTriggerExit2D(Collider2D collider){
-        if (collider.gameObject.tag == "Player"){
-            isCollectible = true;
-        }
+    void Start(){
+        collider = GetComponent<Collider2D>();
+        collider.enabled = false;
+        Invoke("EnableCollider", 1f);
+    }
+
+    void EnableCollider(){
+        collider.enabled = true;
     }
 }

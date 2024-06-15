@@ -60,11 +60,12 @@ public class Player : Entity
             if (weaponCollectible != null){
                 Transform bindingParent = weaponInHand.transform.parent;
                 GameObject droppedWeaponCollectible = Instantiate(weaponInHand.weaponCollectible, transform.position, Quaternion.identity);
-                // Need below statemate to prevent the weapon from being collected again
-                droppedWeaponCollectible.GetComponent<WeaponCollectible>().isCollectible = false;
+                foreach (Transform child in bindingParent){
+                    Destroy(child.gameObject);
+                }
 
-                weaponInHand = weaponCollectible.weaponPrefab.GetComponent<Weapon>();
-                weaponInHand.transform.SetParent(bindingParent);
+                GameObject newWeapon = Instantiate(weaponCollectible.weaponPrefab, transform.position, Quaternion.identity, bindingParent);
+                weaponInHand = newWeapon.GetComponent<Weapon>();
                 Destroy(collider.gameObject);
             }
         }

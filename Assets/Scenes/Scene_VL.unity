@@ -841,7 +841,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &536675703
 Transform:
   m_ObjectHideFlags: 0
@@ -989,6 +989,7 @@ MonoBehaviour:
   upWeaponBinding: {fileID: 879797827}
   downWeaponBinding: {fileID: 1952251984}
   faceDirection: 0
+  droppedWeaponOffset: {x: 1, y: 0, z: 0}
 --- !u!212 &552248126
 SpriteRenderer:
   m_ObjectHideFlags: 0

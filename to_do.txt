@@ -5,6 +5,7 @@ to-do list
 - have enemies also do weaponinhand
 - bullets not colliding with walls
 - rebalance hit radii
+- weird bug with duplication of picked up weapons
 
 add
 - tutorial
