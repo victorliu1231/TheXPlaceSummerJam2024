@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class Player : Entity
 {
-    public float speed;
     private Animator anim;
     private SpriteRenderer spriteRenderer;
+    public Weapon weaponInHand;
+    public Transform sideWeaponBinding;
+    public Transform upWeaponBinding;
+    public Transform downWeaponBinding;
 
     void Start(){
+        base.Start();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -25,12 +29,15 @@ public class Movement : MonoBehaviour
             }
             else if (vertical > 0){
                 anim.Play("Player_Run_Up");
+                weaponInHand.transform.SetParent(upWeaponBinding);
             }
             else if (vertical < 0){
                 anim.Play("Player_Run_Down");
+                weaponInHand.transform.SetParent(downWeaponBinding);
             }
             else {
                 anim.Play("Player_Idle");
+                weaponInHand.transform.SetParent(sideWeaponBinding);
             }
         }
         transform.position = new Vector3(transform.position.x + horizontal, transform.position.y + vertical, transform.position.z);

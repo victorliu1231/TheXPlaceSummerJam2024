@@ -1,10 +1,7 @@
 to-do list
-- after every level, minute hand ticks by one
 - hour hand has functionality with different maps (black hole, galaxy)
 - endless wave of mobs spawning around circle of clock
-
-ask
-- Carl how do you get a sprite to pivot around an edge (e.g. a clock hand)
+- port over mmprogressbar and mmhealthbar scripts?
 
 add
 - tutorial
