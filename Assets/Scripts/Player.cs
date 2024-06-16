@@ -34,7 +34,7 @@ public class Player : Entity
                 faceDirection = horizontal < 0 ? FaceDirection.Left : FaceDirection.Right;
                 weaponInHand.transform.SetParent(sideWeaponBinding);
             }
-            if (vertical > 0){
+            else if (vertical > 0){
                 anim.Play("Player_Run_Up");
                 faceDirection = FaceDirection.Up;
                 weaponInHand.transform.SetParent(upWeaponBinding);

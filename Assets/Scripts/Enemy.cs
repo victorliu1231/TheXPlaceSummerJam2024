@@ -6,6 +6,7 @@ public class Enemy : Entity
 {
     public float damage;
     public Transform target;
+    public bool canCauseKnockback = true;
 
     void Start(){
         base.Start();
@@ -20,7 +21,7 @@ public class Enemy : Entity
 
     void OnCollisionEnter2D(Collision2D other){
         if (other.gameObject.tag == "Player"){
-            other.gameObject.GetComponent<Player>().TakeDamage(damage, transform.position);
+            other.gameObject.GetComponent<Player>().TakeDamage(damage, transform.position, canCauseKnockback);
         }
     }
 }

@@ -1,11 +1,12 @@
 to-do list
 - hour hand has functionality with different maps (black hole, galaxy)
-- healthbar for player weird
+- healthbar for player weird and not persisting 
 - fix ui with guns looking weird when looking up and down
 - have enemies also do weaponinhand
 - bullets not colliding with walls
-- rebalance hit radii
+- rebalance hit radii with melee weapons
 - weird bug with duplication of picked up weapons
+- bullet still doesn't hit enemies for some reason :/
 
 add
 - tutorial

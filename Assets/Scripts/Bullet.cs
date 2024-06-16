@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     public float lifetime;
     public ParticleSystem hitParticles;
     public float hitParticleLifetime;
+    public bool canCauseKnockback = true;
     private SpriteRenderer spriteRenderer;
 
     void Start(){
@@ -21,11 +22,9 @@ public class Bullet : MonoBehaviour
         transform.position += transform.right * speed * Time.deltaTime;
     }
 
-    void OnCollisionEnter2D(Collision2D other){
-        Debug.Log("ok");
+    void OnTriggerEnter2D(Collider2D other){
         if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Wall"){
-            Debug.Log("why");
-            if (other.gameObject.tag == "Enemy") other.gameObject.GetComponent<Enemy>().TakeDamage(damage, transform.position);
+            if (other.gameObject.tag == "Enemy") other.gameObject.GetComponent<Enemy>().TakeDamage(damage, transform.position, this);
             if (hitParticles != null) hitParticles.Play();
             spriteRenderer.enabled = false;
             Destroy(gameObject, hitParticleLifetime);

@@ -5,7 +5,8 @@ using UnityEngine;
 public class RangedWeapon : Weapon
 {
     [Header("Ranged Stats")]
-    public GameObject bulletPrefab;
+    [Tooltip("The prefab that will damage enemies")]
+    public GameObject prefab;
 
     void Start(){
         base.Start();
@@ -17,6 +18,6 @@ public class RangedWeapon : Weapon
     }
 
     void RangedAttack(){
-        Instantiate(bulletPrefab, transform.position, transform.rotation);
+        Instantiate(prefab, transform.position, transform.rotation);
     }
 }

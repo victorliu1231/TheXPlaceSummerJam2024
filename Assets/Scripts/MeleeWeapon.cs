@@ -8,6 +8,7 @@ public class MeleeWeapon : Weapon
     public float meleeDamage;
     public float meleeAnimationTime;
     public ParticleSystem hitParticles;
+    public bool canCauseKnockback = true;
     private Collider2D collider;
 
     void Start(){
@@ -29,7 +30,7 @@ public class MeleeWeapon : Weapon
 
     void OnCollisionEnter2D(Collision2D other){
         if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Wall"){
-            if (other.gameObject.tag == "Enemy") other.gameObject.GetComponent<Enemy>().TakeDamage(meleeDamage, transform.position);
+            if (other.gameObject.tag == "Enemy") other.gameObject.GetComponent<Enemy>().TakeDamage(meleeDamage, transform.position, canCauseKnockback);
             Invoke("PlayParticles", meleeAnimationTime);
         }
     }

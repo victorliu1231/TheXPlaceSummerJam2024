@@ -18,7 +18,7 @@ public class Entity : MonoBehaviour
         if (healthbar == null) healthbar = GetComponentInChildren<MMHealthBar>();
     }
 
-    public void TakeDamage(float damage, Vector2 attackerPosition){
+    public void TakeDamage(float damage, Vector2 attackerPosition, bool canCauseKnockback){
         if (!invincible){
             currentHealth -= damage;
             healthbar.UpdateBar(currentHealth, 0, maxHealth, true);
@@ -27,7 +27,7 @@ public class Entity : MonoBehaviour
             }
             damagedParticles.Play();
             // take knockback based on position of attacker and knockback force and modify transform.position
-            if (canTakeKnockback){
+            if (canTakeKnockback && canCauseKnockback){
                 Vector2 knockbackDirection = (new Vector2(transform.position.x, transform.position.y) - attackerPosition).normalized;
                 // modify position of entity instead of using rigidbody dynamics
                 transform.position = new Vector3(transform.position.x + knockbackDirection.x * knockbackForce, transform.position.y + knockbackDirection.y * knockbackForce, transform.position.z);
