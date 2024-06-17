@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1dc8ee6276ca6d94cbede2897184dedd
+guid: 6e86aa58b0ce3a648adbcb92e844bd3c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,43 +123,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: clock inside_0
+      name: clock-inside
       rect:
         serializedVersion: 2
-        x: 531
-        y: 124
-        width: 843
-        height: 847
+        x: 534
+        y: 128
+        width: 837
+        height: 837
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 306fc479c383ee2408137d74d44c732c
-      internalID: 423023774
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: clock inside_1
-      rect:
-        serializedVersion: 2
-        x: 1213
-        y: 1022
-        width: 7
-        height: 4
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e6c35dd779130c449b9c9cd09978c21a
-      internalID: 1553065533
+      spriteID: 3e7c3ac3d6b58b74e89a31e63c597ddf
+      internalID: -2041912513
       vertices: []
       indices: 
       edges: []
@@ -175,8 +154,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      clock inside_0: 423023774
-      clock inside_1: 1553065533
+      clock-colored_1: 1493327471
+      clock-inside: -2041912513
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

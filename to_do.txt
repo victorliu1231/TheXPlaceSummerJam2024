@@ -14,5 +14,5 @@ add
 - tutorial
 - particle effects
 - sfx
-- main menu
+- main menu - have floating weapons / enemies firing at random intervals moving across the screen
 - high score system
