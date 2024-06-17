@@ -18,8 +18,12 @@ public class Bullet : MonoBehaviour
     }
 
     void Update(){
-        // Move transform based on rotation
-        transform.position += transform.right * speed * Time.deltaTime;
+        if (!GameManager.Instance.isGameOver){
+            // Move transform based on rotation
+            transform.position += transform.right * speed * Time.deltaTime;
+        } else {
+            gameObject.SetActive(false);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other){

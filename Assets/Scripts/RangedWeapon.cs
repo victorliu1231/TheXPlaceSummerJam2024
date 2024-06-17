@@ -7,6 +7,8 @@ public class RangedWeapon : Weapon
     [Header("Ranged Stats")]
     [Tooltip("The prefab that will damage enemies")]
     public GameObject prefab;
+    [Tooltip("Fire particles that will be played when attacking")]
+    public ParticleSystem fireParticles;
 
     void Start(){
         base.Start();
@@ -18,6 +20,7 @@ public class RangedWeapon : Weapon
     }
 
     void RangedAttack(){
+        if (fireParticles != null) fireParticles.Play();
         Instantiate(prefab, transform.position, transform.rotation);
     }
 }

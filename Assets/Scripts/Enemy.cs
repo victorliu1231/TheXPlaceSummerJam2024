@@ -14,8 +14,12 @@ public class Enemy : Entity
     }
 
     void Update(){
-        if (target != null){
-            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        if (!GameManager.Instance.isGameOver){
+            if (target != null && !GameManager.Instance.inTransition){
+                transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            }
+        } else {
+            gameObject.SetActive(false);
         }
     }
 

@@ -3,10 +3,12 @@ to-do list
 - healthbar for player weird and not persisting 
 - fix ui with guns looking weird when looking up and down
 - have enemies also do weaponinhand
-- bullets not colliding with walls
 - rebalance hit radii with melee weapons
 - weird bug with duplication of picked up weapons
-- bullet still doesn't hit enemies for some reason :/
+- add in Jacob's soundtrack
+- show Justin the video of game for UI/UX feedback
+- debug bullet not firing in right direction when player faces left, up, or down
+- enemies getting knocked into walls ... detect if entity will hit into wall and if so, prevent kb
 
 add
 - tutorial

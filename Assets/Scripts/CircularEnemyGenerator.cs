@@ -37,12 +37,16 @@ public class CircularEnemyGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeUntilSpawn -= Time.deltaTime;
-        timeUntilStop += Time.deltaTime;
+        if (!GameManager.Instance.isGameOver){
+            timeUntilSpawn -= Time.deltaTime;
+            timeUntilStop += Time.deltaTime;
 
-        if (timeUntilSpawn <= 0 && timeUntilStop <= stopSpawnTime){
-            SpawnEnemy();
-            SetTimeUntilSpawn();
+            if (timeUntilSpawn <= 0 && timeUntilStop <= stopSpawnTime){
+                SpawnEnemy();
+                SetTimeUntilSpawn();
+            }
+        } else {
+            gameObject.SetActive(false);
         }
     }
 

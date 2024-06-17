@@ -19,7 +19,7 @@ public class Entity : MonoBehaviour
     }
 
     public void TakeDamage(float damage, Vector2 attackerPosition, bool canCauseKnockback){
-        if (!invincible){
+        if (!invincible && !GameManager.Instance.isGameOver){
             currentHealth -= damage;
             healthbar.UpdateBar(currentHealth, 0, maxHealth, true);
             if (currentHealth <= 0){
@@ -35,7 +35,7 @@ public class Entity : MonoBehaviour
         }
     }
 
-    void Die(){
+    public virtual void Die(){
         Destroy(gameObject);
     }
 }

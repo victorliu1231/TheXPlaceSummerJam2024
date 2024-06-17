@@ -28,7 +28,7 @@ public class MeleeWeapon : Weapon
         collider.enabled = false;
     }
 
-    void OnCollisionEnter2D(Collision2D other){
+    void OnTriggerEnter2D(Collider2D other){
         if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Wall"){
             if (other.gameObject.tag == "Enemy") other.gameObject.GetComponent<Enemy>().TakeDamage(meleeDamage, transform.position, canCauseKnockback);
             Invoke("PlayParticles", meleeAnimationTime);

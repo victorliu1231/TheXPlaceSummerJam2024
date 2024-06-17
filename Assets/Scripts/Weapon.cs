@@ -23,7 +23,7 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        if (!GameManager.Instance.inTransition){
+        if (!GameManager.Instance.inTransition && !GameManager.Instance.isGameOver){
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3 lookDir = (mousePos - transform.position) * player.localScale.x;
             float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;

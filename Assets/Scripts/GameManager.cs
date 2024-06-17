@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Kino;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,6 +32,9 @@ public class GameManager : MonoBehaviour
     [Header("Misc")]
     public AnalogGlitch glitch;
     public bool inTransition = false;
+    public GameObject deathScreen;
+    public GameObject playAgainButton;
+    public bool isGameOver = false;
 
     void Awake() {
         if (_instance != null && _instance != this) {
@@ -40,9 +44,15 @@ public class GameManager : MonoBehaviour
             _instance = this;
             DontDestroyOnLoad(_instance);
 
-            ResetLevel();
-            StartCoroutine(TickSecondHand());
+            PlayGame();
         }
+    }
+
+    public void PlayGame(){
+        ResetLevel();
+        StartCoroutine(TickSecondHand());
+        deathScreen.SetActive(false);
+        playAgainButton.SetActive(false);
     }
 
     public void ResetLevel(){
@@ -138,5 +148,15 @@ public class GameManager : MonoBehaviour
     [ContextMenu("Test Next Level")]
     public void TestNextLevel(){
         StartCoroutine(NextLevel());
+    }
+
+    public IEnumerator GameOver(){
+        deathScreen.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        playAgainButton.SetActive(true);
+        for (int i = 0; i < 10; i++){
+            playAgainButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.1f*i);
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }

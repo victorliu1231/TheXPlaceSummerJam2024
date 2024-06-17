@@ -23,7 +23,7 @@ public class Player : Entity
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.Instance.inTransition){
+        if (!GameManager.Instance.inTransition && !GameManager.Instance.isGameOver){
             float horizontal = Input.GetAxis("Horizontal") * speed;
             float vertical = Input.GetAxis("Vertical") * speed;
             if (horizontal != 0){
@@ -69,5 +69,11 @@ public class Player : Entity
                 Destroy(collider.gameObject);
             }
         }
+    }
+
+    public override void Die(){
+        GameManager.Instance.isGameOver = true;
+        StartCoroutine(GameManager.Instance.GameOver());
+        anim.Play("Player_Death");
     }
 }
