@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class CircularEnemyGenerator : MonoBehaviour
 {
@@ -21,11 +20,6 @@ public class CircularEnemyGenerator : MonoBehaviour
     public float radius;
     [Tooltip("Starting angle of the circle in degrees. 0 is north, 90 is east, 180 is south, 270 is west.")]
     public float startingAngle;
-
-    void OnSceneGUI(){
-        Handles.color = Color.yellow;
-        Handles.DrawWireDisc(transform.position, Vector3.forward, radius);
-    }
 
     // Start is called before the first frame update
     void Start()

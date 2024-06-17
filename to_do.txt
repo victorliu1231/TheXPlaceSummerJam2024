@@ -4,7 +4,6 @@ to-do list
 - fix ui with guns looking weird when looking up and down
 - have enemies also do weaponinhand
 - rebalance hit radii with melee weapons
-- weird bug with duplication of picked up weapons
 - add in Jacob's soundtrack
 - show Justin the video of game for UI/UX feedback
 - debug bullet not firing in right direction when player faces left, up, or down

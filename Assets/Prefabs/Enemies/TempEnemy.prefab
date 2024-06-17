@@ -241,7 +241,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.03, y: 2.03, z: 2.03}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6638166377853117362}
@@ -357,12 +357,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4cd189512cd98e498318ac15145b119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.3
+  speed: 0.5
   currentHealth: 0
   maxHealth: 100
   invincible: 0
   canTakeKnockback: 1
-  knockbackForce: 0.1
+  knockbackForce: 0.3
   damagedParticles: {fileID: 3159024389831336062}
   healthbar: {fileID: 0}
   damage: 10

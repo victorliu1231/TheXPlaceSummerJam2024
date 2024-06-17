@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2172bcd6352bc348a27ed9ce76fc53d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownDuration: 0.5
+  cooldownDuration: 1
   weaponType: 0
   minRotateAngle: -45
   maxRotateAngle: 45
