@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 	public static GameManager Instance { get { return _instance; } }
     [Header("Level")]
     public int level = 0;
+    public int levelsBetweenBosses = 5;
+    public GameObject bossGUI;
     public float nextLevelTransitionDuration = 2f;
     public TextMeshProUGUI levelText;
     [Header("Stage")]
@@ -27,7 +29,7 @@ public class GameManager : MonoBehaviour
     public Transform hourHand;
     public TextMeshProUGUI stageText;
     public const int hoursInDay = 12, minutesInHour = 60, secondsInMinute = 60;
-    float totalTime = 0f;
+    public float totalTime = 0f;
     public float currentTime = 0f;
     const float hoursToDegrees = 360f / hoursInDay, minutesToDegrees = 360 / minutesInHour, secondsToDegrees = 360 / secondsInMinute;
     [Header("Death Screen")]
@@ -41,6 +43,14 @@ public class GameManager : MonoBehaviour
     public AnalogGlitch glitch;
     public GameObject player;
     public Transform enemiesParent;
+    public string playerName;
+    public Vector3 spawnPosition;
+    public Vector3 weaponSpawnPositionOne;
+    public Vector3 weaponSpawnPositionTwo;
+    public List<GameObject> weaponCollectibles;
+    [Header("Production")]
+    public bool isDebugging = true;
+    public Transform collectiblesParent;
 
     void Awake() {
         if (_instance != null && _instance != this) {
@@ -66,7 +76,18 @@ public class GameManager : MonoBehaviour
         playAgainButton.SetActive(false);
         youDiedText.SetActive(false);
         youRanOutOfTimeText.SetActive(false);
+        bossGUI.SetActive(false);
         player = GameObject.FindGameObjectWithTag("Player");
+        GameObject data = GameObject.FindGameObjectWithTag("Data");
+        AudioManager.GetSoundtrack("MainTheme").Play();
+        if (data != null) playerName = data.GetComponent<PersistentData>().playerName;
+        if (!isDebugging){
+            player.transform.position = spawnPosition;
+            foreach (Transform child in collectiblesParent){
+                Destroy(child.gameObject);
+            }
+            Instantiate(weaponCollectibles[0], weaponSpawnPositionOne, Quaternion.identity, collectiblesParent);
+        }
     }
 
     public void ResetLevel(){
@@ -145,6 +166,19 @@ public class GameManager : MonoBehaviour
         glitch.colorDrift = 0f;
         glitch.verticalJump = 0f;
         inTransition = false;
+        player.transform.position = spawnPosition;
+        AudioManager.GetSoundtrack("MainTheme").Stop();
+        AudioManager.GetSoundtrack("MainTheme").Play();
+        if (!isDebugging){
+            foreach (Transform child in collectiblesParent){
+                Destroy(child.gameObject);
+            }
+            if (stage == 1) Instantiate(weaponCollectibles[1], weaponSpawnPositionOne, Quaternion.identity, collectiblesParent);
+            if (stage == 2){
+                Instantiate(weaponCollectibles[2], weaponSpawnPositionOne, Quaternion.identity, collectiblesParent);
+                Instantiate(weaponCollectibles[3], weaponSpawnPositionTwo, Quaternion.identity, collectiblesParent);
+            }
+        }
     }
 
     [ContextMenu("Test Next Stage")]
@@ -153,6 +187,7 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator NextLevel(){
+        PersistentData.WriteToSave(0);
         inTransition = true;
         level++;
         levelText.text = "Level " + (level + 1);
@@ -161,6 +196,16 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(nextLevelTransitionDuration);
         glitch.scanLineJitter = 0f;
         glitch.verticalJump = 0f;
+        player.transform.position = spawnPosition;
+        if (level % levelsBetweenBosses == 0){
+            bossGUI.SetActive(true);
+            AudioManager.GetSoundtrack("BossTheme").Play();
+            yield return new WaitForSeconds(1.5f);
+            bossGUI.SetActive(false);
+        } else {
+            AudioManager.GetSoundtrack("MainTheme").Stop();
+            AudioManager.GetSoundtrack("MainTheme").Play();
+        }
         inTransition = false;
     }
 

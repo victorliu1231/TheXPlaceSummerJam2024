@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - EnemyParentTransform
   - Collectible
+  - Data
   layers:
   - Default
   - TransparentFX
@@ -53,4 +54,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 4228327463
+    locked: 0
+  - name: UI
+    uniqueID: 2998555893
     locked: 0

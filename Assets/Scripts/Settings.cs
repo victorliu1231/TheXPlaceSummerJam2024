@@ -9,8 +9,6 @@ using UnityEngine.SceneManagement;
 public class Settings : MonoBehaviour
 {
     public bool fullScreen;
-    public Toggle fullScreenToggleCheckbox;
-    public GameObject quitPanel;
     public Slider musicSlider;
     public Slider sfxSlider;
     
@@ -21,7 +19,6 @@ public class Settings : MonoBehaviour
     }
 
     public void loadScreen(bool settingsFullScreen){
-        fullScreenToggleCheckbox.isOn = settingsFullScreen;
         if (settingsFullScreen){
             Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
             fullScreen = true;

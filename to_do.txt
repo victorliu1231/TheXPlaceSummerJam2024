@@ -8,11 +8,23 @@ to-do list
 - enemies getting knocked into walls ... detect if entity will hit into wall and if so, prevent kb
 - agree on size of screen
 - ui for player respawning in center of clock after a time travel
+- fix boss GUI
+- add ability to add player name upon pressing Play
+
+- fantasy GUI Ranking for high score panel
+- Pause gui for pausing
+- if boss dies, stop boss theme soundtrack
 
 add
+- need a new name for game
 - tutorial
 - particle effects
 - sfx
 - main menu - have floating weapons / enemies firing at random intervals moving across the screen
 - high score system
-- settings for player on main menu
+- make weapons and enemies stronger with each level
+- implement bosses
+- debug settings
+- debug not being able to set player name
+- debug save system
+- test saving system and settings
