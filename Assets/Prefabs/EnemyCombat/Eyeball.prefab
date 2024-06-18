@@ -204,7 +204,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   FollowTargetMode: 2
-  NestDrawnHealthBar: 0
+  NestDrawnHealthBar: 1
   InstantiatedOnDeath: {fileID: 0}
   HealthBarOffset: {x: 0, y: 1, z: 0}
   AlwaysVisible: 1
@@ -261,6 +261,7 @@ MonoBehaviour:
   minRotateAngle: 0
   maxRotateAngle: 0
   weaponCollectible: {fileID: 0}
+  timeDelayBetweenPlayerPosStorageAndAttack: 0.5
   prefab: {fileID: 519883922421658185, guid: 0d5a7ab3dc4c23b47beb6d0ce792a549, type: 3}
   fireParticles: {fileID: 0}
 --- !u!1 &3997309441016426892
@@ -279,7 +280,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6366023988788990015
 Transform:
   m_ObjectHideFlags: 0
@@ -302,7 +303,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3997309441016426892}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -554,14 +555,14 @@ MonoBehaviour:
   target: {fileID: 0}
   canCauseKnockback: 1
   weaponInHand: {fileID: 5200135988956051301}
-  distanceStartAttacking: 5
+  distanceStartAttacking: 7
   anim: {fileID: 0}
   movementAnimName: Eyeball_Idle
   attackAnimName: Eyeball_Attack
   isSpriteFlippable: 0
   isAttackCooldownReduced: 0
   attackCooldownSprite: {fileID: 3366571335390066560}
-  teleportCooldownDuration: 3
+  teleportCooldownDuration: 6
   beginTeleportAnimName: Eyeball_BeginTeleport
   endTeleportAnimName: Eyeball_EndTeleport
 --- !u!1001 &7063287575588845113

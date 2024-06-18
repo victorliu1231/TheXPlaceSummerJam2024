@@ -3,20 +3,16 @@ to-do list
 - laser particles hitting enemies too frequently, causing lag
 - enemies getting knocked into walls ... detect if entity will hit into wall and if so, prevent kb
 - agree on size of screen
-- ui for player respawning in center of clock after a time travel
 - fix boss GUI
 - add ability to add player name upon pressing Play
-- add some visual to indicate which enemies are sped up attack-wise
-- figure out how to disable gameobject when wizard anim is done
 - QA test how we want enemies to get stronger
 - what if we kill all enemies early?
 - one wave per stage?
 
-- get ui for attack cooldown reduced
-
 - fantasy GUI Ranking for high score panel
 - Pause gui for pausing
 - if boss dies, stop boss theme soundtrack
+- debug eyeball attack
 
 add
 - need a new name for game
@@ -31,4 +27,3 @@ add
 - debug not being able to set player name
 - debug save system
 - test saving system and settings
-- debug all enemies

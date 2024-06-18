@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public GameObject bossGUI;
     public float nextLevelTransitionDuration = 2f;
     public TextMeshProUGUI levelText;
+    [Header("Buffs")]
     public int everyXLevelsPlayerGetsStronger = 2;
     public float playerStrengthMultiplier = 1f;
     public float playerStrengthBoostMultiplier;
@@ -49,6 +50,11 @@ public class GameManager : MonoBehaviour
     public GameObject youDiedText;
     public GameObject youRanOutOfTimeText;
     public bool isGameOver = false;
+    [Header("Collectibles")]
+    public Vector3 weaponSpawnPositionOne;
+    public Vector3 weaponSpawnPositionTwo;
+    public List<GameObject> weaponCollectibles;
+    public Transform collectiblesParent;
     [Header("Misc")]
     public bool inTransition = false;
     public AnalogGlitch glitch;
@@ -56,12 +62,10 @@ public class GameManager : MonoBehaviour
     public Transform enemiesParent;
     public string playerName;
     public Vector3 spawnPosition;
-    public Vector3 weaponSpawnPositionOne;
-    public Vector3 weaponSpawnPositionTwo;
-    public List<GameObject> weaponCollectibles;
+    public float clockRadius = 12.5f;
+    
     [Header("Production")]
     public bool isDebugging = true;
-    public Transform collectiblesParent;
 
     void Awake() {
         if (_instance != null && _instance != this) {
@@ -147,7 +151,10 @@ public class GameManager : MonoBehaviour
                 ResetLevel();
                 StartCoroutine(NextLevel());
             } else {
-                if (!isDebugging) StartCoroutine(GameOver(true));
+                if (!isDebugging) {
+                    StopAllCoroutines();
+                    StartCoroutine(GameOver(true));
+                }
             }
         }
         else if (!inTransition){
@@ -224,9 +231,8 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             bossGUI.SetActive(false);
             float angle = Random.Range(0f, 360f);
-            float radius = 12.5f;
-            float x = transform.position.x + radius * Mathf.Cos(angle * Mathf.Deg2Rad);
-            float y = transform.position.y + radius * Mathf.Sin(angle * Mathf.Deg2Rad);
+            float x = transform.position.x + clockRadius * Mathf.Cos(angle * Mathf.Deg2Rad);
+            float y = transform.position.y + clockRadius * Mathf.Sin(angle * Mathf.Deg2Rad);
             Instantiate(bosses[(level+1)/levelsBetweenBosses], new Vector2(x,y), Quaternion.identity, enemiesParent);
         } else {
             AudioManager.GetSoundtrack("MainTheme").Stop();

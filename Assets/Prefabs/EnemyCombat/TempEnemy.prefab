@@ -288,7 +288,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   FollowTargetMode: 2
-  NestDrawnHealthBar: 0
+  NestDrawnHealthBar: 1
   InstantiatedOnDeath: {fileID: 0}
   HealthBarOffset: {x: 0, y: 1, z: 0}
   AlwaysVisible: 1

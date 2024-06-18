@@ -50,6 +50,7 @@ MonoBehaviour:
   minRotateAngle: 0
   maxRotateAngle: 0
   weaponCollectible: {fileID: 0}
+  timeDelayBetweenPlayerPosStorageAndAttack: 0.25
   prefab: {fileID: 206115812581200755, guid: dce8c82cac8cb664e91e074cff888bbb, type: 3}
   fireParticles: {fileID: 0}
 --- !u!1 &1668178637209323703
@@ -561,7 +562,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   FollowTargetMode: 2
-  NestDrawnHealthBar: 0
+  NestDrawnHealthBar: 1
   InstantiatedOnDeath: {fileID: 0}
   HealthBarOffset: {x: 0, y: 1, z: 0}
   AlwaysVisible: 1

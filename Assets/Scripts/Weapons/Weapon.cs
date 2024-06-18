@@ -16,6 +16,9 @@ public class Weapon : MonoBehaviour
     public float minRotateAngle;
     public float maxRotateAngle;
     public GameObject weaponCollectible;
+    [Header("If Enemy Controlled")]
+    [Tooltip("This time delay is crucial for letting the player dodge instantaneous attacks like a laser beam")]
+    public float timeDelayBetweenPlayerPosStorageAndAttack;
 
     public void Start(){
         anim = GetComponent<Animator>();

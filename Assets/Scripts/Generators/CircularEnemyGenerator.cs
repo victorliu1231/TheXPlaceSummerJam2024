@@ -17,7 +17,6 @@ public class CircularEnemyGenerator : MonoBehaviour
     public float maximumSpawnTime; // Maximum time until next enemy spawns
     [Tooltip("Time until enemy spawning stops")]
     public float stopSpawnTime; // Time until enemy spawning stops
-    public float radius;
 
     // Start is called before the first frame update
     void Start()
@@ -70,8 +69,8 @@ public class CircularEnemyGenerator : MonoBehaviour
         }
         // Instantiate enemy at a random point on the circle
         float angle = Random.Range(0f, 360f);
-        float x = transform.position.x + radius * Mathf.Cos(angle * Mathf.Deg2Rad);
-        float y = transform.position.y + radius * Mathf.Sin(angle * Mathf.Deg2Rad);
+        float x = transform.position.x + GameManager.Instance.clockRadius * Mathf.Cos(angle * Mathf.Deg2Rad);
+        float y = transform.position.y + GameManager.Instance.clockRadius * Mathf.Sin(angle * Mathf.Deg2Rad);
         GameObject enemy = Instantiate(enemyPrefabs[i], new Vector2(x,y), Quaternion.identity, enemyParent);
         return enemy;
     }

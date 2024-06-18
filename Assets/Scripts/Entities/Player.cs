@@ -83,6 +83,7 @@ public class Player : Entity
     }
 
     public override void Die(){
+        StopAllCoroutines();
         StartCoroutine(GameManager.Instance.GameOver(false));
     }
 }

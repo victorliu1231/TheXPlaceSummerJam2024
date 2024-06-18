@@ -288,7 +288,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   FollowTargetMode: 2
-  NestDrawnHealthBar: 0
+  NestDrawnHealthBar: 1
   InstantiatedOnDeath: {fileID: 0}
   HealthBarOffset: {x: 0, y: 1, z: 0}
   AlwaysVisible: 1
@@ -345,6 +345,7 @@ MonoBehaviour:
   minRotateAngle: 0
   maxRotateAngle: 0
   weaponCollectible: {fileID: 0}
+  timeDelayBetweenPlayerPosStorageAndAttack: 0.25
   prefab: {fileID: 6617575497658658542, guid: 4039e4e5251500b468fdbd23f80becc9, type: 3}
   fireParticles: {fileID: 0}
 --- !u!1 &6198902659785389750

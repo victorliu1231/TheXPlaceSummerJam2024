@@ -8,22 +8,17 @@ public class Eyeball : Enemy
     private float teleportCooldownTimer;
     public string beginTeleportAnimName;
     public string endTeleportAnimName;
-    private Collider2D clockWalls;
-
-    public void Start(){
-        base.Start();
-        clockWalls = GameObject.FindGameObjectWithTag("Wall").GetComponent<Collider2D>();
-    }
 
     public override void Update(){
         if (!GameManager.Instance.isGameOver){
             if (target != null && !GameManager.Instance.inTransition){
                 teleportCooldownTimer += Time.deltaTime;
                 if (teleportCooldownTimer >= teleportCooldownDuration){
-                    if (anim != null) anim.Play(beginTeleportAnimName);
-                    // Link teleport anim to attack anim thru animator
+                    teleportCooldownTimer = 0f;
                     StartCoroutine(EyeballAttack());
                 }
+            } else {
+                StopCoroutine(EyeballAttack());
             }
         } else {
             gameObject.SetActive(false);
@@ -31,27 +26,27 @@ public class Eyeball : Enemy
     }
 
     public IEnumerator EyeballAttack(){
+        if (anim != null) anim.Play(beginTeleportAnimName);
         yield return new WaitForSeconds(1f);
-        // Teleport to a position that is distanceStartAttacking from player and also not within the clock walls
         TeleportAwayFromPlayer();
         if (anim != null) anim.Play(endTeleportAnimName);
         yield return new WaitForSeconds(1f);
         if (anim != null) anim.Play(movementAnimName);
         yield return new WaitForSeconds(1.5f);
         if (anim != null) anim.Play(attackAnimName);
+        yield return new WaitForSeconds(1.5f);
         weaponInHand.Attack();
-        teleportCooldownDuration = 0f;
     }
 
     void TeleportAwayFromPlayer() {
-        // Calculate the direction from the player to the eyeball
-        Vector3 direction = (transform.position - GameManager.Instance.player.transform.position).normalized;
+        // pick a random direction
+        Vector3 direction = Random.insideUnitCircle.normalized;
 
         // Calculate a position that is distanceStartAttacking units away from the player in the direction of the eyeball
         Vector3 newPosition = GameManager.Instance.player.transform.position + direction * distanceStartAttacking;
 
-        // Check if the new position is within the clock walls
-        if (clockWalls.bounds.Contains(newPosition)) {
+        // Check if the new position is outside radius of the clock walls
+        if (Vector3.Distance(Vector3.zero, newPosition) > GameManager.Instance.clockRadius){
             TeleportAwayFromPlayer();
             return;
         }

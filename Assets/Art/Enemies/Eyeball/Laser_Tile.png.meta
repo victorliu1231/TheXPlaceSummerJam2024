@@ -126,10 +126,10 @@ TextureImporter:
       name: Laser_Tile_0
       rect:
         serializedVersion: 2
-        x: 213
-        y: 137
-        width: 73
-        height: 214
+        x: 137
+        y: 214
+        width: 214
+        height: 73
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
