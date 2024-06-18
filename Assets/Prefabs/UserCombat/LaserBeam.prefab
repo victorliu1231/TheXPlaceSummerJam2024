@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0.05
+  lifetime: -1
   hitParticlesPrefab: {fileID: 6261748922793707141, guid: cf2b1c7ca5239a546b0ec6224ccaddf3, type: 3}
   canCauseKnockback: 0
   knockbackForce: 0

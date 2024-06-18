@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [Header("General Weapon Stats")]
-    public float cooldownDuration;
     public enum WeaponType {Melee, Ranged};
+    [Header("General Weapon Stats")]
     public WeaponType weaponType;
     public bool isInputControlled;
     private Animator anim;
     private float cooldownTimer = 0f;
     private Transform player;
     [Header("If Input Controlled")]
+    public float cooldownDuration;
     public float minRotateAngle;
     public float maxRotateAngle;
     public GameObject weaponCollectible;
