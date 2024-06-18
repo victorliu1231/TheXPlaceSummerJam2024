@@ -2,12 +2,12 @@ to-do list
 - hour hand has functionality with different maps (black hole, galaxy)
 - healthbar for player weird and not persisting 
 - fix ui with guns looking weird when looking up and down
-- have enemies also do weaponinhand
-- rebalance hit radii with melee weapons
 - add in Jacob's soundtrack
 - show Justin the video of game for UI/UX feedback
-- debug bullet not firing in right direction when player faces left, up, or down
+- laser particles hitting enemies too frequently, causing lag
 - enemies getting knocked into walls ... detect if entity will hit into wall and if so, prevent kb
+- agree on size of screen
+- ui for player respawning in center of clock after a time travel
 
 add
 - tutorial

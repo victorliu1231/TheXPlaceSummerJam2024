@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     public GameObject deathScreen;
     public GameObject playAgainButton;
     public bool isGameOver = false;
+    public GameObject player;
 
     void Awake() {
         if (_instance != null && _instance != this) {
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(TickSecondHand());
         deathScreen.SetActive(false);
         playAgainButton.SetActive(false);
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public void ResetLevel(){

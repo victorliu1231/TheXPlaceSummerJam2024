@@ -122,6 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownDuration: 0.5
   weaponType: 1
+  isInputControlled: 1
   minRotateAngle: -45
   maxRotateAngle: 45
   weaponCollectible: {fileID: 5325344330621212836, guid: 831f4ea4e99218f41bc36028bec483ed, type: 3}

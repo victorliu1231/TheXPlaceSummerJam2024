@@ -101,6 +101,8 @@ MonoBehaviour:
   damage: 0.05
   hitParticlesPrefab: {fileID: 6261748922793707141, guid: cf2b1c7ca5239a546b0ec6224ccaddf3, type: 3}
   canCauseKnockback: 0
+  knockbackForce: 0
+  targetTag: Enemy
 --- !u!61 &1086183999551766897
 BoxCollider2D:
   m_ObjectHideFlags: 0

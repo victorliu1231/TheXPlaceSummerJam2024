@@ -4,28 +4,26 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-    public float damage;
     public Transform target;
     public bool canCauseKnockback = true;
+    public Weapon weaponInHand;
+    public float distanceStartAttacking;
 
     void Start(){
         base.Start();
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameManager.Instance.player.transform;
     }
 
     void Update(){
         if (!GameManager.Instance.isGameOver){
             if (target != null && !GameManager.Instance.inTransition){
                 transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+                if (Vector3.Distance(transform.position, target.position) <= distanceStartAttacking){
+                    weaponInHand.Attack();
+                }
             }
         } else {
             gameObject.SetActive(false);
-        }
-    }
-
-    void OnCollisionEnter2D(Collision2D other){
-        if (other.gameObject.tag == "Player"){
-            other.gameObject.GetComponent<Player>().TakeDamage(damage, transform.position, canCauseKnockback);
         }
     }
 }

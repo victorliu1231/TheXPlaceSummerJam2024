@@ -9,7 +9,6 @@ public class Entity : MonoBehaviour
     public float maxHealth;
     public bool invincible = false;
     public bool canTakeKnockback = true;
-    public float knockbackForce;
     public ParticleSystem damagedParticles;
     public MMHealthBar healthbar;
 
@@ -18,7 +17,7 @@ public class Entity : MonoBehaviour
         if (healthbar == null) healthbar = GetComponentInChildren<MMHealthBar>();
     }
 
-    public void TakeDamage(float damage, Vector2 attackerPosition, bool canCauseKnockback){
+    public void TakeDamage(float damage, Vector2 attackerPosition, bool canCauseKnockback, float knockbackForce){
         if (!invincible && !GameManager.Instance.isGameOver){
             currentHealth -= damage;
             healthbar.UpdateBar(currentHealth, 0, maxHealth, true);

@@ -29,7 +29,7 @@ public class Player : Entity
             if (horizontal != 0){
                 anim.Play("Player_Run_Right");
                 Vector3 newScale = transform.localScale;
-                newScale.x = horizontal < 0 ? -1f : 1f;
+                newScale.x = horizontal < 0 ? Mathf.Abs(transform.localScale.x)*-1f : Mathf.Abs(transform.localScale.x)*1f;
                 transform.localScale = newScale;
                 faceDirection = horizontal < 0 ? FaceDirection.Left : FaceDirection.Right;
                 weaponInHand.transform.SetParent(sideWeaponBinding);

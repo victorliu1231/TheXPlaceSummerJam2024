@@ -169,13 +169,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownDuration: 0.5
   weaponType: 0
+  isInputControlled: 1
   minRotateAngle: -45
   maxRotateAngle: 45
   weaponCollectible: {fileID: 2141717048667143818, guid: db7c1d678d6744c4e93d9c1fc36cd615, type: 3}
   meleeDamage: 10
-  meleeAnimationTime: 0.3
+  secAbleToHit: 0.5
   hitParticles: {fileID: 7846972839225162595}
   canCauseKnockback: 1
+  knockbackForce: 0.2
+  targetTag: Enemy
 --- !u!50 &612915539531590453
 Rigidbody2D:
   serializedVersion: 4

@@ -106,6 +106,8 @@ MonoBehaviour:
   hitParticles: {fileID: 7275417440578314907}
   hitParticleLifetime: 0.5
   canCauseKnockback: 1
+  knockbackForce: 0.3
+  targetTag: Enemy
 --- !u!61 &1839997810671874342
 BoxCollider2D:
   m_ObjectHideFlags: 0
