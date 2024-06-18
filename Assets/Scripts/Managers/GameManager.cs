@@ -64,8 +64,11 @@ public class GameManager : MonoBehaviour
     public Vector3 spawnPosition;
     public float clockRadius = 12.5f;
     
-    [Header("Production")]
+    [Header("Debugging")]
     public bool isDebugging = true;
+    public int jumpToLevel;
+    public int jumpToStage;
+    public int jumpToTime;
 
     void Awake() {
         if (_instance != null && _instance != this) {
@@ -73,7 +76,6 @@ public class GameManager : MonoBehaviour
         }
         else {
             _instance = this;
-            //DontDestroyOnLoad(_instance);
 
             PlayGame();
         }
@@ -96,9 +98,9 @@ public class GameManager : MonoBehaviour
         bossGUI.SetActive(false);
         player = GameObject.FindGameObjectWithTag("Player");
         GameObject data = GameObject.FindGameObjectWithTag("Data");
-        AudioManager.GetSoundtrack("MainTheme").Play();
         if (data != null) playerName = data.GetComponent<PersistentData>().playerName;
         if (!isDebugging){
+            AudioManager.GetSoundtrack("MainTheme").Play();
             player.transform.position = spawnPosition;
             foreach (Transform child in collectiblesParent){
                 Destroy(child.gameObject);
@@ -114,6 +116,28 @@ public class GameManager : MonoBehaviour
                 enemyWaves.Add(child.GetComponent<CircularEnemyGenerator>());
             }
             enemyWaves[0].gameObject.SetActive(true);
+        } else {
+            level = jumpToLevel;
+            stage = jumpToStage;
+            currentTime = jumpToTime;
+            stageText.text = "Stage " + (stage+1);
+            levelText.text = "Level " + (level + 1);
+            if ((level + 1) % levelsBetweenBosses == 0){
+                AudioManager.GetSoundtrack("BossTheme").Play();
+                float angle = Random.Range(0f, 360f);
+                float x = transform.position.x + clockRadius * Mathf.Cos(angle * Mathf.Deg2Rad);
+                float y = transform.position.y + clockRadius * Mathf.Sin(angle * Mathf.Deg2Rad);
+                Instantiate(bosses[(level+1)/levelsBetweenBosses - 1], new Vector2(x,y), Quaternion.identity, enemiesParent);
+            } else {
+                AudioManager.GetSoundtrack("MainTheme").Stop();
+                AudioManager.GetSoundtrack("MainTheme").Play();
+            }
+            foreach (Transform child in generatorsParent){
+                enemyWaves.Add(child.GetComponent<CircularEnemyGenerator>());
+            }
+            enemyWaves[level].gameObject.SetActive(true);
+            playerStrengthMultiplier += (level % everyXLevelsPlayerGetsStronger)*playerStrengthBoostMultiplier;
+            enemyStrengthMultiplier += (level % everyXLevelsEnemyGetsStronger)*enemyStrengthBoostMultiplier;
         }
     }
 
@@ -147,13 +171,23 @@ public class GameManager : MonoBehaviour
     {
         totalTime += Time.deltaTime;
         if (currentTime >= 60f){
-            if (enemiesParent.childCount == 0){
+            // see if all children are inactive or destroyed
+            bool allInactive = true;
+            foreach (Transform child in enemiesParent){
+                if (child.gameObject.activeSelf){
+                    allInactive = false;
+                }
+            }
+            if (enemiesParent.childCount == 0 || allInactive){
                 ResetLevel();
                 StartCoroutine(NextLevel());
             } else {
                 if (!isDebugging) {
                     StopAllCoroutines();
                     StartCoroutine(GameOver(true));
+                } else {
+                    ResetLevel();
+                    StartCoroutine(NextLevel());
                 }
             }
         }
@@ -215,12 +249,12 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator NextLevel(){
-        PersistentData.WriteToSave(0);
         inTransition = true;
         level++;
         levelText.text = "Level " + (level + 1);
         glitch.scanLineJitter = 1f;
         glitch.verticalJump = 0.4f;
+        PersistentData.Instance.CreateNewSave(0);
         yield return new WaitForSeconds(nextLevelTransitionDuration);
         glitch.scanLineJitter = 0f;
         glitch.verticalJump = 0f;

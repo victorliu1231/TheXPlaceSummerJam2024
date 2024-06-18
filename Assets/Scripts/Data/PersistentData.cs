@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class PersistentData : MonoBehaviour
 {
-    public AudioManager audioManager;
+    private static PersistentData _instance;
+	public static PersistentData Instance { get { return _instance; } }
     public Settings settings;
     public Transform contentPanel;
     public GameObject numOneBanner;
@@ -18,8 +19,15 @@ public class PersistentData : MonoBehaviour
     // currSaveData and currLevelDatas are private vars accessible through getters
     static SaveData currSaveData;
 
-    void Awake(){
-        DontDestroyOnLoad(gameObject);
+    void Awake() 
+    {
+        if (_instance != null && _instance != this) {
+            Destroy(this.gameObject);
+        }
+        else {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     // Save index 0 is always auto save; Save >= 1 (up to max) is manual save. 
@@ -36,11 +44,11 @@ public class PersistentData : MonoBehaviour
             // Initialize settings from settings in currSaveData
             settings.fullScreen = currSaveData.fullScreen;
             settings.loadScreen(false);
-            audioManager.volumeBGM = currSaveData.volumeBGM;
-            audioManager.OnMusicVolumeChanged(audioManager.volumeBGM);
-            audioManager.volumeSFX = currSaveData.volumeSFX;
-            audioManager.OnSFXVolumeChanged(audioManager.volumeSFX);
-            settings.loadVolumeSliders(audioManager.volumeBGM, audioManager.volumeSFX);
+            AudioManager.Instance.volumeBGM = currSaveData.volumeBGM;
+            AudioManager.Instance.OnMusicVolumeChanged(AudioManager.Instance.volumeBGM);
+            AudioManager.Instance.volumeSFX = currSaveData.volumeSFX;
+            AudioManager.Instance.OnSFXVolumeChanged(AudioManager.Instance.volumeSFX);
+            settings.loadVolumeSliders(AudioManager.Instance.volumeBGM, AudioManager.Instance.volumeSFX);
 
             // Clear out previous high scores
             foreach (Transform child in contentPanel)
@@ -107,9 +115,10 @@ public class PersistentData : MonoBehaviour
         }
         newSave.playerDatas = newSave.playerDatas.OrderBy(playerData => playerData.playerTotalTime).ToList();
 
-        newSave.fullScreen = settings.fullScreen;
-        newSave.volumeBGM = audioManager.volumeBGM;
-        newSave.volumeSFX = audioManager.volumeSFX;
+        if (!GameManager.Instance.isDebugging) newSave.fullScreen = settings.fullScreen;
+        else newSave.fullScreen = false;
+        newSave.volumeBGM = AudioManager.Instance.volumeBGM;
+        newSave.volumeSFX = AudioManager.Instance.volumeSFX;
 
         // write the current save data to the saveIndex save
         DataManager.writeFile(ref newSave, saveIndex);

@@ -12,10 +12,39 @@ public class Settings : MonoBehaviour
     public Slider musicSlider;
     public Slider sfxSlider;
     
+    [Header("UI Elements")]
+    public GameObject sfxIconOn;
+    public GameObject sfxIconOff;
+    public GameObject musicIconOn;
+    public GameObject musicIconOff;
+    
     void Awake(){
         DontDestroyOnLoad(gameObject);
         Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
         fullScreen = false;
+    }
+
+    public void OnMusicVolumeChanged(float newValue){
+        if (newValue == 0){
+            musicIconOn.SetActive(false);
+            musicIconOff.SetActive(true);
+        }
+        else{
+            musicIconOn.SetActive(true);
+            musicIconOff.SetActive(false);
+        }
+    }
+
+    // Changes SFX volumes. Is triggered by SFX slider in settings.
+    public void OnSFXVolumeChanged(float newValue){
+        if (newValue == 0){
+            sfxIconOn.SetActive(false);
+            sfxIconOff.SetActive(true);
+        }
+        else{
+            sfxIconOn.SetActive(true);
+            sfxIconOff.SetActive(false);
+        }
     }
 
     public void loadScreen(bool settingsFullScreen){

@@ -2,9 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
+    private static AudioManager _instance;
+	public static AudioManager Instance { get { return _instance; } }
     // Hack to serialize a Dictionary in Inspector: Use a list of structures and then populate a dictionary in Awake with the variables of the structure.
     // The reason why we do this over serializing a list in the Inspector is because now we don't have to worry about matching indices when referencing the list.
     [Serializable]
@@ -29,16 +32,23 @@ public class AudioManager : MonoBehaviour
 
     void Awake() 
     {
-        DontDestroyOnLoad(gameObject);
-        soundtracks = new Dictionary<string, AudioSource>();
-        SFXs = new Dictionary<string, AudioSource>();
-        
-        // Populating soundtrack and SFX dictionaries according to hack
-        foreach (SoundtrackStruct soundtrackStruct in soundtracksInit){
-            soundtracks[soundtrackStruct.name] = soundtrackStruct.soundtrack;
+        if (_instance != null && _instance != this) {
+            Destroy(this.gameObject);
         }
-        foreach (SFXStruct sfxStruct in sfxsInit){
-            SFXs[sfxStruct.name] = sfxStruct.SFX;
+        else {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+            
+            soundtracks = new Dictionary<string, AudioSource>();
+            SFXs = new Dictionary<string, AudioSource>();
+            
+            // Populating soundtrack and SFX dictionaries according to hack
+            foreach (SoundtrackStruct soundtrackStruct in soundtracksInit){
+                soundtracks[soundtrackStruct.name] = soundtrackStruct.soundtrack;
+            }
+            foreach (SFXStruct sfxStruct in sfxsInit){
+                SFXs[sfxStruct.name] = sfxStruct.SFX;
+            }
         }
     }
 

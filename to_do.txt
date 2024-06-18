@@ -9,21 +9,20 @@ to-do list
 - what if we kill all enemies early?
 - one wave per stage?
 
-- fantasy GUI Ranking for high score panel
 - Pause gui for pausing
 - if boss dies, stop boss theme soundtrack
-- debug eyeball attack
+- add gameplay
 
 add
 - need a new name for game
 - tutorial
+--- autosave every level
 - particle effects
 - sfx
 - main menu - have floating weapons / enemies firing at random intervals moving across the screen
-- high score system
 - make weapons and enemies stronger with each level
 - implement bosses
-- debug settings
-- debug not being able to set player name
-- debug save system
-- test saving system and settings
+- TheXPlace game profile
+
+advertise
+- high score system

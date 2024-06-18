@@ -209,7 +209,6 @@ MonoBehaviour:
   minimumSpawnTime: 0.2
   maximumSpawnTime: 0.2
   stopSpawnTime: 2
-  radius: 12.5
 --- !u!1 &134947911
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,7 +619,6 @@ MonoBehaviour:
   minimumSpawnTime: 0.2
   maximumSpawnTime: 0.2
   stopSpawnTime: 3
-  radius: 12.5
 --- !u!1 &299746564
 GameObject:
   m_ObjectHideFlags: 0
@@ -2286,7 +2284,6 @@ MonoBehaviour:
   minimumSpawnTime: 0.2
   maximumSpawnTime: 0.2
   stopSpawnTime: 2
-  radius: 12.5
 --- !u!1 &852851531
 GameObject:
   m_ObjectHideFlags: 0
@@ -2367,12 +2364,6 @@ MonoBehaviour:
   youDiedText: {fileID: 1275889839}
   youRanOutOfTimeText: {fileID: 737630263}
   isGameOver: 0
-  inTransition: 0
-  glitch: {fileID: 519420034}
-  player: {fileID: 0}
-  enemiesParent: {fileID: 1577359285}
-  playerName: 
-  spawnPosition: {x: -0.93, y: 2.1, z: 0}
   weaponSpawnPositionOne: {x: 0.78, y: 1.95, z: 0}
   weaponSpawnPositionTwo: {x: -3.23, y: 1.95, z: 0}
   weaponCollectibles:
@@ -2380,8 +2371,18 @@ MonoBehaviour:
   - {fileID: 3895740193949117924, guid: 3e4437b9a137b6f4b9d3771d28708ae0, type: 3}
   - {fileID: 5325344330621212836, guid: 831f4ea4e99218f41bc36028bec483ed, type: 3}
   - {fileID: 2141717048667143818, guid: db7c1d678d6744c4e93d9c1fc36cd615, type: 3}
-  isDebugging: 1
   collectiblesParent: {fileID: 52494723}
+  inTransition: 0
+  glitch: {fileID: 519420034}
+  player: {fileID: 0}
+  enemiesParent: {fileID: 1577359285}
+  playerName: 
+  spawnPosition: {x: -0.93, y: 2.1, z: 0}
+  clockRadius: 12.5
+  isDebugging: 1
+  jumpToLevel: 0
+  jumpToStage: 2
+  jumpToTime: 59
 --- !u!1 &854151132
 GameObject:
   m_ObjectHideFlags: 0
@@ -3202,7 +3203,7 @@ GameObject:
   - component: {fileID: 1402062316}
   - component: {fileID: 1402062315}
   m_Layer: 0
-  m_Name: AudioManager
+  m_Name: AudioManager (for debugging purposes)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3731,6 +3732,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1274654011630078281, guid: 831f4ea4e99218f41bc36028bec483ed, type: 3}
   m_PrefabInstance: {fileID: 1701188790}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1775233297
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1775233299}
+  - component: {fileID: 1775233298}
+  m_Layer: 0
+  m_Name: Data (for debugging purposes)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1775233298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775233297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b697d82f84e98d4bae9b5657d97a884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
+  settings: {fileID: 0}
+  contentPanel: {fileID: 0}
+  numOneBanner: {fileID: 0}
+  numTwoBanner: {fileID: 0}
+  numThreeBanner: {fileID: 0}
+  genericNumBanner: {fileID: 0}
+  noSavesYet: {fileID: 0}
+  playerName: 
+--- !u!4 &1775233299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775233297}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.7757883, y: 8.616229, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1780526822
 GameObject:
   m_ObjectHideFlags: 0
@@ -3904,13 +3958,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 1117763913}
+  - {fileID: 8210773243307538579, guid: de3c69dc07c266445a918a2745998438, type: 3}
   enemySpawnWeights:
   - 0.7
   minimumSpawnTime: 0.2
   maximumSpawnTime: 0.2
   stopSpawnTime: 1
-  radius: 12.5
 --- !u!1 &1952251983
 GameObject:
   m_ObjectHideFlags: 0
@@ -5144,7 +5197,6 @@ MonoBehaviour:
   minimumSpawnTime: 0.2
   maximumSpawnTime: 0.2
   stopSpawnTime: 2
-  radius: 12.5
 --- !u!4 &333536190415448187 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2101749682084206904, guid: 9389f741c36e2354cbe013fca25275a2, type: 3}
@@ -5408,7 +5460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5257605296559838914, guid: fa4e973088fba3143bbaf2f119ce2fdc, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5491,6 +5543,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1402062316}
+  - {fileID: 1775233299}
   - {fileID: 519420032}
   - {fileID: 914114093}
   - {fileID: 552248129}
