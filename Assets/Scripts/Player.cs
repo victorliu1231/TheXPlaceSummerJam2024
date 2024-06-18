@@ -32,19 +32,25 @@ public class Player : Entity
                 newScale.x = horizontal < 0 ? Mathf.Abs(transform.localScale.x)*-1f : Mathf.Abs(transform.localScale.x)*1f;
                 transform.localScale = newScale;
                 faceDirection = horizontal < 0 ? FaceDirection.Left : FaceDirection.Right;
-                weaponInHand.transform.SetParent(sideWeaponBinding);
+                weaponInHand?.transform.SetParent(sideWeaponBinding);
             }
             else if (vertical > 0){
                 anim.Play("Player_Run_Up");
                 faceDirection = FaceDirection.Up;
-                weaponInHand.transform.SetParent(upWeaponBinding);
+                weaponInHand?.transform.SetParent(upWeaponBinding);
             }
             else if (vertical < 0){
                 anim.Play("Player_Run_Down");
                 faceDirection = FaceDirection.Down;
-                weaponInHand.transform.SetParent(downWeaponBinding);
+                weaponInHand?.transform.SetParent(downWeaponBinding);
             }
             transform.position = new Vector3(transform.position.x + horizontal, transform.position.y + vertical, transform.position.z);
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                GetComponent<PlayerRecorder>()?.queuedActions.Add(Snapshot.SnapAction.Fire);
+                weaponInHand?.TryAttack();
+            }
         }
     }
 
@@ -58,13 +64,16 @@ public class Player : Entity
         if (collider.gameObject.tag == "Collectible"){
             WeaponCollectible weaponCollectible = collider.gameObject.GetComponent<WeaponCollectible>();
             if (weaponCollectible != null){
-                Transform bindingParent = weaponInHand.transform.parent;
-                GameObject droppedWeaponCollectible = Instantiate(weaponInHand.weaponCollectible, transform.position, Quaternion.identity);
-                foreach (Transform child in bindingParent){
-                    Destroy(child.gameObject);
+                if (weaponInHand is not null)
+                {
+                    Transform bindingParent = weaponInHand.transform.parent;
+                    GameObject droppedWeaponCollectible = Instantiate(weaponInHand.weaponCollectible, transform.position, Quaternion.identity);
+                    foreach (Transform child in bindingParent){
+                        Destroy(child.gameObject);
+                    }
                 }
 
-                GameObject newWeapon = Instantiate(weaponCollectible.weaponPrefab, transform.position, Quaternion.identity, bindingParent);
+                GameObject newWeapon = Instantiate(weaponCollectible.weaponPrefab, transform.position, Quaternion.identity);
                 weaponInHand = newWeapon.GetComponent<Weapon>();
                 Destroy(collider.gameObject);
             }

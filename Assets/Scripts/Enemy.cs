@@ -17,7 +17,8 @@ public class Enemy : Entity
     void Update(){
         if (!GameManager.Instance.isGameOver){
             if (target != null && !GameManager.Instance.inTransition){
-                transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+                Vector3 pos = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+                GetComponent<Rigidbody2D>().MovePosition(pos);
                 if (Vector3.Distance(transform.position, target.position) <= distanceStartAttacking){
                     weaponInHand.Attack();
                 }
