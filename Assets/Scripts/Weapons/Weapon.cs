@@ -42,16 +42,17 @@ public class Weapon : MonoBehaviour
             if (angle > maxRotateAngle + rePositionAngle) angle = maxRotateAngle + rePositionAngle;
             transform.rotation = Quaternion.Euler(0, 0, angle);
             cooldownTimer += Time.deltaTime;
-
-            if (Input.GetMouseButtonDown(0)){
-                if (cooldownTimer >= cooldownDuration){
-                    Attack();
-                    cooldownTimer = 0f;
-                }
-            }
         }
     }
 
+    public virtual void TryAttack()
+    {
+        if (cooldownTimer >= cooldownDuration)
+        {
+            Attack();
+            cooldownTimer = 0f;
+        }
+    }
     public virtual void Attack(){
         if (anim != null){
             anim.SetTrigger("Active");
