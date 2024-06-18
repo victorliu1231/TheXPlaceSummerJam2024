@@ -24,8 +24,8 @@ public class Player : Entity
     void Update()
     {
         if (!GameManager.Instance.inTransition && !GameManager.Instance.isGameOver){
-            float horizontal = Input.GetAxis("Horizontal") * speed;
-            float vertical = Input.GetAxis("Vertical") * speed;
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
             if (horizontal != 0){
                 anim.Play("Player_Run_Right");
                 Vector3 newScale = transform.localScale;
@@ -44,7 +44,9 @@ public class Player : Entity
                 faceDirection = FaceDirection.Down;
                 weaponInHand?.transform.SetParent(downWeaponBinding);
             }
-            transform.position = new Vector3(transform.position.x + horizontal, transform.position.y + vertical, transform.position.z);
+            Vector3 targetPos = new Vector3(transform.position.x + horizontal, transform.position.y + vertical, transform.position.z);
+            Vector3 pos = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+            GetComponent<Rigidbody2D>().MovePosition(pos);
 
             if (Input.GetMouseButtonDown(0))
             {

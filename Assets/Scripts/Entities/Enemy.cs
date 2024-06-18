@@ -13,6 +13,9 @@ public class Enemy : Entity
     [HideInInspector]public Animator anim;
     public string movementAnimName;
     public string attackAnimName;
+    public bool isSpriteFlippable;
+    public bool isAttackCooldownReduced = false;
+    public SpriteRenderer attackCooldownSprite;
 
     public void Start(){
         base.Start();
@@ -24,6 +27,7 @@ public class Enemy : Entity
         if (!GameManager.Instance.isGameOver){
             if (target != null && !GameManager.Instance.inTransition){
                 attackCooldownTimer += Time.deltaTime;
+                if (isSpriteFlippable) GetComponent<SpriteRenderer>().flipX = target.position.x < transform.position.x;
                 if (Vector3.Distance(transform.position, target.position) <= distanceStartAttacking){
                     if (attackCooldownTimer >= attackCooldownDuration){
                         if (anim != null) anim.Play(attackAnimName);
@@ -31,7 +35,8 @@ public class Enemy : Entity
                         attackCooldownTimer = 0f;
                     }
                 } else {
-                    transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+                    Vector3 pos = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+                    GetComponent<Rigidbody2D>().MovePosition(pos);
                     if (anim != null) anim.Play(movementAnimName);
                 }
             }

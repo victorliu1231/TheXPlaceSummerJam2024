@@ -6,6 +6,9 @@ public class Wizard : Enemy
 {
     public float supportCooldownDuration;
     public float speedUpAlliesMultiplier;
+    [Tooltip("Duration in seconds that allies are sped up. Should be less than supportCooldownDuration.")]
+    public float durationAlliesSpedUp;
+    public float radiusToSupport;
     private float supportCooldownTimer = 0f;
     private bool isSupportMoveEnabled = false;
     public GameObject supportAnim;
@@ -37,11 +40,28 @@ public class Wizard : Enemy
     public void SpeedUpAllies(){
         if (anim != null) anim.Play(supportAnimName);
         supportAnim.SetActive(true);
-        foreach (Transform child in GameManager.Instance.enemiesParent){
-            Enemy enemy = child.gameObject.GetComponent<Enemy>();
-            if (enemy != this){
-                enemy.attackCooldownDuration *= speedUpAlliesMultiplier;
+        // Detect all enemies in radius
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radiusToSupport);
+        foreach (Collider2D collider in colliders){
+            if (collider.tag == "Enemy"){
+                Enemy enemy = collider.GetComponent<Enemy>();
+                if (enemy != this){
+                    StartCoroutine(SpeedUpAlliesCo(enemy));
+                }
             }
+        }
+    }
+
+    public IEnumerator SpeedUpAlliesCo(Enemy enemy){
+        if (!enemy.isAttackCooldownReduced){
+            enemy.isAttackCooldownReduced = true;
+            enemy.attackCooldownSprite.enabled = true;
+            float originalAttackCooldownDuration = enemy.attackCooldownDuration;
+            enemy.attackCooldownDuration *= speedUpAlliesMultiplier;
+            yield return new WaitForSeconds(durationAlliesSpedUp);
+            enemy.attackCooldownDuration = originalAttackCooldownDuration;
+            enemy.isAttackCooldownReduced = false;
+            enemy.attackCooldownSprite.enabled = false;
         }
     }
 }

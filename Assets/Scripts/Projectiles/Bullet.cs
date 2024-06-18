@@ -14,6 +14,7 @@ public class Bullet : MonoBehaviour
     public string targetTag;
     private SpriteRenderer spriteRenderer;
     private int playerDir;
+    public bool isPlayerWeapon;
 
     void Start(){
         Destroy(gameObject, lifetime);
@@ -24,8 +25,8 @@ public class Bullet : MonoBehaviour
     void Update(){
         if (!GameManager.Instance.isGameOver){
             // Move transform based on rotation
-            
-            transform.position += transform.right * playerDir * speed * Time.deltaTime;
+            if (isPlayerWeapon) transform.position += transform.right * playerDir * speed * Time.deltaTime;
+            else transform.position += transform.right * speed * Time.deltaTime;
         } else {
             gameObject.SetActive(false);
         }
@@ -33,7 +34,7 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other){
         if (other.gameObject.tag == targetTag || other.gameObject.tag == "Wall"){
-            if (other.gameObject.tag == targetTag) other.gameObject.GetComponent<Enemy>().TakeDamage(damage, transform.position, canCauseKnockback, knockbackForce);
+            if (other.gameObject.tag == targetTag) other.gameObject.GetComponent<Entity>().TakeDamage(damage, transform.position, canCauseKnockback, knockbackForce);
             if (hitParticles != null) hitParticles.Play();
             spriteRenderer.enabled = false;
             Destroy(gameObject, hitParticleLifetime);

@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2092455586, guid: 4787026be9ca21d4fb26f0ad46f84834, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -108,6 +108,7 @@ MonoBehaviour:
   canCauseKnockback: 1
   knockbackForce: 0.3
   targetTag: Player
+  isPlayerWeapon: 0
 --- !u!50 &6394995850082636656
 Rigidbody2D:
   serializedVersion: 4

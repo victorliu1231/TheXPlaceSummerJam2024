@@ -8,6 +8,11 @@ to-do list
 - add ability to add player name upon pressing Play
 - add some visual to indicate which enemies are sped up attack-wise
 - figure out how to disable gameobject when wizard anim is done
+- QA test how we want enemies to get stronger
+- what if we kill all enemies early?
+- one wave per stage?
+
+- get ui for attack cooldown reduced
 
 - fantasy GUI Ranking for high score panel
 - Pause gui for pausing

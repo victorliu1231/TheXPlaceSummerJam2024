@@ -18,8 +18,8 @@ public class Eyeball : Enemy
     public override void Update(){
         if (!GameManager.Instance.isGameOver){
             if (target != null && !GameManager.Instance.inTransition){
-                teleportCooldownDuration += Time.deltaTime;
-                if (teleportCooldownDuration >= teleportCooldownDuration){
+                teleportCooldownTimer += Time.deltaTime;
+                if (teleportCooldownTimer >= teleportCooldownDuration){
                     if (anim != null) anim.Play(beginTeleportAnimName);
                     // Link teleport anim to attack anim thru animator
                     StartCoroutine(EyeballAttack());

@@ -108,6 +108,7 @@ MonoBehaviour:
   canCauseKnockback: 1
   knockbackForce: 0.3
   targetTag: Enemy
+  isPlayerWeapon: 1
 --- !u!61 &1839997810671874342
 BoxCollider2D:
   m_ObjectHideFlags: 0

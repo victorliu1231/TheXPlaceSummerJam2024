@@ -16,6 +16,17 @@ public class GameManager : MonoBehaviour
     public GameObject bossGUI;
     public float nextLevelTransitionDuration = 2f;
     public TextMeshProUGUI levelText;
+    public int everyXLevelsPlayerGetsStronger = 2;
+    public float playerStrengthMultiplier = 1f;
+    public float playerStrengthBoostMultiplier;
+    public int everyXLevelsEnemyGetsStronger = 5;
+    public float enemyStrengthMultiplier = 1f;
+    public float enemyStrengthBoostMultiplier;
+    [Header("Enemy Waves")]
+    [Tooltip("The list of enemy waves. Index 0 is level 1, index 1 is level 2, etc.")]
+    [SerializeField]public List<CircularEnemyGenerator> enemyWaves;
+    public Transform generatorsParent;
+    public List<GameObject> bosses;
     [Header("Stage")]
     public float nextStageTransitionDuration = 2f;
     public int stage = 0;
@@ -66,6 +77,8 @@ public class GameManager : MonoBehaviour
 
     public void PlayGame(){
         ResetLevel();
+        playerStrengthMultiplier = 1f;
+        enemyStrengthMultiplier = 1f;
         minuteHand.localRotation = Quaternion.Euler(0, 0, 0);
         minuteHand.localRotation = Quaternion.Euler(0, 0, 0);
         totalTime = 0f;
@@ -87,6 +100,16 @@ public class GameManager : MonoBehaviour
                 Destroy(child.gameObject);
             }
             Instantiate(weaponCollectibles[0], weaponSpawnPositionOne, Quaternion.identity, collectiblesParent);
+    
+            foreach (Transform child in enemiesParent){
+                Destroy(child.gameObject);
+            }
+
+            foreach (Transform child in generatorsParent){
+                child.gameObject.SetActive(false);
+                enemyWaves.Add(child.GetComponent<CircularEnemyGenerator>());
+            }
+            enemyWaves[0].gameObject.SetActive(true);
         }
     }
 
@@ -124,7 +147,7 @@ public class GameManager : MonoBehaviour
                 ResetLevel();
                 StartCoroutine(NextLevel());
             } else {
-                StartCoroutine(GameOver(true));
+                if (!isDebugging) StartCoroutine(GameOver(true));
             }
         }
         else if (!inTransition){
@@ -167,8 +190,6 @@ public class GameManager : MonoBehaviour
         glitch.verticalJump = 0f;
         inTransition = false;
         player.transform.position = spawnPosition;
-        AudioManager.GetSoundtrack("MainTheme").Stop();
-        AudioManager.GetSoundtrack("MainTheme").Play();
         if (!isDebugging){
             foreach (Transform child in collectiblesParent){
                 Destroy(child.gameObject);
@@ -197,16 +218,28 @@ public class GameManager : MonoBehaviour
         glitch.scanLineJitter = 0f;
         glitch.verticalJump = 0f;
         player.transform.position = spawnPosition;
-        if (level % levelsBetweenBosses == 0){
+        if ((level + 1) % levelsBetweenBosses == 0){
             bossGUI.SetActive(true);
             AudioManager.GetSoundtrack("BossTheme").Play();
             yield return new WaitForSeconds(1.5f);
             bossGUI.SetActive(false);
+            float angle = Random.Range(0f, 360f);
+            float radius = 12.5f;
+            float x = transform.position.x + radius * Mathf.Cos(angle * Mathf.Deg2Rad);
+            float y = transform.position.y + radius * Mathf.Sin(angle * Mathf.Deg2Rad);
+            Instantiate(bosses[(level+1)/levelsBetweenBosses], new Vector2(x,y), Quaternion.identity, enemiesParent);
         } else {
             AudioManager.GetSoundtrack("MainTheme").Stop();
             AudioManager.GetSoundtrack("MainTheme").Play();
         }
         inTransition = false;
+        enemyWaves[level].gameObject.SetActive(true);
+        if (level % everyXLevelsPlayerGetsStronger == 0){
+            playerStrengthMultiplier += playerStrengthBoostMultiplier;
+        }
+        if (level % everyXLevelsEnemyGetsStronger == 0){
+            enemyStrengthMultiplier += enemyStrengthBoostMultiplier;
+        }
     }
 
     [ContextMenu("Test Next Level")]
