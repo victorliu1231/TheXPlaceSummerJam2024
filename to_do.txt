@@ -15,3 +15,4 @@ add
 - sfx
 - main menu - have floating weapons / enemies firing at random intervals moving across the screen
 - high score system
+- settings for player on main menu

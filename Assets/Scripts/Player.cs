@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    private Animator anim;
+    [HideInInspector]public Animator anim;
     public Weapon weaponInHand;
     public Transform sideWeaponBinding;
     public Transform upWeaponBinding;
@@ -49,7 +49,7 @@ public class Player : Entity
     }
 
     void OnCollisionExit2D(Collision2D collision){
-        if (collision.gameObject.tag == "Wall"){
+        if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Enemy"){
             transform.rotation = Quaternion.identity;
         }
     }
@@ -72,8 +72,6 @@ public class Player : Entity
     }
 
     public override void Die(){
-        GameManager.Instance.isGameOver = true;
-        StartCoroutine(GameManager.Instance.GameOver());
-        anim.Play("Player_Death");
+        StartCoroutine(GameManager.Instance.GameOver(false));
     }
 }

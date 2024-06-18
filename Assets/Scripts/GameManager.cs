@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Kino;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,13 +30,17 @@ public class GameManager : MonoBehaviour
     float totalTime = 0f;
     public float currentTime = 0f;
     const float hoursToDegrees = 360f / hoursInDay, minutesToDegrees = 360 / minutesInHour, secondsToDegrees = 360 / secondsInMinute;
-    [Header("Misc")]
-    public AnalogGlitch glitch;
-    public bool inTransition = false;
+    [Header("Death Screen")]
     public GameObject deathScreen;
     public GameObject playAgainButton;
+    public GameObject youDiedText;
+    public GameObject youRanOutOfTimeText;
     public bool isGameOver = false;
+    [Header("Misc")]
+    public bool inTransition = false;
+    public AnalogGlitch glitch;
     public GameObject player;
+    public Transform enemiesParent;
 
     void Awake() {
         if (_instance != null && _instance != this) {
@@ -43,7 +48,7 @@ public class GameManager : MonoBehaviour
         }
         else {
             _instance = this;
-            DontDestroyOnLoad(_instance);
+            //DontDestroyOnLoad(_instance);
 
             PlayGame();
         }
@@ -51,13 +56,21 @@ public class GameManager : MonoBehaviour
 
     public void PlayGame(){
         ResetLevel();
+        minuteHand.localRotation = Quaternion.Euler(0, 0, 0);
+        minuteHand.localRotation = Quaternion.Euler(0, 0, 0);
+        totalTime = 0f;
+        isGameOver = false;
+        inTransition = false;
         StartCoroutine(TickSecondHand());
         deathScreen.SetActive(false);
         playAgainButton.SetActive(false);
+        youDiedText.SetActive(false);
+        youRanOutOfTimeText.SetActive(false);
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public void ResetLevel(){
+        level = 0;
         stage = 0;
         currentTime = 0f;
         stageText.text = "Stage 1";
@@ -85,7 +98,15 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         totalTime += Time.deltaTime;
-        if (!inTransition){
+        if (currentTime >= 60f){
+            if (enemiesParent.childCount == 0){
+                ResetLevel();
+                StartCoroutine(NextLevel());
+            } else {
+                StartCoroutine(GameOver(true));
+            }
+        }
+        else if (!inTransition){
             currentTime += Time.deltaTime / timeSlowdowns[stage];
             hourHand.localRotation = Quaternion.Euler(0, 0, -GetHour()*hoursToDegrees);
             minuteHand.localRotation = Quaternion.Euler(0, 0, -GetMinute()*minutesToDegrees);
@@ -93,10 +114,6 @@ public class GameManager : MonoBehaviour
             if (currentTime >= stageEndTimes[stage]){
                 StartCoroutine(NextStage());
             }
-        }
-        if (currentTime >= 60f){
-            ResetLevel();
-            StartCoroutine(NextLevel());
         }
     }
 
@@ -152,13 +169,24 @@ public class GameManager : MonoBehaviour
         StartCoroutine(NextLevel());
     }
 
-    public IEnumerator GameOver(){
+    public IEnumerator GameOver(bool ranOutOfTime){
+        player.GetComponent<Player>().anim.Play("Player_Death");
+        isGameOver = true;
         deathScreen.SetActive(true);
+        if (ranOutOfTime){
+            youRanOutOfTimeText.SetActive(true);
+        } else {
+            youDiedText.SetActive(true);
+        }
         yield return new WaitForSeconds(1f);
         playAgainButton.SetActive(true);
         for (int i = 0; i < 10; i++){
             playAgainButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.1f*i);
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    public void PlayAgain(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
