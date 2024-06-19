@@ -4671,8 +4671,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1497522243}
-  gameScene: Game_VL
-  tutorialScene: Tutorial
+  cutscene: Cutscene_VL
+  tutorialScene: Tutorial_VL
   data: {fileID: 560114537}
   usernameText: {fileID: 1898659035}
 --- !u!4 &723320274

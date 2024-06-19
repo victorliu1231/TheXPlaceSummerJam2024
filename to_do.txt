@@ -6,7 +6,6 @@ to-do list
 add
 - time scaling difficulty, ghosts for lasers and bullets 
 - tutorial
---- autosave every level
 --- time slow + ghost system
 --- space to drop weapons
 --- wasd to move

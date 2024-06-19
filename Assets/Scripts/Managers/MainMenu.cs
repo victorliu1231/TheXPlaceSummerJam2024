@@ -7,8 +7,8 @@ using TMPro;
 public class MainMenu : MonoBehaviour
 {
     public Animator anim;
-    public string gameScene = "Scene_VL";
-    public string tutorialScene = "Tutorial";
+    public string cutscene = "Cutscene_VL";
+    public string tutorialScene = "Tutorial_VL";
     public PersistentData data;
     public TextMeshProUGUI usernameText;
 
@@ -20,7 +20,7 @@ public class MainMenu : MonoBehaviour
     }
 
     public void PlayGame(){
-        SceneManager.LoadScene(gameScene);
+        SceneManager.LoadScene(cutscene);
     }
 
     public void PlayTutorial(){

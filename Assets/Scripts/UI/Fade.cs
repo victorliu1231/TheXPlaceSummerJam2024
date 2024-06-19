@@ -22,15 +22,6 @@ public class Fade: MonoBehaviour
         TextMeshProUGUI text;
         Image image;
         SpriteRenderer sprite;
-        if (fadeType == FadeType.In){
-            if (TryGetComponent<TextMeshProUGUI>(out text)) text.color = new Color(1f, 1f, 1f, 0f);
-            if (TryGetComponent<Image>(out image)) image.color = new Color(1f, 1f, 1f, 0f);
-            if (TryGetComponent<SpriteRenderer>(out sprite)) sprite.color = new Color(1f, 1f, 1f, 0f);
-        } else {
-            if (TryGetComponent<TextMeshProUGUI>(out text)) text.color = new Color(1f, 1f, 1f, 1f);
-            if (TryGetComponent<Image>(out image)) image.color = new Color(1f, 1f, 1f, 1f);
-            if (TryGetComponent<SpriteRenderer>(out sprite)) sprite.color = new Color(1f, 1f, 1f, 1f);
-        }
         yield return new WaitForSeconds(timeDelay);
         for (int i = 0; i < 10; i++){
             if (fadeType == FadeType.In){
