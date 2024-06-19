@@ -12,6 +12,7 @@ public class Player : Entity
     public Transform downWeaponBinding;
     public enum FaceDirection{ Up, Down, Left, Right};
     public FaceDirection faceDirection;
+    public GameObject healthbar;
 
     void Start(){
         base.Start();
@@ -88,6 +89,7 @@ public class Player : Entity
 
     public override void Die(){
         StopAllCoroutines();
+        healthbar.SetActive(false);
         StartCoroutine(GameManager.Instance.GameOver(false));
     }
 }

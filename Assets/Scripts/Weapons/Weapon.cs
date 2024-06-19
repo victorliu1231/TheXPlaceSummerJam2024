@@ -33,7 +33,6 @@ public class Weapon : MonoBehaviour
                 Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector3 lookDir = (mousePos - transform.position) * player.localScale.x;
                 float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
-                Debug.Log(angle);
                 if (faceDirection == FaceDirection.Up){
                     if ((-45f < angle && angle <= 45f-22.5f) || (-405f < angle && angle <= -315f-22.5f)) {
                         faceDirection = FaceDirection.Right;

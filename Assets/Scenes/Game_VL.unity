@@ -1457,7 +1457,8 @@ MonoBehaviour:
   leftWeaponBinding: {fileID: 376901222}
   upWeaponBinding: {fileID: 879797827}
   downWeaponBinding: {fileID: 1952251984}
-  faceDirection: 0
+  faceDirection: 3
+  healthbar: {fileID: 307536024}
 --- !u!212 &552248126
 SpriteRenderer:
   m_ObjectHideFlags: 0

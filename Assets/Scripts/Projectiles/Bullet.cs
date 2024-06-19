@@ -33,6 +33,7 @@ public class Bullet : MonoBehaviour
             if (other.gameObject.tag == targetTag) other.gameObject.GetComponent<Entity>().TakeDamage(damage, transform.position, canCauseKnockback, knockbackForce);
             if (hitParticles != null) hitParticles.Play();
             spriteRenderer.enabled = false;
+            GetComponent<Collider2D>().enabled = false;
             Destroy(gameObject, hitParticleLifetime);
         }
     }
