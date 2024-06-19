@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2814110576402638877}
   - component: {fileID: 1839997810671874342}
   - component: {fileID: 212898504574198676}
+  - component: {fileID: 2701095875050249277}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -108,7 +109,6 @@ MonoBehaviour:
   canCauseKnockback: 1
   knockbackForce: 0.3
   targetTag: Enemy
-  isPlayerWeapon: 1
 --- !u!61 &1839997810671874342
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -181,6 +181,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2701095875050249277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5488736018931721027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710f9ae966d23354b847e3ca41014108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StageIndicator: {fileID: 7546781710895800468}
+  stage: 1
 --- !u!1001 &6552417555271235253
 PrefabInstance:
   m_ObjectHideFlags: 0

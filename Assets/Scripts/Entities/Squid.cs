@@ -16,7 +16,7 @@ public class Squid : Enemy
         base.Update();
         if (!GameManager.Instance.isGameOver){
             if (target != null && !GameManager.Instance.inTransition){
-                spawnWallCooldownTimer += Time.deltaTime;
+                spawnWallCooldownTimer += Time.deltaTime * Util.GetRecriprocalStage(GetComponent<TimeSlowdown>());
                 if (spawnWallCooldownTimer >= spawnWallCooldownDuration){
                     SpawnWall();
                     spawnWallCooldownTimer = 0f;

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2980415110041573239}
   - component: {fileID: 7594338137595419417}
   - component: {fileID: 9114195088966551347}
+  - component: {fileID: 4556827329698806579}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Gun
@@ -128,6 +129,20 @@ MonoBehaviour:
   timeDelayBetweenPlayerPosStorageAndAttack: 0
   prefab: {fileID: 5488736018931721027, guid: cdf623efaa86af7458efbba1e4a533d3, type: 3}
   fireParticles: {fileID: 6422739336187769109}
+--- !u!114 &4556827329698806579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346147250611523877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710f9ae966d23354b847e3ca41014108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StageIndicator: {fileID: 0}
+  stage: 1
 --- !u!1001 &8763123058207236308
 PrefabInstance:
   m_ObjectHideFlags: 0

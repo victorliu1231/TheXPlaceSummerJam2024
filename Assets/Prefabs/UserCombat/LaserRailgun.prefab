@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3326738000343677131}
   - component: {fileID: 8423800447411463895}
   - component: {fileID: 885921781087984860}
+  - component: {fileID: -4539225380288245021}
   m_Layer: 0
   m_Name: LaserRailgun
   m_TagString: Laser
@@ -106,6 +107,20 @@ MonoBehaviour:
   timeDelayBetweenPlayerPosStorageAndAttack: 0
   prefab: {fileID: 1453286740839070790, guid: 733fe38acc7560149a7b9e29c20e5b66, type: 3}
   fireParticles: {fileID: 8095681906563546390}
+--- !u!114 &-4539225380288245021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4008838687057021155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710f9ae966d23354b847e3ca41014108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StageIndicator: {fileID: 0}
+  stage: 1
 --- !u!1001 &3779225061178473981
 PrefabInstance:
   m_ObjectHideFlags: 0
