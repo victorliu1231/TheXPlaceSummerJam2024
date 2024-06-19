@@ -6,7 +6,8 @@ public class PlayerGhost : Entity
 {
     [HideInInspector] public Animator anim;
     public Weapon weaponInHand;
-    public Transform sideWeaponBinding;
+    public Transform leftWeaponBinding;
+    public Transform rightWeaponBinding;
     public Transform upWeaponBinding;
     public Transform downWeaponBinding;
     public enum FaceDirection { Up, Down, Left, Right };
@@ -24,7 +25,7 @@ public class PlayerGhost : Entity
         base.Start();
         anim = GetComponent<Animator>();
         weaponInHand = GetComponentInChildren<Weapon>();
-        if (weaponInHand != null) weaponInHand.transform.SetParent(sideWeaponBinding);
+        if (weaponInHand != null) weaponInHand.transform.SetParent(rightWeaponBinding);
         faceDirection = FaceDirection.Right;
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
@@ -103,7 +104,7 @@ public class PlayerGhost : Entity
                     }
                 }
 
-                GameObject newWeapon = Instantiate(weaponCollectible.weaponPrefab, sideWeaponBinding);
+                GameObject newWeapon = Instantiate(weaponCollectible.weaponPrefab, rightWeaponBinding);
                 weaponInHand = newWeapon.GetComponent<Weapon>();
                 Destroy(collider.gameObject);
             }

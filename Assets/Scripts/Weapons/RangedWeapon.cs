@@ -23,6 +23,6 @@ public class RangedWeapon : Weapon
         Quaternion freezeWeaponRot = transform.rotation;
         yield return new WaitForSeconds(timeDelayBetweenPlayerPosStorageAndAttack);
         if (fireParticles != null) fireParticles.Play();
-        Instantiate(prefab, transform.position, freezeWeaponRot);
+        Instantiate(prefab, transform.position, freezeWeaponRot, GameManager.Instance.projectilesParent);
     }
 }

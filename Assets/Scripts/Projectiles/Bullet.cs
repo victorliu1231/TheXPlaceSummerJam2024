@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
     }
 
     void Update(){
-        if (!GameManager.Instance.isGameOver){
+        if (!GameManager.Instance.isGameOver && !GameManager.Instance.inTransition){
             // Move transform based on rotation
             transform.position += transform.right * speed * Time.deltaTime;
         } else {

@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
     public Transform enemiesParent;
     public Transform ghostsParent;
     public Transform spawnedWallsParent;
+    public Transform projectilesParent;
     public PlayerRecorder playerRecorder;
     [Header("Misc")]
     public bool inTransition = false;
@@ -228,6 +229,9 @@ public class GameManager : MonoBehaviour
         foreach (Transform child in spawnedWallsParent){
             Destroy(child.gameObject);
         }
+        foreach (Transform child in projectilesParent){
+            Destroy(child.gameObject);
+        }
         inTransition = true;
         stage++;
         stageText.text = "Stage " + (stage+1);
@@ -245,6 +249,9 @@ public class GameManager : MonoBehaviour
             playerRecorder.InstantiateGhost();
             
             foreach (Transform child in collectiblesParent){
+                Destroy(child.gameObject);
+            }
+            foreach (Transform child in projectilesParent){
                 Destroy(child.gameObject);
             }
             if (stage == 1) Instantiate(weaponCollectibles[1], weaponSpawnPositionOne, Quaternion.identity, collectiblesParent);
@@ -265,6 +272,12 @@ public class GameManager : MonoBehaviour
             Destroy(child.gameObject);
         }
         foreach (Transform child in spawnedWallsParent){
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in collectiblesParent){
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in projectilesParent){
             Destroy(child.gameObject);
         }
         inTransition = true;

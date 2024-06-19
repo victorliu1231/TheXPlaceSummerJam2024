@@ -1,30 +1,18 @@
 to-do list
-- hour hand has functionality with different maps (black hole, galaxy)
 - laser particles hitting enemies too frequently, causing lag
-- enemies getting knocked into walls ... detect if entity will hit into wall and if so, prevent kb
-- agree on size of screen
-- fix boss GUI
-- QA test how we want enemies to get stronger
+- remove boss GUI
 - what if we kill all enemies early?
-- one wave per stage?
 - remove collisions between you and your ghosts
 - fireball visual is pointing wrong way
 
-
-- if boss dies, stop boss theme soundtrack
-- add gameplay
-
 add
-- eesh, difficulty GUI for enemies, scaling difficulty, bosses, ghosts for lasers and bullets, gui for previous stages of enemies and players 
+- time scaling difficulty, ghosts for lasers and bullets, gui for previous stages of enemies and players 
 - pause gui in game
-- need a new name for game
 - tutorial
 --- autosave every level
 - particle effects
 - sfx
 - main menu - have floating weapons / enemies firing at random intervals moving across the screen
-- make weapons and enemies stronger with each level
-- implement bosses
 - TheXPlace game profile
 
 advertise
