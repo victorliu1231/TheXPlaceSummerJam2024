@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2248448583560346549}
   - component: {fileID: 862884091351282955}
   - component: {fileID: -294155176800212944}
+  - component: {fileID: 6382468182564635002}
   m_Layer: 0
   m_Name: Club
   m_TagString: SwingableMeleeObject
@@ -206,6 +207,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6382468182564635002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030178012815371284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710f9ae966d23354b847e3ca41014108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StageIndicator: {fileID: 0}
+  stage: 1
 --- !u!1001 &6209146160919385285
 PrefabInstance:
   m_ObjectHideFlags: 0

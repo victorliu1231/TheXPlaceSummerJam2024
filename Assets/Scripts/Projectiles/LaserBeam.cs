@@ -16,13 +16,13 @@ public class LaserBeam : MonoBehaviour
 
     void Start(){
         if (lifetime >= 0){
-            Destroy(gameObject, lifetime);
+            Destroy(gameObject, lifetime * Util.GetStage(GetComponent<TimeSlowdown>()));
         }
     }
 
     void OnTriggerEnter2D(Collider2D other){
         if (other.gameObject.tag == targetTag && damageTriggerType == DamageTriggerType.OnTriggerEnter){
-            other.gameObject.GetComponent<Entity>().TakeDamage(damage, transform.position, canCauseKnockback, knockbackForce);
+            other.gameObject.GetComponent<Entity>().TakeDamage(damage, transform.position, canCauseKnockback, knockbackForce, gameObject);
             if (hitParticlesPrefab != null){
                 GameObject particles = Instantiate(hitParticlesPrefab, other.transform.position, Quaternion.identity);
                 Destroy(particles, 0.5f);
@@ -32,7 +32,7 @@ public class LaserBeam : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other){
         if (other.gameObject.tag == targetTag && damageTriggerType == DamageTriggerType.OnTriggerStay){
-            other.gameObject.GetComponent<Entity>().TakeDamage(damage, transform.position, canCauseKnockback, knockbackForce);
+            other.gameObject.GetComponent<Entity>().TakeDamage(damage, transform.position, canCauseKnockback, knockbackForce, gameObject);
             if (hitParticlesPrefab != null){
                 GameObject particles = Instantiate(hitParticlesPrefab, other.transform.position, Quaternion.identity);
                 Destroy(particles, 0.5f);

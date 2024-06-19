@@ -60,28 +60,29 @@ public class PlayerRecorder : MonoBehaviour
     {
         if (recordOn && player && rb)
         {
-            snapshots.Enqueue(new Snapshot(player.transform.position, Input.mousePosition, rb, queuedActions, Time.time - firstTime));
+            snapshots.Enqueue(new Snapshot(player.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), rb, queuedActions, Time.time - firstTime));
             queuedActions.Clear();
         }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            recordOn = true;
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            recordOn = false;
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            InstantiateGhost();
-        }
+        //if (Input.GetKeyDown(KeyCode.O))
+        //{
+        //    recordOn = true;
+        //}
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    recordOn = false;
+        //}
+        //if (Input.GetKeyDown(KeyCode.I))
+        //{
+        //    GameObject ghost = InstantiateGhost();
+        //    ghost.GetComponent<TimeSlowdown>().ChangeStage(2);
+        //}
     }
 
-    public void InstantiateGhost(){
+    public GameObject InstantiateGhost(){
         GameObject ghost = Instantiate(playerGhost, startLocation, Quaternion.identity, ghostsParent);
         Queue<Snapshot> newSnaps = new Queue<Snapshot>();
         foreach (Snapshot snap in snapshots)
@@ -89,6 +90,7 @@ public class PlayerRecorder : MonoBehaviour
             newSnaps.Enqueue(snap.CopySelf());
         }
         ghost.GetComponent<PlayerGhost>().snapshots = newSnaps;
+        return ghost;
     }
 
     public void FlushRecordings()

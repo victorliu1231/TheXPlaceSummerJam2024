@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5768048960903312418}
   - component: {fileID: 3858484356591423149}
   - component: {fileID: 4830778178623400433}
+  - component: {fileID: 8382661064684102830}
   m_Layer: 0
   m_Name: EyeballLaser
   m_TagString: Untagged
@@ -81,6 +82,7 @@ MonoBehaviour:
   canCauseKnockback: 1
   knockbackForce: 0.3
   targetTag: Player
+  damageTriggerType: 0
 --- !u!212 &3858484356591423149
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -178,6 +180,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.14, y: 0.73}
   m_EdgeRadius: 0
+--- !u!114 &8382661064684102830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519883922421658185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710f9ae966d23354b847e3ca41014108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StageIndicator: {fileID: 3858484356591423149}
+  stage: 1
 --- !u!1001 &5752900586731400869
 PrefabInstance:
   m_ObjectHideFlags: 0

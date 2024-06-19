@@ -38,9 +38,11 @@ public class Enemy : Entity
     }
 
     public virtual void Update(){
+        int stage = GameManager.Instance.stage - (GetComponent<TimeSlowdown>()?.stage ?? 1) + 1;
+
         if (!GameManager.Instance.isGameOver){
             if (target != null && !GameManager.Instance.inTransition){
-                attackCooldownTimer += Time.deltaTime;
+                attackCooldownTimer += Time.deltaTime * (1f/stage);
                 if (isSpriteFlippable) {
                     if (spriteDirection == SpriteDirection.Right) GetComponent<SpriteRenderer>().flipX = target.position.x < transform.position.x;
                     if (spriteDirection == SpriteDirection.Left) GetComponent<SpriteRenderer>().flipX = target.position.x > transform.position.x;
@@ -52,7 +54,7 @@ public class Enemy : Entity
                         attackCooldownTimer = 0f;
                     }
                 } else {
-                    Vector3 pos = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+                    Vector3 pos = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime * (1f / stage));
                     GetComponent<Rigidbody2D>().MovePosition(pos);
                     if (anim != null) anim.Play(movementAnimName);
                 }

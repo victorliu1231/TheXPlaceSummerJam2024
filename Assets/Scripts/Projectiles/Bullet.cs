@@ -15,14 +15,14 @@ public class Bullet : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     void Start(){
-        Destroy(gameObject, lifetime);
+        Destroy(gameObject, lifetime * Util.GetStage(GetComponent<TimeSlowdown>()));
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update(){
         if (!GameManager.Instance.isGameOver && !GameManager.Instance.inTransition){
             // Move transform based on rotation
-            transform.position += transform.right * speed * Time.deltaTime;
+            transform.position += transform.right * speed * Time.deltaTime * Util.GetRecriprocalStage(GetComponent<TimeSlowdown>());
         } else {
             gameObject.SetActive(false);
         }
@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other){
         if (other.gameObject.tag == targetTag || other.gameObject.tag == "Wall"){
-            if (other.gameObject.tag == targetTag) other.gameObject.GetComponent<Entity>().TakeDamage(damage, transform.position, canCauseKnockback, knockbackForce);
+            if (other.gameObject.tag == targetTag) other.gameObject.GetComponent<Entity>().TakeDamage(damage, transform.position, canCauseKnockback, knockbackForce, gameObject);
             if (hitParticles != null) hitParticles.Play();
             spriteRenderer.enabled = false;
             GetComponent<Collider2D>().enabled = false;

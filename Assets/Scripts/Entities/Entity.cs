@@ -17,7 +17,15 @@ public class Entity : MonoBehaviour
         if (healthbar == null) healthbar = GetComponentInChildren<MMHealthBar>();
     }
 
-    public void TakeDamage(float damage, Vector2 attackerPosition, bool canCauseKnockback, float knockbackForce){
+    public void TakeDamage(float damage, Vector2 attackerPosition, bool canCauseKnockback, float knockbackForce, GameObject dealer = null){
+        if (dealer is not null)
+        {
+            if (GetComponent<TimeSlowdown>().stage < dealer.GetComponent<TimeSlowdown>().stage)
+            {
+                GetComponent<TimeSlowdown>().ChangeStage(dealer.GetComponent<TimeSlowdown>().stage);
+            }
+        }
+        
         if (!invincible && !GameManager.Instance.isGameOver){
             if (gameObject.tag == "Player"){
                 currentHealth -= damage * GameManager.Instance.enemyStrengthMultiplier;

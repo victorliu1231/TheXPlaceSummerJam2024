@@ -13,10 +13,11 @@ public class Wizard : Enemy
     private bool isSupportMoveEnabled = false;
     public GameObject supportAnim;
     public string supportAnimName;
-
+        
     void Start(){
         base.Start();
-        Invoke("EnableSupportMove", 2.5f);
+
+        Invoke("EnableSupportMove", 2.5f * Util.GetRecriprocalStage(GetComponent<TimeSlowdown>()));
         supportAnim.SetActive(false);
     }
 
@@ -24,7 +25,7 @@ public class Wizard : Enemy
         base.Update();
         if (!GameManager.Instance.isGameOver){
             if (target != null && !GameManager.Instance.inTransition && isSupportMoveEnabled){
-                supportCooldownTimer += Time.deltaTime;
+                supportCooldownTimer += Time.deltaTime * Util.GetRecriprocalStage(GetComponent<TimeSlowdown>());
                 if (supportCooldownTimer >= supportCooldownDuration){
                     SpeedUpAllies();
                     supportCooldownTimer = 0f;
@@ -59,7 +60,7 @@ public class Wizard : Enemy
             enemy.attackCooldownSprite.enabled = true;
             float originalAttackCooldownDuration = enemy.attackCooldownDuration;
             enemy.attackCooldownDuration *= speedUpAlliesMultiplier;
-            yield return new WaitForSeconds(durationAlliesSpedUp);
+            yield return new WaitForSeconds(durationAlliesSpedUp * Util.GetRecriprocalStage(GetComponent<TimeSlowdown>()));
             enemy.attackCooldownDuration = originalAttackCooldownDuration;
             enemy.isAttackCooldownReduced = false;
             enemy.attackCooldownSprite.enabled = false;

@@ -27,24 +27,24 @@ public class Player : Entity
         if (!GameManager.Instance.inTransition && !GameManager.Instance.isGameOver){
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
-            if (weaponInHand.faceDirection == Weapon.FaceDirection.Right){
+            if (weaponInHand?.faceDirection == Weapon.FaceDirection.Right){
                 if (horizontal > 0){
                     anim.Play("Player_Run_Right");
                 } else {
                     anim.Play("Player_Idle_Right");
                 }
-            } else if (weaponInHand.faceDirection == Weapon.FaceDirection.Left){
+            } else if (weaponInHand?.faceDirection == Weapon.FaceDirection.Left){
                 if (horizontal < 0){
                     anim.Play("Player_Run_Left");
                 } else {
                     anim.Play("Player_Idle_Left");
                 }
             }
-            else if (weaponInHand.faceDirection == Weapon.FaceDirection.Up){
+            else if (weaponInHand?.faceDirection == Weapon.FaceDirection.Up){
                 if (vertical > 0) anim.Play("Player_Run_Up");
                 else anim.Play("Player_Up_Idle");
             }
-            else if (weaponInHand.faceDirection == Weapon.FaceDirection.Down){
+            else if (weaponInHand?.faceDirection == Weapon.FaceDirection.Down){
                 if (vertical < 0) anim.Play("Player_Run_Down");
                 else anim.Play("Player_Down_Idle");
             }

@@ -36,15 +36,36 @@ public class PlayerGhost : Entity
     // Update is called once per frame
     void Update()
     {
+        int stage = GameManager.Instance.stage - (GetComponent<TimeSlowdown>()?.stage ?? 1) + 1;
+
         if (!GameManager.Instance.inTransition && !GameManager.Instance.isGameOver)
         {
+            if (weaponInHand?.faceDirection == Weapon.FaceDirection.Right)
+            {
+                anim.Play("Player_Idle_Right");
+            }
+            else if (weaponInHand?.faceDirection == Weapon.FaceDirection.Left)
+            {
+                anim.Play("Player_Idle_Left");
+            }
+            else if (weaponInHand?.faceDirection == Weapon.FaceDirection.Up)
+            {
+                anim.Play("Player_Up_Idle");
+            }
+            else if (weaponInHand?.faceDirection == Weapon.FaceDirection.Down)
+            {
+                anim.Play("Player_Down_Idle");
+            }
+
             if (snapshots.Count > 0)
             {
                 Snapshot nextSnap = snapshots.Peek();
 
-                if (nextSnap is not null && nextSnap.timeSinceFirstSnapshot <= Time.time - firstTime)
+                if (nextSnap is not null && nextSnap.timeSinceFirstSnapshot * stage <= Time.time - firstTime)
                 {
                     nextSnap = snapshots.Dequeue();
+
+                    if (weaponInHand) weaponInHand.ghostMousePos = nextSnap.mousePos;
 
                     if (!rb) { rb = GetComponent<Rigidbody2D>(); }
 
@@ -94,7 +115,7 @@ public class PlayerGhost : Entity
             WeaponCollectible weaponCollectible = collider.gameObject.GetComponent<WeaponCollectible>();
             if (weaponCollectible != null)
             {
-                if (weaponInHand is not null)
+                if (weaponInHand != null)
                 {
                     Transform bindingParent = weaponInHand.transform.parent;
                     GameObject droppedWeaponCollectible = Instantiate(weaponInHand.weaponCollectible, transform.position, Quaternion.identity);
@@ -105,7 +126,10 @@ public class PlayerGhost : Entity
                 }
 
                 GameObject newWeapon = Instantiate(weaponCollectible.weaponPrefab, rightWeaponBinding);
+                newWeapon.GetComponent<TimeSlowdown>().ChangeStage(GetComponent<TimeSlowdown>().stage);
                 weaponInHand = newWeapon.GetComponent<Weapon>();
+                weaponInHand.isInputControlled = false;
+                weaponInHand.isGhost = true;
                 Destroy(collider.gameObject);
             }
         }

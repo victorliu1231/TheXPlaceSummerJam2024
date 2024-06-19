@@ -12,10 +12,17 @@ public class Eyeball : Enemy
     [Tooltip("Used only for ghosts.")]
     public int counter = 0;
 
+    int seed;
+
+    void Awake()
+    {
+        seed = (int)transform.position.x + (int)transform.position.y;
+    }
+
     public override void Update(){
         if (!GameManager.Instance.isGameOver){
             if (target != null && !GameManager.Instance.inTransition){
-                teleportCooldownTimer += Time.deltaTime;
+                teleportCooldownTimer += Time.deltaTime * Util.GetRecriprocalStage(GetComponent<TimeSlowdown>());
                 if (teleportCooldownTimer >= teleportCooldownDuration){
                     teleportCooldownTimer = 0f;
                     StartCoroutine(EyeballAttack());
@@ -30,16 +37,16 @@ public class Eyeball : Enemy
 
     public IEnumerator EyeballAttack(){
         if (anim != null) anim.Play(beginTeleportAnimName);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f * Util.GetRecriprocalStage(GetComponent<TimeSlowdown>()));
         AudioManager.GetSFX("Teleport")?.Play();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f * Util.GetRecriprocalStage(GetComponent<TimeSlowdown>()));
         TeleportAwayFromPlayer();
         if (anim != null) anim.Play(endTeleportAnimName);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f * Util.GetRecriprocalStage(GetComponent<TimeSlowdown>()));
         if (anim != null) anim.Play(movementAnimName);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.5f * Util.GetRecriprocalStage(GetComponent<TimeSlowdown>()));
         if (anim != null) anim.Play(attackAnimName);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.5f * Util.GetRecriprocalStage(GetComponent<TimeSlowdown>()));
         weaponInHand.Attack();
     }
 

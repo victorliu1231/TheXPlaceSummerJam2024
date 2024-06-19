@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
 	public static GameManager Instance { get { return _instance; } }
+
+    public List<GameObject> allLevels = new List<GameObject>();
+
     [Header("Level")]
     public int level = 0;
     public int levelsBetweenBosses = 5;
@@ -30,7 +33,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> bosses;
     [Header("Stage")]
     public float nextStageTransitionDuration = 2f;
-    public int stage = 0;
+    public int stage = 1;
     [Tooltip("The time slow multiplier for the game. 1 is normal time, 2 is twice as slow, 3 is three times as slow, etc.")]
     public float[] timeSlowdowns = new float[3]{1f, 2f, 3f};
     [Tooltip("The time in seconds that each stage ends at.")]
@@ -108,28 +111,32 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         GameObject data = GameObject.FindGameObjectWithTag("Data");
         if (data != null) playerName = data.GetComponent<PersistentData>().playerName;
+
+        currentLevelTemplate = allLevels[Random.Range(0, allLevels.Count - 1)];
+        currentLevelInstance = Instantiate(currentLevelTemplate, Vector2.zero, Quaternion.identity);
+
         if (!isDebugging){
             AudioManager.GetSoundtrack("MainTheme").Play();
             player.transform.position = spawnPosition;
             foreach (Transform child in collectiblesParent){
                 Destroy(child.gameObject);
             }
-            Instantiate(weaponCollectibles[0], weaponSpawnPositionOne, Quaternion.identity, collectiblesParent);
+            //Instantiate(weaponCollectibles[0], weaponSpawnPositionOne, Quaternion.identity, collectiblesParent);
     
             foreach (Transform child in enemiesParent){
                 Destroy(child.gameObject);
             }
 
-            foreach (Transform child in generatorsParent){
-                child.gameObject.SetActive(false);
-                enemyWaves.Add(child.GetComponent<CircularEnemyGenerator>());
-            }
-            enemyWaves[0].gameObject.SetActive(true);
+            //foreach (Transform child in generatorsParent){
+            //    child.gameObject.SetActive(false);
+            //    enemyWaves.Add(child.GetComponent<CircularEnemyGenerator>());
+            //}
+            //enemyWaves[0].gameObject.SetActive(true);
         } else {
             level = jumpToLevel;
             stage = jumpToStage;
             currentTime = jumpToTime;
-            stageText.text = "Stage " + (stage+1);
+            stageText.text = "Stage " + (stage);
             levelText.text = "Level " + (level + 1);
             if ((level + 1) % levelsBetweenBosses == 0){
                 AudioManager.GetSoundtrack("BossTheme").Play();
@@ -141,9 +148,9 @@ public class GameManager : MonoBehaviour
                 AudioManager.GetSoundtrack("MainTheme").Stop();
                 AudioManager.GetSoundtrack("MainTheme").Play();
             }
-            foreach (Transform child in generatorsParent){
-                enemyWaves.Add(child.GetComponent<CircularEnemyGenerator>());
-            }
+            //foreach (Transform child in generatorsParent){
+            //    enemyWaves.Add(child.GetComponent<CircularEnemyGenerator>());
+            //}
             //enemyWaves[level].gameObject.SetActive(true);
             playerStrengthMultiplier += (level % everyXLevelsPlayerGetsStronger)*playerStrengthBoostMultiplier;
             enemyStrengthMultiplier += (level % everyXLevelsEnemyGetsStronger)*enemyStrengthBoostMultiplier;
@@ -152,7 +159,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetLevel(){
         level = 0;
-        stage = 0;
+        stage = 1;
         currentTime = 0f;
         stageText.text = "Stage 1";
         levelText.text = "Level 1";
@@ -204,11 +211,11 @@ public class GameManager : MonoBehaviour
             }
         }
         else if (!inTransition){
-            currentTime += Time.deltaTime / timeSlowdowns[stage];
+            currentTime += Time.deltaTime;
             hourHand.localRotation = Quaternion.Euler(0, 0, -GetHour()*hoursToDegrees);
             minuteHand.localRotation = Quaternion.Euler(0, 0, -GetMinute()*minutesToDegrees);
             //secondHand.localRotation = Quaternion.Euler(0, 0, -GetSecond()*secondsToDegrees);
-            if (currentTime >= stageEndTimes[stage]){
+            if (currentTime >= stageEndTimes[stage-1]){
                 StartCoroutine(NextStage());
             }
         }
@@ -229,6 +236,39 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public GameObject currentLevelTemplate;
+    public GameObject currentLevelInstance;
+
+    public GameObject playerGhost;
+
+    public Queue<Snapshot> ghost1 = new Queue<Snapshot>();
+    public Queue<Snapshot> ghost2 = new Queue<Snapshot>();
+
+    public void InstantiateGhosts()
+    {
+        if (stage >= 2)
+        {
+            GameObject ghost = Instantiate(playerGhost, new Vector2(0, 0), Quaternion.identity, ghostsParent);
+            Queue<Snapshot> g1 = new Queue<Snapshot>();
+            foreach (Snapshot snap in ghost1)
+            {
+                g1.Enqueue(snap.CopySelf());
+            }
+            ghost.GetComponent<PlayerGhost>().snapshots = g1;
+        }
+        if (stage >= 3)
+        {
+            GameObject ghost = Instantiate(playerGhost, new Vector2(0, 0), Quaternion.identity, ghostsParent);
+            Queue<Snapshot> g2 = new Queue<Snapshot>();
+            foreach (Snapshot snap in ghost2)
+            {
+                g2.Enqueue(snap.CopySelf());
+            }
+            ghost.GetComponent<PlayerGhost>().snapshots = g2;
+            ghost.GetComponent<TimeSlowdown>().ChangeStage(2);
+        }
+    }
+
     IEnumerator NextStage(){
         foreach (Transform child in enemiesParent){
             Destroy(child.gameObject);
@@ -242,9 +282,21 @@ public class GameManager : MonoBehaviour
         foreach (Transform child in projectilesParent){
             Destroy(child.gameObject);
         }
+        foreach (Transform child in enemiesParent)
+        {
+            Destroy(child.gameObject);
+        }
+            
+        foreach (Transform child in collectiblesParent){
+            Destroy(child.gameObject);
+        }
+
+        Destroy(currentLevelInstance);
+        currentLevelInstance = Instantiate(currentLevelTemplate, Vector2.zero, Quaternion.identity);
         inTransition = true;
         stage++;
-        stageText.text = "Stage " + (stage+1);
+        player.GetComponent<TimeSlowdown>().ChangeStage(stage);
+        stageText.text = "Stage " + (stage);
         glitch.horizontalShake = 0.1f;
         glitch.scanLineJitter += 0.1f;
         glitch.colorDrift = 1f;
@@ -257,20 +309,28 @@ public class GameManager : MonoBehaviour
         inTransition = false;
         player.transform.position = spawnPosition;
         if (!isDebugging){
-            playerRecorder.InstantiateGhost();
-            // Over here, instantiate all ghost versions of the enemies from first stage
-            
-            foreach (Transform child in collectiblesParent){
-                Destroy(child.gameObject);
+            if (stage == 2)
+            {
+                foreach (Snapshot snap in playerRecorder.snapshots)
+                {
+                    ghost1.Enqueue(snap.CopySelf());
+                }
             }
-            foreach (Transform child in projectilesParent){
-                Destroy(child.gameObject);
+            else if (stage == 3)
+            {
+                foreach (Snapshot snap in playerRecorder.snapshots)
+                {
+                    ghost2.Enqueue(snap.CopySelf());
+                }
             }
-            if (stage == 1) Instantiate(weaponCollectibles[1], weaponSpawnPositionOne, Quaternion.identity, collectiblesParent);
-            if (stage == 2){
-                Instantiate(weaponCollectibles[2], weaponSpawnPositionOne, Quaternion.identity, collectiblesParent);
-                Instantiate(weaponCollectibles[3], weaponSpawnPositionTwo, Quaternion.identity, collectiblesParent);
-            }
+            playerRecorder.FlushRecordings();
+            if (player.GetComponent<Player>().weaponInHand != null) Destroy(player.GetComponent<Player>().weaponInHand.gameObject);
+            InstantiateGhosts();
+            //if (stage == 1) Instantiate(weaponCollectibles[1], weaponSpawnPositionOne, Quaternion.identity, collectiblesParent);
+            //if (stage == 2){
+            //    Instantiate(weaponCollectibles[2], weaponSpawnPositionOne, Quaternion.identity, collectiblesParent);
+            //    Instantiate(weaponCollectibles[3], weaponSpawnPositionTwo, Quaternion.identity, collectiblesParent);
+            //}
         }
     }
 

@@ -29,14 +29,14 @@ public class MeleeWeapon : Weapon
 
     IEnumerator MeleeAttack(){
         collider.enabled = true;
-        yield return new WaitForSeconds(secAbleToHit);
+        yield return new WaitForSeconds(secAbleToHit * Util.GetStage(GetComponent<TimeSlowdown>()));
         collider.enabled = false;
     }
 
     void OnTriggerEnter2D(Collider2D other){
         if (other.gameObject.tag == targetTag || other.gameObject.tag == "Wall"){
-            if (other.gameObject.tag == targetTag) other.gameObject.GetComponent<Entity>().TakeDamage(meleeDamage, transform.position, canCauseKnockback, knockbackForce);
-            Invoke("PlayParticles", secAbleToHit);
+            if (other.gameObject.tag == targetTag) other.gameObject.GetComponent<Entity>().TakeDamage(meleeDamage, transform.position, canCauseKnockback, knockbackForce, gameObject);
+            Invoke("PlayParticles", secAbleToHit * Util.GetStage(GetComponent<TimeSlowdown>()));
         }
     }
 
