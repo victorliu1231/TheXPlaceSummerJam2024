@@ -2,7 +2,7 @@ to-do list
 - laser particles hitting enemies too frequently, causing lag
 - remove boss GUI
 - what if we kill all enemies early?
-- to do Will's additions
+- to do Will's additions and Grace's anim for cutscene
 - weird thing with NextLevel() still being ghost called somewhere in GameManager script when dying
 
 add

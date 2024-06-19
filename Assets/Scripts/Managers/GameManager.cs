@@ -114,26 +114,18 @@ public class GameManager : MonoBehaviour
         GameObject data = GameObject.FindGameObjectWithTag("Data");
         if (data != null) playerName = data.GetComponent<PersistentData>().playerName;
 
-        currentLevelTemplate = allLevels[Random.Range(0, allLevels.Count - 1)];
-        currentLevelInstance = Instantiate(currentLevelTemplate, Vector2.zero, Quaternion.identity);
-
         if (!isDebugging){
+            currentLevelTemplate = allLevels[Random.Range(0, allLevels.Count - 1)];
+            currentLevelInstance = Instantiate(currentLevelTemplate, Vector2.zero, Quaternion.identity);
             AudioManager.GetSoundtrack("MainTheme").Play();
             player.transform.position = spawnPosition;
             foreach (Transform child in collectiblesParent){
                 Destroy(child.gameObject);
             }
-            //Instantiate(weaponCollectibles[0], weaponSpawnPositionOne, Quaternion.identity, collectiblesParent);
     
             foreach (Transform child in enemiesParent){
                 Destroy(child.gameObject);
             }
-
-            //foreach (Transform child in generatorsParent){
-            //    child.gameObject.SetActive(false);
-            //    enemyWaves.Add(child.GetComponent<CircularEnemyGenerator>());
-            //}
-            //enemyWaves[0].gameObject.SetActive(true);
         } else {
             level = jumpToLevel;
             stage = jumpToStage;
@@ -150,10 +142,6 @@ public class GameManager : MonoBehaviour
                 AudioManager.GetSoundtrack("MainTheme").Stop();
                 AudioManager.GetSoundtrack("MainTheme").Play();
             }
-            //foreach (Transform child in generatorsParent){
-            //    enemyWaves.Add(child.GetComponent<CircularEnemyGenerator>());
-            //}
-            //enemyWaves[level].gameObject.SetActive(true);
             playerStrengthMultiplier += (level % everyXLevelsPlayerGetsStronger)*playerStrengthBoostMultiplier;
             enemyStrengthMultiplier += (level % everyXLevelsEnemyGetsStronger)*enemyStrengthBoostMultiplier;
         }
@@ -221,7 +209,7 @@ public class GameManager : MonoBehaviour
             if (currentTime >= stageEndTimes[stage-1]){
                 StartCoroutine(NextStage());
             }
-            currentTime += Time.deltaTime;
+            currentTime += Time.deltaTime * (1 + 0.1f * level);
         }
     }
 
@@ -392,14 +380,11 @@ public class GameManager : MonoBehaviour
     }
 
     public IEnumerator GameOver(bool ranOutOfTime){
-        glitch.scanLineJitter = 0f;
-        glitch.horizontalShake = 0f;
-        glitch.colorDrift = 0f;
-        glitch.verticalJump = 0f;
         AudioManager.StopAllSoundtracks();
         AudioManager.StopAllSFXs();
         AudioManager.GetSFX("GameOver").Play();
-        player.GetComponent<Player>().anim.Play("Player_Death");
+        //player.GetComponent<Player>().anim.Play("Player_Death");
+        player.SetActive(false);
         isGameOver = true;
         deathScreen.SetActive(true);
         if (ranOutOfTime){
