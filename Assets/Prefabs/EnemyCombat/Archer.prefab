@@ -290,7 +290,7 @@ MonoBehaviour:
   FollowTargetMode: 2
   NestDrawnHealthBar: 1
   InstantiatedOnDeath: {fileID: 0}
-  HealthBarOffset: {x: 0, y: 1, z: 0}
+  HealthBarOffset: {x: 0, y: 0.6, z: 0}
   AlwaysVisible: 1
   DisplayDurationOnHit: 1
   HideBarAtZero: 1
@@ -340,10 +340,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 1
+  faceDirection: 0
   isInputControlled: 0
   cooldownDuration: 0
-  minRotateAngle: 0
-  maxRotateAngle: 0
   weaponCollectible: {fileID: 0}
   timeDelayBetweenPlayerPosStorageAndAttack: 0.25
   prefab: {fileID: 6617575497658658542, guid: 4039e4e5251500b468fdbd23f80becc9, type: 3}
@@ -378,8 +377,8 @@ Transform:
   m_GameObject: {fileID: 6198902659785389750}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3, y: 2.16, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4617914230777286321}
@@ -555,13 +554,14 @@ MonoBehaviour:
   target: {fileID: 0}
   canCauseKnockback: 1
   weaponInHand: {fileID: 4751411028908051602}
-  distanceStartAttacking: 8
+  distanceStartAttacking: 3
   anim: {fileID: 0}
   movementAnimName: Archer_Movement
   attackAnimName: Archer_Attack
   isSpriteFlippable: 1
   isAttackCooldownReduced: 0
   attackCooldownSprite: {fileID: 2039925521713407113}
+  hasWallInFrontOfIt: 0
 --- !u!1001 &965902988323002488
 PrefabInstance:
   m_ObjectHideFlags: 0

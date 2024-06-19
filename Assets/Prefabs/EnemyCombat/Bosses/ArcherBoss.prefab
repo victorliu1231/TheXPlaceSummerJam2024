@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2293506069650830544}
@@ -214,6 +214,7 @@ MonoBehaviour:
   isSpriteFlippable: 0
   isAttackCooldownReduced: 0
   attackCooldownSprite: {fileID: 3943677173931960069}
+  hasWallInFrontOfIt: 0
 --- !u!1 &2719574875621856896
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,10 +471,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 1
+  faceDirection: 0
   isInputControlled: 0
   cooldownDuration: 0
-  minRotateAngle: 0
-  maxRotateAngle: 0
   weaponCollectible: {fileID: 0}
   timeDelayBetweenPlayerPosStorageAndAttack: 0.25
   prefab: {fileID: 879608210458940921, guid: a264193fc56f2a248ac3a7964973ce5a, type: 3}

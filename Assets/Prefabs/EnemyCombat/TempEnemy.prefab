@@ -290,7 +290,7 @@ MonoBehaviour:
   FollowTargetMode: 2
   NestDrawnHealthBar: 1
   InstantiatedOnDeath: {fileID: 0}
-  HealthBarOffset: {x: 0, y: 1, z: 0}
+  HealthBarOffset: {x: 0, y: 0.5, z: 0}
   AlwaysVisible: 1
   DisplayDurationOnHit: 1
   HideBarAtZero: 1
@@ -341,11 +341,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 0
+  faceDirection: 0
   isInputControlled: 0
   cooldownDuration: 1
-  minRotateAngle: 0
-  maxRotateAngle: 0
   weaponCollectible: {fileID: 0}
+  timeDelayBetweenPlayerPosStorageAndAttack: 0
   meleeDamage: 10
   secAbleToHit: 0.5
   hitParticles: {fileID: 0}
@@ -427,7 +427,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.03, y: 2.03, z: 2.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6638166377853117362}
@@ -545,7 +545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4cd189512cd98e498318ac15145b119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 5
   currentHealth: 0
   maxHealth: 100
   invincible: 0
@@ -555,13 +555,14 @@ MonoBehaviour:
   target: {fileID: 0}
   canCauseKnockback: 1
   weaponInHand: {fileID: 3796109858770210453}
-  distanceStartAttacking: 1
+  distanceStartAttacking: 0.66
   anim: {fileID: 0}
   movementAnimName: 
   attackAnimName: 
   isSpriteFlippable: 0
   isAttackCooldownReduced: 0
   attackCooldownSprite: {fileID: 1335989503714710974}
+  hasWallInFrontOfIt: 0
 --- !u!50 &8093481991878515236
 Rigidbody2D:
   serializedVersion: 4

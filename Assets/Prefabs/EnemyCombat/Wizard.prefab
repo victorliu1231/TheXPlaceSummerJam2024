@@ -45,10 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 1
+  faceDirection: 0
   isInputControlled: 0
   cooldownDuration: 0
-  minRotateAngle: 0
-  maxRotateAngle: 0
   weaponCollectible: {fileID: 0}
   timeDelayBetweenPlayerPosStorageAndAttack: 0.25
   prefab: {fileID: 206115812581200755, guid: dce8c82cac8cb664e91e074cff888bbb, type: 3}
@@ -83,8 +82,8 @@ Transform:
   m_GameObject: {fileID: 1668178637209323703}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3, y: 2.16, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7899281853810715856}
@@ -195,17 +194,18 @@ MonoBehaviour:
   target: {fileID: 0}
   canCauseKnockback: 1
   weaponInHand: {fileID: 1782846779414519349}
-  distanceStartAttacking: 8
+  distanceStartAttacking: 3
   anim: {fileID: 0}
   movementAnimName: Wizard_Movement
   attackAnimName: Wizard_Attack
   isSpriteFlippable: 0
   isAttackCooldownReduced: 0
   attackCooldownSprite: {fileID: 6655074706812150591}
+  hasWallInFrontOfIt: 0
   supportCooldownDuration: 5
   speedUpAlliesMultiplier: 0.66
   durationAlliesSpedUp: 10
-  radiusToSupport: 2.3232
+  radiusToSupport: 2
   supportAnim: {fileID: 6202326535934532104}
   supportAnimName: Wizard_Support
 --- !u!95 &9175879463994258879
@@ -564,7 +564,7 @@ MonoBehaviour:
   FollowTargetMode: 2
   NestDrawnHealthBar: 1
   InstantiatedOnDeath: {fileID: 0}
-  HealthBarOffset: {x: 0, y: 1, z: 0}
+  HealthBarOffset: {x: 0, y: 0.6, z: 0}
   AlwaysVisible: 1
   DisplayDurationOnHit: 1
   HideBarAtZero: 1
@@ -598,7 +598,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.42, y: 2.42, z: 2.42}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 9092123829882180606}

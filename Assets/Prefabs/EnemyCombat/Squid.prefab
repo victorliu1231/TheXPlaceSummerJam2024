@@ -206,7 +206,7 @@ MonoBehaviour:
   FollowTargetMode: 2
   NestDrawnHealthBar: 1
   InstantiatedOnDeath: {fileID: 0}
-  HealthBarOffset: {x: 0, y: 1, z: 0}
+  HealthBarOffset: {x: 0, y: 0.8, z: 0}
   AlwaysVisible: 1
   DisplayDurationOnHit: 1
   HideBarAtZero: 1
@@ -257,10 +257,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 0
+  faceDirection: 0
   isInputControlled: 0
   cooldownDuration: 0
-  minRotateAngle: 0
-  maxRotateAngle: 0
   weaponCollectible: {fileID: 0}
   timeDelayBetweenPlayerPosStorageAndAttack: 0
   meleeDamage: 5
@@ -429,7 +428,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.79, y: 2.79, z: 2.79}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3167223275636533468}
@@ -605,7 +604,7 @@ MonoBehaviour:
   target: {fileID: 0}
   canCauseKnockback: 1
   weaponInHand: {fileID: 8756579519667449980}
-  distanceStartAttacking: 1
+  distanceStartAttacking: 0.66
   anim: {fileID: 0}
   movementAnimName: Squid_Movement
   attackAnimName: 
@@ -613,7 +612,7 @@ MonoBehaviour:
   isAttackCooldownReduced: 0
   attackCooldownSprite: {fileID: 9203559917293647690}
   hasWallInFrontOfIt: 0
-  spawnWallDistance: 2
+  spawnWallDistance: 1
   spawnWallCooldownDuration: 5
   wallPrefab: {fileID: 7008876704442941457, guid: 4190bd8af7e1b7442a12775a823bb5f3, type: 3}
   lastWallTarget: {fileID: 0}
