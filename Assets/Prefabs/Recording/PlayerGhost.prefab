@@ -659,7 +659,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  SortingLayerName: UI
+  SortingLayerName: HealthbarUI
   Delay: 0.5
   LerpFrontBar: 1
   LerpFrontBarSpeed: 15

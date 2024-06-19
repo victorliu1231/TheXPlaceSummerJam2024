@@ -89,6 +89,12 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public static void StopAllSoundtracks(){
+        foreach (KeyValuePair<string, AudioSource> entry in soundtracks){
+            entry.Value.Stop();
+        }
+    }
+
     public static void PauseAllSFXs(){
         foreach (KeyValuePair<string, AudioSource> entry in SFXs){
             entry.Value.Pause();
@@ -98,6 +104,12 @@ public class AudioManager : MonoBehaviour
     public static void UnpauseAllSFXs(){
         foreach (KeyValuePair<string, AudioSource> entry in SFXs){
             entry.Value.Pause();
+        }
+    }
+
+    public static void StopAllSFXs(){
+        foreach (KeyValuePair<string, AudioSource> entry in SFXs){
+            entry.Value.Stop();
         }
     }
 }

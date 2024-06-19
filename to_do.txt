@@ -2,6 +2,8 @@ to-do list
 - laser particles hitting enemies too frequently, causing lag
 - remove boss GUI
 - what if we kill all enemies early?
+- to do Will's additions
+- weird thing with NextLevel() still being ghost called somewhere in GameManager script when dying
 
 add
 - time scaling difficulty, ghosts for lasers and bullets 

@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
         stage = 1;
         currentTime = 0f;
         stageText.text = "Stage 1";
-        levelText.text = "Level 1";
+        levelText.text = $"Level {level+1}";
         glitch.scanLineJitter = 0f;
         glitch.horizontalShake = 0f;
         glitch.colorDrift = 0f;
@@ -193,12 +193,14 @@ public class GameManager : MonoBehaviour
         if (currentTime >= 60f){
             // see if all children are inactive or destroyed
             bool allInactive = true;
+            Debug.Log(enemiesParent.childCount);
             foreach (Transform child in enemiesParent){
                 if (child.gameObject.activeSelf){
                     allInactive = false;
                 }
             }
             if (enemiesParent.childCount == 0 || allInactive){
+                Debug.Log("dead");
                 ResetLevel();
                 StartCoroutine(NextLevel());
             } else {
@@ -206,19 +208,20 @@ public class GameManager : MonoBehaviour
                     StopAllCoroutines();
                     StartCoroutine(GameOver(true));
                 } else {
+                    Debug.Log("move on");
                     ResetLevel();
                     StartCoroutine(NextLevel());
                 }
             }
         }
         else if (!inTransition){
-            currentTime += Time.deltaTime;
             hourHand.localRotation = Quaternion.Euler(0, 0, -GetHour()*hoursToDegrees);
             minuteHand.localRotation = Quaternion.Euler(0, 0, -GetMinute()*minutesToDegrees);
             //secondHand.localRotation = Quaternion.Euler(0, 0, -GetSecond()*secondsToDegrees);
             if (currentTime >= stageEndTimes[stage-1]){
                 StartCoroutine(NextStage());
             }
+            currentTime += Time.deltaTime;
         }
     }
 
@@ -375,7 +378,6 @@ public class GameManager : MonoBehaviour
             AudioManager.GetSoundtrack("MainTheme").Play();
         }
         inTransition = false;
-        enemyWaves[level].gameObject.SetActive(true);
         if (level % everyXLevelsPlayerGetsStronger == 0){
             playerStrengthMultiplier += playerStrengthBoostMultiplier;
         }
@@ -390,7 +392,12 @@ public class GameManager : MonoBehaviour
     }
 
     public IEnumerator GameOver(bool ranOutOfTime){
-        AudioManager.GetSoundtrack("MainTheme").Stop();
+        glitch.scanLineJitter = 0f;
+        glitch.horizontalShake = 0f;
+        glitch.colorDrift = 0f;
+        glitch.verticalJump = 0f;
+        AudioManager.StopAllSoundtracks();
+        AudioManager.StopAllSFXs();
         AudioManager.GetSFX("GameOver").Play();
         player.GetComponent<Player>().anim.Play("Player_Death");
         isGameOver = true;
