@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     public GameObject youDiedText;
     public GameObject youRanOutOfTimeText;
     public bool isGameOver = false;
+    public float currentTimescale = 1f;
     [Header("Collectibles")]
     public Vector3 weaponSpawnPositionOne;
     public Vector3 weaponSpawnPositionTwo;
@@ -68,6 +69,7 @@ public class GameManager : MonoBehaviour
     public string playerName;
     public Vector3 spawnPosition;
     public float clockRadius = 12.5f;
+    public GameObject pauseMenu;
     
     [Header("Debugging")]
     public bool isDebugging = true;
@@ -88,6 +90,8 @@ public class GameManager : MonoBehaviour
 
     public void PlayGame(){
         ResetLevel();
+        currentTimescale = 1f;
+        Time.timeScale = currentTimescale;
         playerStrengthMultiplier = 1f;
         enemyStrengthMultiplier = 1f;
         minuteHand.localRotation = Quaternion.Euler(0, 0, 0);
@@ -174,6 +178,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape)){
+            if (Time.timeScale == 0f) ResumeGame();
+            else PauseGame();
+        }
         totalTime += Time.deltaTime;
         if (currentTime >= 60f){
             // see if all children are inactive or destroyed
@@ -337,5 +345,22 @@ public class GameManager : MonoBehaviour
 
     public void PlayAgain(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void ReturnToMenu(){
+        SceneManager.LoadScene("Main_Menu_VL");
+    }
+
+    public void PauseGame(){
+        pauseMenu.SetActive(true);
+        currentTimescale = Time.timeScale;
+        Time.timeScale = 0f;
+        inTransition = true;
+    }
+
+    public void ResumeGame(){
+        pauseMenu.SetActive(false);
+        Time.timeScale = currentTimescale;
+        inTransition = false;
     }
 }

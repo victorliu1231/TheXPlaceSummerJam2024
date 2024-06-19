@@ -16,13 +16,16 @@ public class RangedWeapon : Weapon
 
     public override void Attack(){
         base.Attack();
-        if (weaponType == WeaponType.Ranged) StartCoroutine(RangedAttack());
+        if (weaponType == WeaponType.Ranged) {
+            StartCoroutine(RangedAttack());
+        }
     }
 
     IEnumerator RangedAttack(){
         Quaternion freezeWeaponRot = transform.rotation;
         yield return new WaitForSeconds(timeDelayBetweenPlayerPosStorageAndAttack);
         if (fireParticles != null) fireParticles.Play();
-        Instantiate(prefab, transform.position, freezeWeaponRot, GameManager.Instance.projectilesParent);
+        GameObject projectile = Instantiate(prefab, transform.position, freezeWeaponRot, GameManager.Instance.projectilesParent);
+        projectile.GetComponent<SpriteRenderer>().flipX = transform.localEulerAngles.z < -90 || transform.localEulerAngles.z > 90;
     }
 }

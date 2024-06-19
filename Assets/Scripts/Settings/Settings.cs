@@ -33,6 +33,7 @@ public class Settings : MonoBehaviour
             musicIconOn.SetActive(true);
             musicIconOff.SetActive(false);
         }
+        AudioManager.Instance.OnMusicVolumeChanged(newValue);
     }
 
     // Changes SFX volumes. Is triggered by SFX slider in settings.
@@ -45,6 +46,7 @@ public class Settings : MonoBehaviour
             sfxIconOn.SetActive(true);
             sfxIconOff.SetActive(false);
         }
+        AudioManager.Instance.OnSFXVolumeChanged(newValue);
     }
 
     public void loadScreen(bool settingsFullScreen){
