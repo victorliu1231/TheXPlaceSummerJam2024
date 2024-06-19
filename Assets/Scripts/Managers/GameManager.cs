@@ -286,7 +286,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-            
         foreach (Transform child in collectiblesParent){
             Destroy(child.gameObject);
         }

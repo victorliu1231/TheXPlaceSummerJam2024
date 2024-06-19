@@ -10,6 +10,11 @@ public class PlayerGhost : Entity
     public Transform rightWeaponBinding;
     public Transform upWeaponBinding;
     public Transform downWeaponBinding;
+    public Transform stageIndicatorRightBinding;
+    public Transform stageIndicatorLeftBinding;
+    public Transform stageIndicatorUpBinding;
+    public Transform stageIndicatorDownBinding;
+    public Transform stageIndicator;
     public enum FaceDirection { Up, Down, Left, Right };
     public FaceDirection faceDirection;
 
@@ -26,6 +31,7 @@ public class PlayerGhost : Entity
         anim = GetComponent<Animator>();
         weaponInHand = GetComponentInChildren<Weapon>();
         if (weaponInHand != null) weaponInHand.transform.SetParent(rightWeaponBinding);
+        stageIndicator.SetParent(stageIndicatorRightBinding);
         faceDirection = FaceDirection.Right;
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();

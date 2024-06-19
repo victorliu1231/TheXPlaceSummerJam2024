@@ -4069,7 +4069,7 @@ MonoBehaviour:
   invincible: 1
   canTakeKnockback: 1
   damagedParticles: {fileID: 1518949097}
-  healthbar: {fileID: 307536024}
+  healthbar: {fileID: 307536026}
   anim: {fileID: 0}
   weaponInHand: {fileID: 0}
   rightWeaponBinding: {fileID: 1500942609}
@@ -6517,6 +6517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a397bdd756e5484d99f468cfac8aab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allLevels: []
   level: 0
   levelsBetweenBosses: 5
   bossGUI: {fileID: 1446277348}
@@ -6578,6 +6579,9 @@ MonoBehaviour:
   jumpToLevel: 0
   jumpToStage: 0
   jumpToTime: 0
+  currentLevelTemplate: {fileID: 0}
+  currentLevelInstance: {fileID: 0}
+  playerGhost: {fileID: 0}
 --- !u!1 &854151132
 GameObject:
   m_ObjectHideFlags: 0

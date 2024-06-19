@@ -41,6 +41,8 @@ public class Weapon : MonoBehaviour
         if (!GameManager.Instance.inTransition && !GameManager.Instance.isGameOver){
             if (isInputControlled || isGhost){
                 Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                PlayerGhost playerGhost = transform.parent.parent.GetComponent<PlayerGhost>();
+                Player playerScript = player.GetComponent<Player>();
                 if (isGhost)
                 {
                     mousePos = ghostMousePos;
@@ -53,11 +55,13 @@ public class Weapon : MonoBehaviour
                         faceDirection = FaceDirection.Right;
                         if (isGhost)
                         {
-                            transform.SetParent(transform.parent.parent.GetComponent<PlayerGhost>().rightWeaponBinding, false);
+                            transform.SetParent(playerGhost.rightWeaponBinding, false);
+                            playerGhost.stageIndicator.SetParent(playerGhost.stageIndicatorRightBinding, false);
                         }
                         else
                         {
-                            transform.SetParent(player.GetComponent<Player>().rightWeaponBinding, false);
+                            transform.SetParent(playerScript.rightWeaponBinding, false);
+                            playerScript.stageIndicator.SetParent(playerScript.stageIndicatorRightBinding, false);
                         }
                         GetComponent<SpriteRenderer>().flipY = false;
                     }
@@ -65,11 +69,13 @@ public class Weapon : MonoBehaviour
                         faceDirection = FaceDirection.Down;
                         if (isGhost)
                         {
-                            transform.SetParent(transform.parent.parent.GetComponent<PlayerGhost>().downWeaponBinding, false);
+                            transform.SetParent(playerGhost.downWeaponBinding, false);
+                            playerGhost.stageIndicator.SetParent(playerGhost.stageIndicatorDownBinding, false);
                         }
                         else
                         {
-                            transform.SetParent(player.GetComponent<Player>().downWeaponBinding, false);
+                            transform.SetParent(playerScript.downWeaponBinding, false);
+                            playerScript.stageIndicator.SetParent(playerScript.stageIndicatorDownBinding, false);
                         }
                         GetComponent<SpriteRenderer>().flipY = false;
                     }
@@ -77,11 +83,13 @@ public class Weapon : MonoBehaviour
                         faceDirection = FaceDirection.Left;
                         if (isGhost)
                         {
-                            transform.SetParent(transform.parent.parent.GetComponent<PlayerGhost>().leftWeaponBinding, false);
+                            transform.SetParent(playerGhost.leftWeaponBinding, false);
+                            playerGhost.stageIndicator.SetParent(playerGhost.stageIndicatorLeftBinding, false);
                         }
                         else
                         {
-                            transform.SetParent(player.GetComponent<Player>().leftWeaponBinding, false);
+                            transform.SetParent(playerScript.leftWeaponBinding, false);
+                            playerScript.stageIndicator.SetParent(playerScript.stageIndicatorLeftBinding, false);
                         }
                         GetComponent<SpriteRenderer>().flipY = true;
                     }
@@ -91,11 +99,13 @@ public class Weapon : MonoBehaviour
                         faceDirection = FaceDirection.Up;
                         if (isGhost)
                         {
-                            transform.SetParent(transform.parent.parent.GetComponent<PlayerGhost>().upWeaponBinding, false);
+                            transform.SetParent(playerGhost.upWeaponBinding, false);
+                            playerGhost.stageIndicator.SetParent(playerGhost.stageIndicatorUpBinding, false);
                         }
                         else
                         {
-                            transform.SetParent(player.GetComponent<Player>().upWeaponBinding, false);
+                            transform.SetParent(playerScript.upWeaponBinding, false);
+                            playerScript.stageIndicator.SetParent(playerScript.stageIndicatorUpBinding, false);
                         }
                         GetComponent<SpriteRenderer>().flipY = false;
                     }
@@ -103,11 +113,13 @@ public class Weapon : MonoBehaviour
                         faceDirection = FaceDirection.Down;
                         if (isGhost)
                         {
-                            transform.SetParent(transform.parent.parent.GetComponent<PlayerGhost>().downWeaponBinding, false);
+                            transform.SetParent(playerGhost.downWeaponBinding, false);
+                            playerGhost.stageIndicator.SetParent(playerGhost.stageIndicatorDownBinding, false);
                         }
                         else
                         {
-                            transform.SetParent(player.GetComponent<Player>().downWeaponBinding, false);
+                            transform.SetParent(playerScript.downWeaponBinding, false);
+                            playerScript.stageIndicator.SetParent(playerScript.stageIndicatorDownBinding, false);
                         }
                         GetComponent<SpriteRenderer>().flipY = false;
                     }
@@ -115,11 +127,13 @@ public class Weapon : MonoBehaviour
                         faceDirection = FaceDirection.Left;
                         if (isGhost)
                         {
-                            transform.SetParent(transform.parent.parent.GetComponent<PlayerGhost>().leftWeaponBinding, false);
+                            transform.SetParent(playerGhost.leftWeaponBinding, false);
+                            playerGhost.stageIndicator.SetParent(playerGhost.stageIndicatorLeftBinding, false);
                         }
                         else
                         {
-                            transform.SetParent(player.GetComponent<Player>().leftWeaponBinding, false);
+                            transform.SetParent(playerScript.leftWeaponBinding, false);
+                            playerScript.stageIndicator.SetParent(playerScript.stageIndicatorLeftBinding, false);
                         }
                         GetComponent<SpriteRenderer>().flipY = true;
                     }
@@ -129,11 +143,13 @@ public class Weapon : MonoBehaviour
                         faceDirection = FaceDirection.Up;
                         if (isGhost)
                         {
-                            transform.SetParent(transform.parent.parent.GetComponent<PlayerGhost>().upWeaponBinding, false);
+                            transform.SetParent(playerGhost.upWeaponBinding, false);
+                            playerGhost.stageIndicator.SetParent(playerGhost.stageIndicatorUpBinding, false);
                         }
                         else
                         {
-                            transform.SetParent(player.GetComponent<Player>().upWeaponBinding, false);
+                            transform.SetParent(playerScript.upWeaponBinding, false);
+                            playerScript.stageIndicator.SetParent(playerScript.stageIndicatorUpBinding, false);
                         }
                         GetComponent<SpriteRenderer>().flipY = false;
                     }
@@ -141,11 +157,13 @@ public class Weapon : MonoBehaviour
                         faceDirection = FaceDirection.Right;
                         if (isGhost)
                         {
-                            transform.SetParent(transform.parent.parent.GetComponent<PlayerGhost>().rightWeaponBinding, false);
+                            transform.SetParent(playerGhost.rightWeaponBinding, false);
+                            playerGhost.stageIndicator.SetParent(playerGhost.stageIndicatorRightBinding, false);
                         }
                         else
                         {
-                            transform.SetParent(player.GetComponent<Player>().rightWeaponBinding, false);
+                            transform.SetParent(playerScript.rightWeaponBinding, false);
+                            playerScript.stageIndicator.SetParent(playerScript.stageIndicatorRightBinding, false);
                         }
                         GetComponent<SpriteRenderer>().flipY = false;
                     }
@@ -153,11 +171,13 @@ public class Weapon : MonoBehaviour
                         faceDirection = FaceDirection.Left;
                         if (isGhost)
                         {
-                            transform.SetParent(transform.parent.parent.GetComponent<PlayerGhost>().leftWeaponBinding, false);
+                            transform.SetParent(playerGhost.leftWeaponBinding, false);
+                            playerGhost.stageIndicator.SetParent(playerGhost.stageIndicatorLeftBinding, false);
                         }
                         else
                         {
-                            transform.SetParent(player.GetComponent<Player>().leftWeaponBinding, false);
+                            transform.SetParent(playerScript.leftWeaponBinding, false);
+                            playerScript.stageIndicator.SetParent(playerScript.stageIndicatorLeftBinding, false);
                         }
                         GetComponent<SpriteRenderer>().flipY = true;
                     }
@@ -167,11 +187,13 @@ public class Weapon : MonoBehaviour
                         faceDirection = FaceDirection.Up;
                         if (isGhost)
                         {
-                            transform.SetParent(transform.parent.parent.GetComponent<PlayerGhost>().upWeaponBinding, false);
+                            transform.SetParent(playerGhost.upWeaponBinding, false);
+                            playerGhost.stageIndicator.SetParent(playerGhost.stageIndicatorUpBinding, false);
                         }
                         else
                         {
-                            transform.SetParent(player.GetComponent<Player>().upWeaponBinding, false);
+                            transform.SetParent(playerScript.upWeaponBinding, false);
+                            playerScript.stageIndicator.SetParent(playerScript.stageIndicatorUpBinding, false);
                         }
                         GetComponent<SpriteRenderer>().flipY = false;
                     }
@@ -179,11 +201,13 @@ public class Weapon : MonoBehaviour
                         faceDirection = FaceDirection.Right;
                         if (isGhost)
                         {
-                            transform.SetParent(transform.parent.parent.GetComponent<PlayerGhost>().rightWeaponBinding, false);
+                            transform.SetParent(playerGhost.rightWeaponBinding, false);
+                            playerGhost.stageIndicator.SetParent(playerGhost.stageIndicatorRightBinding, false);
                         }
                         else
                         {
-                            transform.SetParent(player.GetComponent<Player>().rightWeaponBinding, false);
+                            transform.SetParent(playerScript.rightWeaponBinding, false);
+                            playerScript.stageIndicator.SetParent(playerScript.stageIndicatorRightBinding, false);
                         }
                         GetComponent<SpriteRenderer>().flipY = false;
                     }
@@ -191,11 +215,13 @@ public class Weapon : MonoBehaviour
                         faceDirection = FaceDirection.Down;
                         if (isGhost)
                         {
-                            transform.SetParent(transform.parent.parent.GetComponent<PlayerGhost>().downWeaponBinding, false);
+                            transform.SetParent(playerGhost.downWeaponBinding, false);
+                            playerGhost.stageIndicator.SetParent(playerGhost.stageIndicatorDownBinding, false);
                         }
                         else
                         {
-                            transform.SetParent(player.GetComponent<Player>().downWeaponBinding, false);
+                            transform.SetParent(playerScript.downWeaponBinding, false);
+                            playerScript.stageIndicator.SetParent(playerScript.stageIndicatorDownBinding, false);
                         }
                         GetComponent<SpriteRenderer>().flipY = false;
                     }
