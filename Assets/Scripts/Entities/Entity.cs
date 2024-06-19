@@ -23,6 +23,7 @@ public class Entity : MonoBehaviour
             if (GetComponent<TimeSlowdown>().stage < dealer.GetComponent<TimeSlowdown>().stage)
             {
                 GetComponent<TimeSlowdown>().ChangeStage(dealer.GetComponent<TimeSlowdown>().stage);
+                if (gameObject.tag == "Enemy") GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
             }
         }
         
