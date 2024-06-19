@@ -21,7 +21,10 @@ public class MeleeWeapon : Weapon
 
     public override void Attack(){
         base.Attack();
-        if (weaponType == WeaponType.Melee) StartCoroutine(MeleeAttack());
+        if (weaponType == WeaponType.Melee) {
+            if (gameObject.tag == "SwingableMeleeObject") AudioManager.GetSFX("MeleeSwing")?.Play();
+            StartCoroutine(MeleeAttack());
+        }
     }
 
     IEnumerator MeleeAttack(){

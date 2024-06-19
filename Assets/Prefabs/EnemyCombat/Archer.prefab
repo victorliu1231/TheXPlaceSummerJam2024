@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 4751411028908051602}
   m_Layer: 0
   m_Name: RangedWeapon
-  m_TagString: Untagged
+  m_TagString: Bow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -550,6 +550,7 @@ MonoBehaviour:
   invincible: 0
   canTakeKnockback: 1
   damagedParticles: {fileID: 4025859982022069629}
+  healthbar: {fileID: 0}
   attackCooldownDuration: 4
   target: {fileID: 0}
   canCauseKnockback: 1

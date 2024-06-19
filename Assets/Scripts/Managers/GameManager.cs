@@ -246,6 +246,7 @@ public class GameManager : MonoBehaviour
         glitch.scanLineJitter += 0.1f;
         glitch.colorDrift = 1f;
         glitch.verticalJump = 0.4f;
+        AudioManager.GetSFX("TimeWarp")?.Play();
         yield return new WaitForSeconds(nextStageTransitionDuration);
         glitch.horizontalShake = 0f;
         glitch.colorDrift = 0f;
@@ -293,6 +294,7 @@ public class GameManager : MonoBehaviour
         glitch.scanLineJitter = 1f;
         glitch.verticalJump = 0.4f;
         PersistentData.Instance.CreateNewSave(0);
+        AudioManager.GetSFX("TimeWarp")?.Play();
         yield return new WaitForSeconds(nextLevelTransitionDuration);
         glitch.scanLineJitter = 0f;
         glitch.verticalJump = 0f;
@@ -326,6 +328,8 @@ public class GameManager : MonoBehaviour
     }
 
     public IEnumerator GameOver(bool ranOutOfTime){
+        AudioManager.GetSoundtrack("MainTheme").Stop();
+        AudioManager.GetSFX("GameOver").Play();
         player.GetComponent<Player>().anim.Play("Player_Death");
         isGameOver = true;
         deathScreen.SetActive(true);
@@ -340,6 +344,7 @@ public class GameManager : MonoBehaviour
             playAgainButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.1f*i);
             yield return new WaitForSeconds(0.1f);
         }
+        AudioManager.GetSoundtrack("BossTheme").Play();
     }
 
     public void PlayAgain(){

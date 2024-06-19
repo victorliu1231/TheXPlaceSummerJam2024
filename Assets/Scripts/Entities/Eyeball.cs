@@ -27,7 +27,9 @@ public class Eyeball : Enemy
 
     public IEnumerator EyeballAttack(){
         if (anim != null) anim.Play(beginTeleportAnimName);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
+        AudioManager.GetSFX("Teleport")?.Play();
+        yield return new WaitForSeconds(0.5f);
         TeleportAwayFromPlayer();
         if (anim != null) anim.Play(endTeleportAnimName);
         yield return new WaitForSeconds(1f);

@@ -38,6 +38,7 @@ public class Wizard : Enemy
     }
 
     public void SpeedUpAllies(){
+        AudioManager.GetSFX("SpellCast")?.Play();
         if (anim != null) anim.Play(supportAnimName);
         supportAnim.SetActive(true);
         // Detect all enemies in radius

@@ -2,7 +2,6 @@ to-do list
 - laser particles hitting enemies too frequently, causing lag
 - remove boss GUI
 - what if we kill all enemies early?
-- remove collisions between you and your ghosts
 
 add
 - time scaling difficulty, ghosts for lasers and bullets, gui for previous stages of enemies and players 

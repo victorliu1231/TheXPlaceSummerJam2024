@@ -9,6 +9,11 @@ TagManager:
   - EnemyParentTransform
   - Collectible
   - Data
+  - Gun
+  - Laser
+  - Bow
+  - FireballWeapon
+  - SwingableMeleeObject
   layers:
   - Default
   - TransparentFX

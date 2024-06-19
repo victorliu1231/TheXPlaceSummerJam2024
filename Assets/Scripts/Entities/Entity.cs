@@ -25,10 +25,11 @@ public class Entity : MonoBehaviour
                 currentHealth -= damage * GameManager.Instance.playerStrengthMultiplier;
             }
             healthbar.UpdateBar(currentHealth, 0, maxHealth, true);
+            damagedParticles.Play();
+            AudioManager.GetSFX("Damage")?.Play();
             if (currentHealth <= 0){
                 Die();
             }
-            damagedParticles.Play();
             // take knockback based on position of attacker and knockback force and modify transform.position
             if (canTakeKnockback && canCauseKnockback){
                 Vector2 knockbackDirection = (new Vector2(transform.position.x, transform.position.y) - attackerPosition).normalized;

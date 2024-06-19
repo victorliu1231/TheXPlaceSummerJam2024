@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 5200135988956051301}
   m_Layer: 0
   m_Name: RangedWeapon
-  m_TagString: Untagged
+  m_TagString: Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -550,6 +550,7 @@ MonoBehaviour:
   invincible: 0
   canTakeKnockback: 1
   damagedParticles: {fileID: 6394266307956499260}
+  healthbar: {fileID: 0}
   attackCooldownDuration: 0
   target: {fileID: 0}
   canCauseKnockback: 1

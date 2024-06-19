@@ -17,14 +17,19 @@ public class RangedWeapon : Weapon
     public override void Attack(){
         base.Attack();
         if (weaponType == WeaponType.Ranged) {
+            if (gameObject.tag == "Bow") AudioManager.GetSFX("ArrowFire")?.Play();
+            else if (gameObject.tag == "Gun") AudioManager.GetSFX("GunFire")?.Play();
+            else if (gameObject.tag == "Laser") AudioManager.GetSFX("LaserBeam")?.Play();
+            else if (gameObject.tag == "FireballWeapon") AudioManager.GetSFX("SpellCast")?.Play();
             StartCoroutine(RangedAttack());
         }
     }
 
     IEnumerator RangedAttack(){
         Quaternion freezeWeaponRot = transform.rotation;
-        yield return new WaitForSeconds(timeDelayBetweenPlayerPosStorageAndAttack);
+        if (!isInputControlled) yield return new WaitForSeconds(timeDelayBetweenPlayerPosStorageAndAttack);
         if (fireParticles != null) fireParticles.Play();
+        if (gameObject.tag == "FireballWeapon") AudioManager.GetSFX("Fireball")?.Play();
         GameObject projectile = Instantiate(prefab, transform.position, freezeWeaponRot, GameManager.Instance.projectilesParent);
         projectile.GetComponent<SpriteRenderer>().flipX = transform.localEulerAngles.z < -90 || transform.localEulerAngles.z > 90;
     }

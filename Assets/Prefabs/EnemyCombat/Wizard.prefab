@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1782846779414519349}
   m_Layer: 0
   m_Name: RangedWeapon
-  m_TagString: Untagged
+  m_TagString: FireballWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -190,6 +190,7 @@ MonoBehaviour:
   invincible: 0
   canTakeKnockback: 1
   damagedParticles: {fileID: 1898117889781853980}
+  healthbar: {fileID: 0}
   attackCooldownDuration: 5
   target: {fileID: 0}
   canCauseKnockback: 1

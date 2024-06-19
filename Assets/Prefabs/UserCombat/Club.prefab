@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -294155176800212944}
   m_Layer: 0
   m_Name: Club
-  m_TagString: Untagged
+  m_TagString: SwingableMeleeObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,12 +167,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2172bcd6352bc348a27ed9ce76fc53d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownDuration: 1
   weaponType: 0
+  faceDirection: 0
   isInputControlled: 1
-  minRotateAngle: -45
-  maxRotateAngle: 45
+  cooldownDuration: 1
   weaponCollectible: {fileID: 3895740193949117924, guid: 3e4437b9a137b6f4b9d3771d28708ae0, type: 3}
+  timeDelayBetweenPlayerPosStorageAndAttack: 0
   meleeDamage: 2
   secAbleToHit: 0.5
   hitParticles: {fileID: 3588011392971140670}
