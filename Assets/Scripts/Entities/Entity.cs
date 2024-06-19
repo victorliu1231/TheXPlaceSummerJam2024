@@ -20,7 +20,6 @@ public class Entity : MonoBehaviour
     public void TakeDamage(float damage, Vector2 attackerPosition, bool canCauseKnockback, float knockbackForce, GameObject dealer = null){
         if (dealer is not null)
         {
-            Debug.Log($"timeslowdown: {GetComponent<TimeSlowdown>()}, {dealer.GetComponent<TimeSlowdown>()}");
             if (GetComponent<TimeSlowdown>().stage < dealer.GetComponent<TimeSlowdown>().stage)
             {
                 GetComponent<TimeSlowdown>().ChangeStage(dealer.GetComponent<TimeSlowdown>().stage);

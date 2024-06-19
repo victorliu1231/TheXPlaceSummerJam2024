@@ -17,6 +17,7 @@ public class MeleeWeapon : Weapon
         base.Start();
         collider = GetComponent<Collider2D>();
         if (collider != null) collider.enabled = false;
+        GetComponent<TimeSlowdown>()?.ChangeStage(GameManager.Instance.stage);
     }
 
     public override void Attack(){

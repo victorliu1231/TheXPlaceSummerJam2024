@@ -17,6 +17,7 @@ public class Bullet : MonoBehaviour
     void Start(){
         Destroy(gameObject, lifetime * Util.GetStage(GetComponent<TimeSlowdown>()));
         spriteRenderer = GetComponent<SpriteRenderer>();
+        GetComponent<TimeSlowdown>()?.ChangeStage(GameManager.Instance.stage);
     }
 
     void Update(){

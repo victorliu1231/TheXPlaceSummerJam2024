@@ -17,6 +17,7 @@ public class LaserBeam : MonoBehaviour
     void Start(){
         if (lifetime >= 0){
             Destroy(gameObject, lifetime * Util.GetStage(GetComponent<TimeSlowdown>()));
+            GetComponent<TimeSlowdown>()?.ChangeStage(GameManager.Instance.stage);
         }
     }
 
