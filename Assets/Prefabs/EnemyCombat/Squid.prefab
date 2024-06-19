@@ -261,6 +261,7 @@ MonoBehaviour:
   isInputControlled: 0
   isGhost: 0
   ghostMousePos: {x: 0, y: 0}
+  target: {fileID: 0}
   cooldownDuration: 0
   weaponCollectible: {fileID: 0}
   timeDelayBetweenPlayerPosStorageAndAttack: 0
@@ -598,9 +599,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2aabcf2e4183c48b9bb2a767ac2911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 0.5
   currentHealth: 0
-  maxHealth: 200
+  maxHealth: 100
   invincible: 0
   canTakeKnockback: 1
   damagedParticles: {fileID: 6646369796595870480}

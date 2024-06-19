@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8955c306ea6f5f469930e87e0e87acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0.05
+  isGhost: 0
+  damage: 0.5
   lifetime: -1
   hitParticlesPrefab: {fileID: 6261748922793707141, guid: cf2b1c7ca5239a546b0ec6224ccaddf3, type: 3}
   canCauseKnockback: 0

@@ -260,6 +260,7 @@ MonoBehaviour:
   isInputControlled: 0
   isGhost: 0
   ghostMousePos: {x: 0, y: 0}
+  target: {fileID: 0}
   cooldownDuration: 0
   weaponCollectible: {fileID: 0}
   timeDelayBetweenPlayerPosStorageAndAttack: 0.5
@@ -550,7 +551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   currentHealth: 0
-  maxHealth: 75
+  maxHealth: 32
   invincible: 0
   canTakeKnockback: 1
   damagedParticles: {fileID: 6394266307956499260}
@@ -571,8 +572,6 @@ MonoBehaviour:
   teleportCooldownDuration: 6
   beginTeleportAnimName: Eyeball_BeginTeleport
   endTeleportAnimName: Eyeball_EndTeleport
-  teleportationSeeds: 
-  counter: 0
 --- !u!114 &646256638718533361
 MonoBehaviour:
   m_ObjectHideFlags: 0

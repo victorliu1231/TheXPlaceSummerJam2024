@@ -28,9 +28,9 @@ public class MeleeWeapon : Weapon
     }
 
     IEnumerator MeleeAttack(){
-        collider.enabled = true;
+        if (collider != null) collider.enabled = true;
         yield return new WaitForSeconds(secAbleToHit * Util.GetStage(GetComponent<TimeSlowdown>()));
-        collider.enabled = false;
+        if (collider != null) collider.enabled = false;
     }
 
     void OnTriggerEnter2D(Collider2D other){

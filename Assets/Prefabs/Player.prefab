@@ -378,8 +378,7 @@ Transform:
   m_LocalPosition: {x: 0.249, y: 0.119, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8403898038255677864}
+  m_Children: []
   m_Father: {fileID: 3669892714619011860}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4933060074178070191
@@ -816,68 +815,6 @@ ParticleSystem:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5580438366711224009, guid: 7d8b5041dc24ba14a8d5fffb6181d46e, type: 3}
   m_PrefabInstance: {fileID: 3113181501867716434}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &6524121742440647011
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 40316890108669037}
-    m_Modifications:
-    - target: {fileID: 3326738000343677131, guid: 528eb295a33c13546bf06cd384b58464, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3326738000343677131, guid: 528eb295a33c13546bf06cd384b58464, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3326738000343677131, guid: 528eb295a33c13546bf06cd384b58464, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3326738000343677131, guid: 528eb295a33c13546bf06cd384b58464, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3326738000343677131, guid: 528eb295a33c13546bf06cd384b58464, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3326738000343677131, guid: 528eb295a33c13546bf06cd384b58464, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3326738000343677131, guid: 528eb295a33c13546bf06cd384b58464, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3326738000343677131, guid: 528eb295a33c13546bf06cd384b58464, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3326738000343677131, guid: 528eb295a33c13546bf06cd384b58464, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3326738000343677131, guid: 528eb295a33c13546bf06cd384b58464, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4008838687057021155, guid: 528eb295a33c13546bf06cd384b58464, type: 3}
-      propertyPath: m_Name
-      value: LaserRailgun
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 528eb295a33c13546bf06cd384b58464, type: 3}
---- !u!4 &8403898038255677864 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3326738000343677131, guid: 528eb295a33c13546bf06cd384b58464, type: 3}
-  m_PrefabInstance: {fileID: 6524121742440647011}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7788798434907015896
 PrefabInstance:

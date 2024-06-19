@@ -111,7 +111,7 @@ public class PlayerGhost : Entity
 
     void DropWeapon(){
         Transform bindingParent = weaponInHand.transform.parent;
-        GameObject droppedWeaponCollectible = Instantiate(weaponInHand.weaponCollectible, transform.position, Quaternion.identity);
+        GameObject droppedWeaponCollectible = Instantiate(weaponInHand.weaponCollectible, transform.position, Quaternion.identity, GameManager.Instance.collectiblesParent);
         foreach (Transform child in bindingParent){
             Destroy(child.gameObject);
         }

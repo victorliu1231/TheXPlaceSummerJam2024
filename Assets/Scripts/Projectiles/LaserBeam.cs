@@ -25,8 +25,10 @@ public class LaserBeam : Projectile
         if (other.gameObject.tag == targetTag && damageTriggerType == DamageTriggerType.OnTriggerEnter){
             other.gameObject.GetComponent<Entity>().TakeDamage(damage, transform.position, canCauseKnockback, knockbackForce, gameObject);
             if (hitParticlesPrefab != null){
-                GameObject particles = Instantiate(hitParticlesPrefab, other.transform.position, Quaternion.identity);
-                Destroy(particles, 0.5f);
+                if (other.gameObject.tag != "Enemy") {
+                    GameObject particles = Instantiate(hitParticlesPrefab, other.transform.position, Quaternion.identity);
+                    Destroy(particles, 0.5f);
+                }
             }
         }
     }
@@ -35,8 +37,10 @@ public class LaserBeam : Projectile
         if (other.gameObject.tag == targetTag && damageTriggerType == DamageTriggerType.OnTriggerStay){
             other.gameObject.GetComponent<Entity>().TakeDamage(damage, transform.position, canCauseKnockback, knockbackForce, gameObject);
             if (hitParticlesPrefab != null){
-                GameObject particles = Instantiate(hitParticlesPrefab, other.transform.position, Quaternion.identity);
-                Destroy(particles, 0.5f);
+                if (other.gameObject.tag != "Enemy") {
+                    GameObject particles = Instantiate(hitParticlesPrefab, other.transform.position, Quaternion.identity);
+                    Destroy(particles, 0.5f);
+                }
             }
         }
     }

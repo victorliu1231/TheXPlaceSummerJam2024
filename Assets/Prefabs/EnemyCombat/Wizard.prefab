@@ -47,6 +47,9 @@ MonoBehaviour:
   weaponType: 1
   faceDirection: 0
   isInputControlled: 0
+  isGhost: 0
+  ghostMousePos: {x: 0, y: 0}
+  target: {fileID: 0}
   cooldownDuration: 0
   weaponCollectible: {fileID: 0}
   timeDelayBetweenPlayerPosStorageAndAttack: 0.25
@@ -186,9 +189,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe3f6785b9b9ef249a5d8663b31238e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 1
   currentHealth: 0
-  maxHealth: 100
+  maxHealth: 50
   invincible: 0
   canTakeKnockback: 1
   damagedParticles: {fileID: 1898117889781853980}
@@ -202,12 +205,10 @@ MonoBehaviour:
   movementAnimName: Wizard_Movement
   attackAnimName: Wizard_Attack
   isSpriteFlippable: 0
+  spriteDirection: 0
   isAttackCooldownReduced: 0
   attackCooldownSprite: {fileID: 6655074706812150591}
   isGhost: 0
-  ghostLayer:
-    serializedVersion: 2
-    m_Bits: 8
   supportCooldownDuration: 5
   speedUpAlliesMultiplier: 0.66
   durationAlliesSpedUp: 10

@@ -287,7 +287,7 @@ public class GameManager : MonoBehaviour
         player.GetComponent<TimeSlowdown>().ChangeStage(stage);
         stageText.text = "Stage " + (stage);
         glitch.horizontalShake = 0.1f;
-        glitch.scanLineJitter += 0.1f;
+        glitch.scanLineJitter = 0.25f;
         glitch.colorDrift = 1f;
         glitch.verticalJump = 0.4f;
         AudioManager.GetSFX("TimeWarp")?.Play();

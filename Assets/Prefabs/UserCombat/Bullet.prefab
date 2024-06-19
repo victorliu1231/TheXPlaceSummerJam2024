@@ -101,7 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32ce82c787e2cb4fa6313443cdd0d95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  isGhost: 0
+  damage: 15
   speed: 10
   lifetime: 5
   hitParticles: {fileID: 7275417440578314907}

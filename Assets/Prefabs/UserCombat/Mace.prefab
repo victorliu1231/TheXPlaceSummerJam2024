@@ -171,10 +171,13 @@ MonoBehaviour:
   weaponType: 0
   faceDirection: 0
   isInputControlled: 1
+  isGhost: 0
+  ghostMousePos: {x: 0, y: 0}
+  target: {fileID: 0}
   cooldownDuration: 0.5
   weaponCollectible: {fileID: 2141717048667143818, guid: db7c1d678d6744c4e93d9c1fc36cd615, type: 3}
   timeDelayBetweenPlayerPosStorageAndAttack: 0
-  meleeDamage: 10
+  meleeDamage: 15
   secAbleToHit: 0.5
   hitParticles: {fileID: 7846972839225162595}
   canCauseKnockback: 1

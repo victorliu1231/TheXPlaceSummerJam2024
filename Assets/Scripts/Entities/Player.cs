@@ -61,7 +61,7 @@ public class Player : Entity
             if (Input.GetMouseButtonDown(0))
             {
                 GetComponent<PlayerRecorder>()?.queuedActions.Add(Snapshot.SnapAction.Fire);
-                weaponInHand?.TryAttack();
+                if (weaponInHand != null) weaponInHand?.TryAttack();
             }
 
             if (Input.GetKeyDown(KeyCode.Space) && weaponInHand != null){
@@ -73,7 +73,7 @@ public class Player : Entity
 
     void DropWeapon(){
         Transform bindingParent = weaponInHand.transform.parent;
-        GameObject droppedWeaponCollectible = Instantiate(weaponInHand.weaponCollectible, transform.position, Quaternion.identity);
+        GameObject droppedWeaponCollectible = Instantiate(weaponInHand.weaponCollectible, transform.position, Quaternion.identity, GameManager.Instance.collectiblesParent);
         foreach (Transform child in bindingParent){
             Destroy(child.gameObject);
         }
