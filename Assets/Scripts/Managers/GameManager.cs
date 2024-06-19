@@ -230,6 +230,9 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator NextStage(){
+        foreach (Transform child in enemiesParent){
+            Destroy(child.gameObject);
+        }
         foreach (Transform child in ghostsParent){
             Destroy(child.gameObject);
         }
@@ -255,6 +258,7 @@ public class GameManager : MonoBehaviour
         player.transform.position = spawnPosition;
         if (!isDebugging){
             playerRecorder.InstantiateGhost();
+            // Over here, instantiate all ghost versions of the enemies from first stage
             
             foreach (Transform child in collectiblesParent){
                 Destroy(child.gameObject);
@@ -276,6 +280,9 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator NextLevel(){
+        foreach (Transform child in enemiesParent){
+            Destroy(child.gameObject);
+        }
         foreach (Transform child in ghostsParent){
             Destroy(child.gameObject);
         }

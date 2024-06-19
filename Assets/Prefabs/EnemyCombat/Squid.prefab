@@ -600,6 +600,7 @@ MonoBehaviour:
   invincible: 0
   canTakeKnockback: 1
   damagedParticles: {fileID: 6646369796595870480}
+  healthbar: {fileID: 0}
   attackCooldownDuration: 0.25
   target: {fileID: 0}
   canCauseKnockback: 1
@@ -611,7 +612,10 @@ MonoBehaviour:
   isSpriteFlippable: 1
   isAttackCooldownReduced: 0
   attackCooldownSprite: {fileID: 9203559917293647690}
-  hasWallInFrontOfIt: 0
+  isGhost: 0
+  ghostLayer:
+    serializedVersion: 2
+    m_Bits: 8
   spawnWallDistance: 1
   spawnWallCooldownDuration: 5
   wallPrefab: {fileID: 7008876704442941457, guid: 4190bd8af7e1b7442a12775a823bb5f3, type: 3}

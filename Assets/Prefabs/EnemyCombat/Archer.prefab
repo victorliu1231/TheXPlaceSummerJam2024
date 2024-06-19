@@ -562,7 +562,10 @@ MonoBehaviour:
   isSpriteFlippable: 1
   isAttackCooldownReduced: 0
   attackCooldownSprite: {fileID: 2039925521713407113}
-  hasWallInFrontOfIt: 0
+  isGhost: 0
+  ghostLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1001 &965902988323002488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -575,6 +578,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blood_splash_BW_02
       objectReference: {fileID: 0}
+    - target: {fileID: 2989052336247690466, guid: 7d8b5041dc24ba14a8d5fffb6181d46e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4231459455618372869, guid: 7d8b5041dc24ba14a8d5fffb6181d46e, type: 3}
       propertyPath: looping
       value: 0
@@ -586,6 +593,10 @@ PrefabInstance:
     - target: {fileID: 4231459455618372869, guid: 7d8b5041dc24ba14a8d5fffb6181d46e, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231459455618372869, guid: 7d8b5041dc24ba14a8d5fffb6181d46e, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5580438366711224009, guid: 7d8b5041dc24ba14a8d5fffb6181d46e, type: 3}
       propertyPath: m_LocalScale.x

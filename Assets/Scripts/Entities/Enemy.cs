@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : Entity
 {
     public float attackCooldownDuration;
-    [HideInInspector]public Transform target;
+    public Transform target;
     public bool canCauseKnockback = true;
     public Weapon weaponInHand;
     public float distanceStartAttacking;
@@ -14,13 +14,26 @@ public class Enemy : Entity
     public string movementAnimName;
     public string attackAnimName;
     public bool isSpriteFlippable;
+    public enum SpriteDirection{Right, Left};
+    [Tooltip("This is the direction the sprite is facing in the import.")]
+    public SpriteDirection spriteDirection = SpriteDirection.Right;
     public bool isAttackCooldownReduced = false;
     public SpriteRenderer attackCooldownSprite;
-    public bool hasWallInFrontOfIt;
+    public bool isGhost;
 
     public void Start(){
         base.Start();
-        target = GameManager.Instance.player.transform;
+        if (!isGhost){
+            target = GameManager.Instance.player.transform;
+        } else {
+            GameObject[] playerObjs = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject playerObj in playerObjs){
+                if (playerObj.layer == LayerMask.NameToLayer("Ghost")){
+                    target = playerObj.transform;
+                    break;
+                }
+            }
+        }
         anim = GetComponent<Animator>();
     }
 
@@ -28,7 +41,10 @@ public class Enemy : Entity
         if (!GameManager.Instance.isGameOver){
             if (target != null && !GameManager.Instance.inTransition){
                 attackCooldownTimer += Time.deltaTime;
-                if (isSpriteFlippable) GetComponent<SpriteRenderer>().flipX = target.position.x < transform.position.x;
+                if (isSpriteFlippable) {
+                    if (spriteDirection == SpriteDirection.Right) GetComponent<SpriteRenderer>().flipX = target.position.x < transform.position.x;
+                    if (spriteDirection == SpriteDirection.Left) GetComponent<SpriteRenderer>().flipX = target.position.x > transform.position.x;
+                }
                 if (Vector3.Distance(transform.position, target.position) <= distanceStartAttacking){
                     if (attackCooldownTimer >= attackCooldownDuration){
                         if (anim != null) anim.Play(attackAnimName);

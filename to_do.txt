@@ -4,12 +4,13 @@ to-do list
 - what if we kill all enemies early?
 
 add
-- time scaling difficulty, ghosts for lasers and bullets, gui for previous stages of enemies and players 
+- time scaling difficulty, ghosts for lasers and bullets 
 - tutorial
 --- autosave every level
-- particle effects
-- sfx
-- main menu - have floating weapons / enemies firing at random intervals moving across the screen
+--- time slow + ghost system
+--- space to drop weapons
+--- wasd to move
+- scrape together random gameplay clips, can exclude the time warp aspect for now
 - TheXPlace game profile
 
 advertise

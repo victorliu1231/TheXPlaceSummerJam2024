@@ -562,10 +562,14 @@ MonoBehaviour:
   isSpriteFlippable: 0
   isAttackCooldownReduced: 0
   attackCooldownSprite: {fileID: 3366571335390066560}
-  hasWallInFrontOfIt: 0
+  isGhost: 0
+  ghostLayer:
+    serializedVersion: 2
+    m_Bits: 8
   teleportCooldownDuration: 6
   beginTeleportAnimName: Eyeball_BeginTeleport
   endTeleportAnimName: Eyeball_EndTeleport
+  teleportationSeeds: 
 --- !u!1001 &7063287575588845113
 PrefabInstance:
   m_ObjectHideFlags: 0

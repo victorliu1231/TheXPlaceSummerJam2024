@@ -57,6 +57,14 @@ public class Player : Entity
                 GetComponent<PlayerRecorder>()?.queuedActions.Add(Snapshot.SnapAction.Fire);
                 weaponInHand?.TryAttack();
             }
+
+            if (Input.GetKeyDown(KeyCode.Space) && weaponInHand != null){
+                Transform bindingParent = weaponInHand.transform.parent;
+                GameObject droppedWeaponCollectible = Instantiate(weaponInHand.weaponCollectible, transform.position, Quaternion.identity);
+                foreach (Transform child in bindingParent){
+                    Destroy(child.gameObject);
+                }
+            }
         }
     }
 
@@ -69,17 +77,8 @@ public class Player : Entity
     void OnTriggerEnter2D(Collider2D collider){
         if (collider.gameObject.tag == "Collectible"){
             WeaponCollectible weaponCollectible = collider.gameObject.GetComponent<WeaponCollectible>();
-            if (weaponCollectible != null){
-                if (weaponInHand is not null)
-                {
-                    Transform bindingParent = weaponInHand.transform.parent;
-                    GameObject droppedWeaponCollectible = Instantiate(weaponInHand.weaponCollectible, transform.position, Quaternion.identity);
-                    foreach (Transform child in bindingParent){
-                        Destroy(child.gameObject);
-                    }
-                }
-
-                GameObject newWeapon = Instantiate(weaponCollectible.weaponPrefab, transform.position, Quaternion.identity);
+            if (weaponCollectible != null && weaponInHand == null){
+                GameObject newWeapon = Instantiate(weaponCollectible.weaponPrefab, transform.position, Quaternion.identity, rightWeaponBinding);
                 weaponInHand = newWeapon.GetComponent<Weapon>();
                 Destroy(collider.gameObject);
             }
