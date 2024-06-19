@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : Projectile
 {
     public float damage;
     public float speed;
@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
     void Start(){
         Destroy(gameObject, lifetime * Util.GetStage(GetComponent<TimeSlowdown>()));
         spriteRenderer = GetComponent<SpriteRenderer>();
-        GetComponent<TimeSlowdown>()?.ChangeStage(GameManager.Instance.stage);
+        if (!isGhost) GetComponent<TimeSlowdown>()?.ChangeStage(GameManager.Instance.stage);
     }
 
     void Update(){

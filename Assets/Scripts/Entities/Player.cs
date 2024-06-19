@@ -65,12 +65,17 @@ public class Player : Entity
             }
 
             if (Input.GetKeyDown(KeyCode.Space) && weaponInHand != null){
-                Transform bindingParent = weaponInHand.transform.parent;
-                GameObject droppedWeaponCollectible = Instantiate(weaponInHand.weaponCollectible, transform.position, Quaternion.identity);
-                foreach (Transform child in bindingParent){
-                    Destroy(child.gameObject);
-                }
+                GetComponent<PlayerRecorder>()?.queuedActions.Add(Snapshot.SnapAction.DropWeapon);
+                DropWeapon();
             }
+        }
+    }
+
+    void DropWeapon(){
+        Transform bindingParent = weaponInHand.transform.parent;
+        GameObject droppedWeaponCollectible = Instantiate(weaponInHand.weaponCollectible, transform.position, Quaternion.identity);
+        foreach (Transform child in bindingParent){
+            Destroy(child.gameObject);
         }
     }
 

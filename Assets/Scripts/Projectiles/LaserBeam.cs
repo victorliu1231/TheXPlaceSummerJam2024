@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserBeam : MonoBehaviour
+public class LaserBeam : Projectile
 {
     public float damage;
     [Tooltip("If lifetime < 0, then the laser will not destroy itself")]
@@ -17,7 +17,7 @@ public class LaserBeam : MonoBehaviour
     void Start(){
         if (lifetime >= 0){
             Destroy(gameObject, lifetime * Util.GetStage(GetComponent<TimeSlowdown>()));
-            GetComponent<TimeSlowdown>()?.ChangeStage(GameManager.Instance.stage);
+            if (!isGhost) GetComponent<TimeSlowdown>()?.ChangeStage(GameManager.Instance.stage);
         }
     }
 

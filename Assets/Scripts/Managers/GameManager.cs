@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [ContextMenu("Play Game")]
     public void PlayGame(){
         ResetLevel();
         currentTimescale = 1f;
@@ -158,7 +159,6 @@ public class GameManager : MonoBehaviour
     }
 
     public void ResetLevel(){
-        level = 0;
         stage = 1;
         currentTime = 0f;
         stageText.text = "Stage 1";
@@ -362,8 +362,8 @@ public class GameManager : MonoBehaviour
         PersistentData.Instance.CreateNewSave(0);
         AudioManager.GetSFX("TimeWarp")?.Play();
         yield return new WaitForSeconds(nextLevelTransitionDuration);
-        glitch.scanLineJitter = 0f;
-        glitch.verticalJump = 0f;
+        ResetLevel();
+        player.GetComponent<TimeSlowdown>().ChangeStage(1);
         player.transform.position = spawnPosition;
         if ((level + 1) % levelsBetweenBosses == 0){
             bossGUI.SetActive(true);

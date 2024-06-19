@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class CollectibleSpawner : MonoBehaviour
 {
     public float spawnTime;
     public GameObject spawnObject;
@@ -20,15 +20,12 @@ public class EnemySpawner : MonoBehaviour
     public IEnumerator Spawn(GameObject go)
     {
         yield return new WaitForSeconds(spawnTime * GameManager.Instance.stage);
-        GameObject enemy = Instantiate(go, transform.position, Quaternion.identity);
-        
+        GameObject collectible = Instantiate(go, transform.position, Quaternion.identity);
         if (GameManager.Instance.stage > 1)
         {
-            enemy.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
-            enemy.GetComponent<Enemy>().isGhost = true;
+            collectible.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
         }
 
-        enemy.GetComponent<Enemy>().BindTarget();
-        enemy.transform.parent = GameManager.Instance.enemiesParent;
+        collectible.transform.parent = GameManager.Instance.collectiblesParent;
     }
 }

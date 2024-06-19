@@ -25,7 +25,7 @@ public class Weapon : MonoBehaviour
     public void Start(){
         anim = GetComponent<Animator>();
         player = GameManager.Instance.player.transform;
-        GetComponent<TimeSlowdown>()?.ChangeStage(GameManager.Instance.stage);
+        if (!isGhost) GetComponent<TimeSlowdown>()?.ChangeStage(GameManager.Instance.stage);
     }
 
     // Update is called once per frame

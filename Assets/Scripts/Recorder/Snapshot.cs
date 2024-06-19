@@ -11,7 +11,7 @@ public class Snapshot
 	public RigidbodyState rbState;
     public Rigidbody2D rb;
 
-    public enum SnapAction { Fire }
+    public enum SnapAction { Fire , DropWeapon}
 
     public List<SnapAction> actions = new List<SnapAction>();
 

@@ -93,6 +93,9 @@ public class PlayerGhost : Entity
                             case Snapshot.SnapAction.Fire:
                                 weaponInHand?.TryAttack();
                                 break;
+                            case Snapshot.SnapAction.DropWeapon:
+                                DropWeapon();
+                                break;
                             default:
                                 break;
                         }
@@ -106,6 +109,14 @@ public class PlayerGhost : Entity
         }
     }
 
+    void DropWeapon(){
+        Transform bindingParent = weaponInHand.transform.parent;
+        GameObject droppedWeaponCollectible = Instantiate(weaponInHand.weaponCollectible, transform.position, Quaternion.identity);
+        foreach (Transform child in bindingParent){
+            Destroy(child.gameObject);
+        }
+    }
+
     void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Enemy")
@@ -114,24 +125,11 @@ public class PlayerGhost : Entity
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag == "Collectible")
-        {
+    void OnTriggerEnter2D(Collider2D collider){
+        if (collider.gameObject.tag == "Collectible"){
             WeaponCollectible weaponCollectible = collider.gameObject.GetComponent<WeaponCollectible>();
-            if (weaponCollectible != null)
-            {
-                if (weaponInHand != null)
-                {
-                    Transform bindingParent = weaponInHand.transform.parent;
-                    GameObject droppedWeaponCollectible = Instantiate(weaponInHand.weaponCollectible, transform.position, Quaternion.identity);
-                    foreach (Transform child in bindingParent)
-                    {
-                        Destroy(child.gameObject);
-                    }
-                }
-
-                GameObject newWeapon = Instantiate(weaponCollectible.weaponPrefab, rightWeaponBinding);
+            if (weaponCollectible != null && weaponInHand == null){
+                GameObject newWeapon = Instantiate(weaponCollectible.weaponPrefab, transform.position, Quaternion.identity, rightWeaponBinding);
                 newWeapon.GetComponent<TimeSlowdown>().ChangeStage(GetComponent<TimeSlowdown>().stage);
                 weaponInHand = newWeapon.GetComponent<Weapon>();
                 weaponInHand.isInputControlled = false;

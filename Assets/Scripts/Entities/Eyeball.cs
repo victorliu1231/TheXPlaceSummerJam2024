@@ -8,15 +8,14 @@ public class Eyeball : Enemy
     private float teleportCooldownTimer;
     public string beginTeleportAnimName;
     public string endTeleportAnimName;
-    public List<int> teleportationSeeds;
     [Tooltip("Used only for ghosts.")]
-    public int counter = 0;
 
     int seed;
 
     void Awake()
     {
         seed = (int)transform.position.x + (int)transform.position.y;
+        Debug.Log(isGhost);
     }
 
     public override void Update(){
@@ -50,31 +49,19 @@ public class Eyeball : Enemy
         weaponInHand.Attack();
     }
 
-    void TeleportAwayFromPlayer() {
-        Vector3 newPosition;
-        if (!isGhost){
-            // pick a random direction
-            int seed = System.DateTime.Now.Millisecond;
-            Random.InitState(seed);
-            Vector3 direction = Random.insideUnitCircle.normalized;
+    void TeleportAwayFromPlayer(bool newSeed = true)
+    {
+        if (newSeed) Random.InitState(seed);
+        Vector3 direction = Random.insideUnitCircle.normalized;
+        // Calculate a position that is distanceStartAttacking units away from the player in the direction of the eyeball
+        Vector3 newPosition = GameManager.Instance.player.transform.position + direction * distanceStartAttacking;
 
-            // Calculate a position that is distanceStartAttacking units away from the player in the direction of the eyeball
-            newPosition = GameManager.Instance.player.transform.position + direction * distanceStartAttacking;
-
-            // Check if the new position is outside radius of the clock walls
-            if (Vector3.Distance(Vector3.zero, newPosition) > GameManager.Instance.clockRadius){
-                TeleportAwayFromPlayer();
-                return;
-            }
-            teleportationSeeds.Add(seed);
-        } else {
-            Random.InitState(teleportationSeeds[counter]);
-            Vector3 direction = Random.insideUnitCircle.normalized;
-            newPosition = GameManager.Instance.player.transform.position + direction * distanceStartAttacking;
-            counter++;
+        // Check if the new position is outside radius of the clock walls
+        if (Vector3.Distance(Vector3.zero, newPosition) > GameManager.Instance.clockRadius){
+            TeleportAwayFromPlayer(false);
+            return;
         }
         // Set the position of the eyeball to the new position
         transform.position = newPosition;
-        
     }
 }

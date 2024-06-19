@@ -31,7 +31,10 @@ public class RangedWeapon : Weapon
         if (fireParticles != null) fireParticles.Play();
         if (gameObject.tag == "FireballWeapon") AudioManager.GetSFX("Fireball")?.Play();
         GameObject projectile = Instantiate(prefab, transform.position, freezeWeaponRot, GameManager.Instance.projectilesParent);
-        if (GetComponent<TimeSlowdown>() != null) projectile.GetComponent<TimeSlowdown>().ChangeStage(GetComponent<TimeSlowdown>().stage);
+        if (GetComponent<TimeSlowdown>() != null) {
+            projectile.GetComponent<Projectile>().isGhost = base.isGhost;
+            projectile.GetComponent<TimeSlowdown>().ChangeStage(GetComponent<TimeSlowdown>().stage);
+        }
         projectile.GetComponent<SpriteRenderer>().flipX = transform.localEulerAngles.z < -90 || transform.localEulerAngles.z > 90;
     }
 }

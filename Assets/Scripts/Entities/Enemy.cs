@@ -23,18 +23,24 @@ public class Enemy : Entity
 
     public void Start(){
         base.Start();
+        anim = GetComponent<Animator>();
+    }
+
+    public void BindTarget(){
+        Debug.Log("is ghost");
         if (!isGhost){
             target = GameManager.Instance.player.transform;
         } else {
             GameObject[] playerObjs = GameObject.FindGameObjectsWithTag("Player");
+            Debug.Log("Found " + playerObjs.Length + " players.");
             foreach (GameObject playerObj in playerObjs){
                 if (playerObj.layer == LayerMask.NameToLayer("Ghost")){
+                    Debug.Log("bound ghost target");
                     target = playerObj.transform;
                     break;
                 }
             }
         }
-        anim = GetComponent<Animator>();
     }
 
     public virtual void Update(){
