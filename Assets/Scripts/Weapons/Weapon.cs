@@ -15,6 +15,7 @@ public class Weapon : MonoBehaviour
     private Animator anim;
     private float cooldownTimer = 0f;
     private Transform player;
+    public Transform target;
     [Header("If Input Controlled")]
     public float cooldownDuration;
     public GameObject weaponCollectible;
@@ -26,6 +27,10 @@ public class Weapon : MonoBehaviour
         anim = GetComponent<Animator>();
         player = GameManager.Instance.player.transform;
         if (!isGhost) GetComponent<TimeSlowdown>()?.ChangeStage(GameManager.Instance.stage);
+    }
+
+    public void BindTarget(Transform target){
+        this.target = target;
     }
 
     // Update is called once per frame
@@ -229,7 +234,7 @@ public class Weapon : MonoBehaviour
                 }
                 transform.rotation = Quaternion.Euler(0, 0, angle);
             }else {
-                Vector3 lookDir = player.position - transform.position;
+                Vector3 lookDir = target.position - transform.position;
                 float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(0, 0, angle);
             }   

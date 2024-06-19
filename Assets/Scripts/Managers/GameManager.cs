@@ -61,7 +61,8 @@ public class GameManager : MonoBehaviour
     public Transform collectiblesParent;
     [Header("Misc Bindings")]
     public AnalogGlitch glitch;
-    [HideInInspector]public GameObject player;
+    [Tooltip("Auto-bound")]
+    public GameObject player;
     public Transform enemiesParent;
     public Transform ghostsParent;
     public Transform spawnedWallsParent;
@@ -290,8 +291,6 @@ public class GameManager : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        Destroy(currentLevelInstance);
-        currentLevelInstance = Instantiate(currentLevelTemplate, Vector2.zero, Quaternion.identity);
         inTransition = true;
         stage++;
         player.GetComponent<TimeSlowdown>().ChangeStage(stage);
@@ -325,11 +324,8 @@ public class GameManager : MonoBehaviour
             playerRecorder.FlushRecordings();
             if (player.GetComponent<Player>().weaponInHand != null) Destroy(player.GetComponent<Player>().weaponInHand.gameObject);
             InstantiateGhosts();
-            //if (stage == 1) Instantiate(weaponCollectibles[1], weaponSpawnPositionOne, Quaternion.identity, collectiblesParent);
-            //if (stage == 2){
-            //    Instantiate(weaponCollectibles[2], weaponSpawnPositionOne, Quaternion.identity, collectiblesParent);
-            //    Instantiate(weaponCollectibles[3], weaponSpawnPositionTwo, Quaternion.identity, collectiblesParent);
-            //}
+            Destroy(currentLevelInstance);
+            currentLevelInstance = Instantiate(currentLevelTemplate, Vector2.zero, Quaternion.identity);
         }
     }
 

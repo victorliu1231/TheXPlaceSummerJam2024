@@ -27,20 +27,17 @@ public class Enemy : Entity
     }
 
     public void BindTarget(){
-        Debug.Log("is ghost");
-        if (!isGhost){
-            target = GameManager.Instance.player.transform;
-        } else {
+        if (isGhost) {
             GameObject[] playerObjs = GameObject.FindGameObjectsWithTag("Player");
-            Debug.Log("Found " + playerObjs.Length + " players.");
             foreach (GameObject playerObj in playerObjs){
-                if (playerObj.layer == LayerMask.NameToLayer("Ghost")){
-                    Debug.Log("bound ghost target");
+                if (playerObj.GetComponent<TimeSlowdown>().stage == 1) {
                     target = playerObj.transform;
-                    break;
                 }
             }
+        } else {
+            target = GameManager.Instance.player.transform;
         }
+        weaponInHand.BindTarget(target);
     }
 
     public virtual void Update(){
