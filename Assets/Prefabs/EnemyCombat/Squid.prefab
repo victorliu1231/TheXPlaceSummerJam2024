@@ -259,6 +259,8 @@ MonoBehaviour:
   weaponType: 0
   faceDirection: 0
   isInputControlled: 0
+  isGhost: 0
+  ghostMousePos: {x: 0, y: 0}
   cooldownDuration: 0
   weaponCollectible: {fileID: 0}
   timeDelayBetweenPlayerPosStorageAndAttack: 0
@@ -612,12 +614,10 @@ MonoBehaviour:
   movementAnimName: Squid_Movement
   attackAnimName: 
   isSpriteFlippable: 1
+  spriteDirection: 0
   isAttackCooldownReduced: 0
   attackCooldownSprite: {fileID: 9203559917293647690}
   isGhost: 0
-  ghostLayer:
-    serializedVersion: 2
-    m_Bits: 8
   spawnWallDistance: 1
   spawnWallCooldownDuration: 5
   wallPrefab: {fileID: 7008876704442941457, guid: 4190bd8af7e1b7442a12775a823bb5f3, type: 3}
