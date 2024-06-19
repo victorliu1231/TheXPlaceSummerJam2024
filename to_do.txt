@@ -1,18 +1,23 @@
 to-do list
-- laser particles hitting enemies too frequently, causing lag
-- remove boss GUI
-- what if we kill all enemies early?
-- to do Will's additions and Grace's anim for cutscene
-- weird thing with NextLevel() still being ghost called somewhere in GameManager script when dying
+- what if we kill all enemies early? time should speed up
+- turn off rb collisions between current stage and ghosts, BUT not for bullets or weapons
+- are bullets and weapons 0.5x speed?
+- weird thing with NextLevel() still being ghost called somewhere in GameManager script when dying, causing double music to play
+- figure out why it doesn't auto-full screen
+- bullets and lasers and such should be 0.5 opacity
+- remove healthbar for player since they're invincible
+- fix movement anims,,,, yikes
 
 add
-- time scaling difficulty, ghosts for lasers and bullets 
 - tutorial
 --- time slow + ghost system
---- space to drop weapons
---- wasd to move
-- scrape together random gameplay clips, can exclude the time warp aspect for now
-- TheXPlace game profile
+- mobile support lol?
+- better gameplay trailer if we're making this official
+- spruce up itch page
 
-advertise
-- high score system
+AFTERWARDS
+- add more content
+- bosses? more pseudorandom levels?
+- better balancing
+- publishing online on itch.io
+- TheXPlace game profile

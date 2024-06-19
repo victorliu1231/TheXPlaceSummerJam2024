@@ -57,13 +57,13 @@ public class Wizard : Enemy
     public IEnumerator SpeedUpAlliesCo(Enemy enemy){
         if (!enemy.isAttackCooldownReduced){
             enemy.isAttackCooldownReduced = true;
-            enemy.attackCooldownSprite.enabled = true;
+            if (enemy.attackCooldownDuration != null) enemy.attackCooldownSprite.enabled = true;
             float originalAttackCooldownDuration = enemy.attackCooldownDuration;
             enemy.attackCooldownDuration *= speedUpAlliesMultiplier;
             yield return new WaitForSeconds(durationAlliesSpedUp * Util.GetRecriprocalStage(GetComponent<TimeSlowdown>()));
             enemy.attackCooldownDuration = originalAttackCooldownDuration;
             enemy.isAttackCooldownReduced = false;
-            enemy.attackCooldownSprite.enabled = false;
+            if (enemy.attackCooldownDuration != null) enemy.attackCooldownSprite.enabled = false;
         }
     }
 }

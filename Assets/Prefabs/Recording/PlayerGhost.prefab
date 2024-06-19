@@ -124,7 +124,7 @@ MonoBehaviour:
   speed: 5
   currentHealth: 0
   maxHealth: 100
-  invincible: 0
+  invincible: 1
   canTakeKnockback: 1
   damagedParticles: {fileID: 2130153873001132457}
   healthbar: {fileID: 0}
@@ -504,7 +504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7631646075907294530
 Transform:
   m_ObjectHideFlags: 0

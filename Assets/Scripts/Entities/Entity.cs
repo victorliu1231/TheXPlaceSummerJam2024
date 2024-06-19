@@ -20,9 +20,11 @@ public class Entity : MonoBehaviour
     public virtual void TakeDamage(float damage, Vector2 attackerPosition, bool canCauseKnockback, float knockbackForce, GameObject dealer = null){
         if (dealer is not null)
         {
-            if (GetComponent<TimeSlowdown>().stage < dealer.GetComponent<TimeSlowdown>().stage)
-            {
-                if (gameObject.tag == "Enemy") GetComponent<TimeSlowdown>().ChangeStage(dealer.GetComponent<TimeSlowdown>().stage);
+            if (GetComponent<TimeSlowdown>() is not null && dealer.GetComponent<TimeSlowdown>() is not null){
+                if (GetComponent<TimeSlowdown>().stage < dealer.GetComponent<TimeSlowdown>().stage)
+                {
+                    if (gameObject.tag == "Enemy") GetComponent<TimeSlowdown>().ChangeStage(dealer.GetComponent<TimeSlowdown>().stage);
+                }
             }
         }
         

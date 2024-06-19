@@ -158,8 +158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.05, y: -389}
-  m_SizeDelta: {x: 1557.38, y: 577.52}
+  m_AnchoredPosition: {x: 0, y: -506.3}
+  m_SizeDelta: {x: 434.3, y: 106.23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &16768352
 MonoBehaviour:
@@ -176,6 +176,8 @@ MonoBehaviour:
   timeBetweenFadeInterps: 0.3
   fadeType: 0
   timeDelay: 0.5
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &16768353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,8 +225,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 47.37
-  m_fontSizeBase: 47.37
+  m_fontSize: 26.08
+  m_fontSizeBase: 26.08
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -438,6 +440,8 @@ MonoBehaviour:
   timeBetweenFadeInterps: 0.3
   fadeType: 0
   timeDelay: 0.5
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &122004929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,6 +593,8 @@ MonoBehaviour:
   timeBetweenFadeInterps: 0.3
   fadeType: 1
   timeDelay: 6
+  startColor: {r: 0.32941177, g: 0, b: 0, a: 1}
+  endColor: {r: 0.32941177, g: 0, b: 0, a: 0}
 --- !u!114 &183734169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -604,6 +610,8 @@ MonoBehaviour:
   timeBetweenFadeInterps: 0.3
   fadeType: 0
   timeDelay: 0.5
+  startColor: {r: 0.32941177, g: 0, b: 0, a: 0}
+  endColor: {r: 0.32941177, g: 0, b: 0, a: 1}
 --- !u!114 &183734170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,8 +632,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Unknown - YOU are banished from the real world for the crimes you have
-    committed against the gods.
+  m_text: YOU are banished from the real world for the crimes you have committed
+    against the gods.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf570010b29d0e647ae3c3613344e498, type: 2}
   m_sharedMaterial: {fileID: -8391152487728178958, guid: cf570010b29d0e647ae3c3613344e498, type: 2}
@@ -634,8 +642,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
+    rgba: 84
+  m_fontColor: {r: 0.3301887, g: 0, b: 0, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1013,6 +1021,8 @@ MonoBehaviour:
   timeBetweenFadeInterps: 0.3
   fadeType: 1
   timeDelay: 4
+  startColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &496488820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1028,6 +1038,8 @@ MonoBehaviour:
   timeBetweenFadeInterps: 0.3
   fadeType: 0
   timeDelay: 0.5
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &558734285
 GameObject:
   m_ObjectHideFlags: 0
@@ -1082,6 +1094,8 @@ MonoBehaviour:
   timeBetweenFadeInterps: 0.1
   fadeType: 1
   timeDelay: 1.5
+  startColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &558734288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1097,6 +1111,8 @@ MonoBehaviour:
   timeBetweenFadeInterps: 0.1
   fadeType: 0
   timeDelay: 0.5
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &558734289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1248,6 +1264,8 @@ MonoBehaviour:
   timeBetweenFadeInterps: 0.3
   fadeType: 1
   timeDelay: 5
+  startColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1194196729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1263,6 +1281,8 @@ MonoBehaviour:
   timeBetweenFadeInterps: 0.3
   fadeType: 0
   timeDelay: 0.5
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1194196730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1414,6 +1434,8 @@ MonoBehaviour:
   timeBetweenFadeInterps: 0.3
   fadeType: 1
   timeDelay: 6
+  startColor: {r: 0.32941177, g: 0, b: 0, a: 1}
+  endColor: {r: 0.32941177, g: 0, b: 0, a: 0}
 --- !u!114 &1289381464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1429,6 +1451,8 @@ MonoBehaviour:
   timeBetweenFadeInterps: 0.3
   fadeType: 0
   timeDelay: 0.5
+  startColor: {r: 0.32941177, g: 0, b: 0, a: 0}
+  endColor: {r: 0.32941177, g: 0, b: 0, a: 1}
 --- !u!114 &1289381465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1449,8 +1473,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: father time - spend the rest of your days in the eternal void between this
-    universe's timelines!
+  m_text: spend the rest of your days in the eternal void between this universe's
+    timelines!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf570010b29d0e647ae3c3613344e498, type: 2}
   m_sharedMaterial: {fileID: -8391152487728178958, guid: cf570010b29d0e647ae3c3613344e498, type: 2}
@@ -1460,7 +1484,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
+  m_fontColor: {r: 0.32941177, g: 0, b: 0, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1925,6 +1949,8 @@ MonoBehaviour:
   timeBetweenFadeInterps: 0.3
   fadeType: 1
   timeDelay: 4
+  startColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1490731147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1940,6 +1966,8 @@ MonoBehaviour:
   timeBetweenFadeInterps: 0.3
   fadeType: 0
   timeDelay: 0.5
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1490731148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2091,6 +2119,8 @@ MonoBehaviour:
   timeBetweenFadeInterps: 0.3
   fadeType: 1
   timeDelay: 6
+  startColor: {r: 0.32941177, g: 0, b: 0, a: 1}
+  endColor: {r: 0.32941177, g: 0, b: 0, a: 0}
 --- !u!114 &1721260609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2106,6 +2136,8 @@ MonoBehaviour:
   timeBetweenFadeInterps: 0.3
   fadeType: 0
   timeDelay: 0.5
+  startColor: {r: 0.32941177, g: 0, b: 0, a: 0}
+  endColor: {r: 0.32941177, g: 0, b: 0, a: 1}
 --- !u!114 &1721260610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2126,8 +2158,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: unknown - as father time, i will dole out justice against you on behalf
-    of the gods.
+  m_text: as father time, i will dole out justice against you on behalf of the gods.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf570010b29d0e647ae3c3613344e498, type: 2}
   m_sharedMaterial: {fileID: -8391152487728178958, guid: cf570010b29d0e647ae3c3613344e498, type: 2}
@@ -2137,7 +2168,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
+  m_fontColor: {r: 0.32941177, g: 0, b: 0, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2302,6 +2333,8 @@ MonoBehaviour:
   timeBetweenFadeInterps: 0.3
   fadeType: 1
   timeDelay: 4
+  startColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &2134009528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2317,6 +2350,8 @@ MonoBehaviour:
   timeBetweenFadeInterps: 0.3
   fadeType: 0
   timeDelay: 0.5
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  endColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &2134009529
 MonoBehaviour:
   m_ObjectHideFlags: 0

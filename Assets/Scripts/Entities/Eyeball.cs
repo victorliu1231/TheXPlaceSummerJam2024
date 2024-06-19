@@ -15,7 +15,6 @@ public class Eyeball : Enemy
     void Awake()
     {
         seed = (int)transform.position.x + (int)transform.position.y;
-        Debug.Log(isGhost);
     }
 
     public override void Update(){

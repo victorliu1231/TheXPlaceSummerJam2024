@@ -74,6 +74,10 @@ public class GameManager : MonoBehaviour
     public Vector3 spawnPosition;
     public float clockRadius = 12.5f;
     public GameObject pauseMenu;
+    [Header("Tutorial")]
+    public bool inTutorial = false;
+    public GameObject doneWithTutorialGameObject;
+    public bool isBeginTime = false;
     
     [Header("Debugging")]
     public bool isDebugging = true;
@@ -115,8 +119,10 @@ public class GameManager : MonoBehaviour
         if (data != null) playerName = data.GetComponent<PersistentData>().playerName;
 
         if (!isDebugging){
-            currentLevelTemplate = allLevels[Random.Range(0, allLevels.Count - 1)];
-            currentLevelInstance = Instantiate(currentLevelTemplate, Vector2.zero, Quaternion.identity);
+            if (!inTutorial){
+                currentLevelTemplate = allLevels[Random.Range(0, allLevels.Count - 1)];
+                currentLevelInstance = Instantiate(currentLevelTemplate, Vector2.zero, Quaternion.identity);
+            }
             AudioManager.GetSoundtrack("MainTheme").Play();
             player.transform.position = spawnPosition;
             foreach (Transform child in collectiblesParent){
@@ -150,8 +156,10 @@ public class GameManager : MonoBehaviour
     public void ResetLevel(){
         stage = 1;
         currentTime = 0f;
-        stageText.text = "Stage 1";
-        levelText.text = $"Level {level+1}";
+        if (!inTutorial){
+            stageText.text = "Stage 1";
+            levelText.text = $"Level {level+1}";
+        }
         glitch.scanLineJitter = 0f;
         glitch.horizontalShake = 0f;
         glitch.colorDrift = 0f;
@@ -178,38 +186,54 @@ public class GameManager : MonoBehaviour
             PauseGame();
         }
         totalTime += Time.deltaTime;
-        if (currentTime >= 60f){
-            // see if all children are inactive or destroyed
-            bool allInactive = true;
-            Debug.Log(enemiesParent.childCount);
-            foreach (Transform child in enemiesParent){
-                if (child.gameObject.activeSelf){
-                    allInactive = false;
+        if (!inTutorial){
+            if (currentTime >= 60f){
+                // see if all children are inactive or destroyed
+                bool allInactive = true;
+                Debug.Log(enemiesParent.childCount);
+                foreach (Transform child in enemiesParent){
+                    if (child.gameObject.activeSelf){
+                        allInactive = false;
+                    }
                 }
-            }
-            if (enemiesParent.childCount == 0 || allInactive){
-                Debug.Log("dead");
-                ResetLevel();
-                StartCoroutine(NextLevel());
-            } else {
-                if (!isDebugging) {
-                    StopAllCoroutines();
-                    StartCoroutine(GameOver(true));
-                } else {
-                    Debug.Log("move on");
+                if (enemiesParent.childCount == 0 || allInactive){
+                    Debug.Log("dead");
                     ResetLevel();
                     StartCoroutine(NextLevel());
+                } else {
+                    if (!isDebugging) {
+                        StopAllCoroutines();
+                        StartCoroutine(GameOver(true));
+                    } else {
+                        Debug.Log("move on");
+                        ResetLevel();
+                        StartCoroutine(NextLevel());
+                    }
                 }
             }
-        }
-        else if (!inTransition){
-            hourHand.localRotation = Quaternion.Euler(0, 0, -GetHour()*hoursToDegrees);
-            minuteHand.localRotation = Quaternion.Euler(0, 0, -GetMinute()*minutesToDegrees);
-            //secondHand.localRotation = Quaternion.Euler(0, 0, -GetSecond()*secondsToDegrees);
-            if (currentTime >= stageEndTimes[stage-1]){
-                StartCoroutine(NextStage());
+            else if (!inTransition){
+                hourHand.localRotation = Quaternion.Euler(0, 0, -GetHour()*hoursToDegrees);
+                minuteHand.localRotation = Quaternion.Euler(0, 0, -GetMinute()*minutesToDegrees);
+                //secondHand.localRotation = Quaternion.Euler(0, 0, -GetSecond()*secondsToDegrees);
+                if (currentTime >= stageEndTimes[stage-1]){
+                    StartCoroutine(NextStage());
+                }
+                currentTime += Time.deltaTime * (1 + 0.1f * level);
             }
-            currentTime += Time.deltaTime * (1 + 0.1f * level);
+        } else {
+            // if in tutorial
+            if (!inTransition){
+                hourHand.localRotation = Quaternion.Euler(0, 0, -GetHour()*hoursToDegrees);
+                minuteHand.localRotation = Quaternion.Euler(0, 0, -GetMinute()*minutesToDegrees);
+                //secondHand.localRotation = Quaternion.Euler(0, 0, -GetSecond()*secondsToDegrees);
+                if (currentTime >= stageEndTimes[stage-1] && stage < 3){
+                    StartCoroutine(NextStage());
+                }
+                if (isBeginTime) currentTime += Time.deltaTime;
+                if (enemiesParent.childCount == 0 && currentTime >= 30 && !inTransition){
+                    doneWithTutorialGameObject.SetActive(true);
+                }
+            }
         }
     }
 
@@ -285,7 +309,7 @@ public class GameManager : MonoBehaviour
         inTransition = true;
         stage++;
         player.GetComponent<TimeSlowdown>().ChangeStage(stage);
-        stageText.text = "Stage " + (stage);
+        if (!inTutorial) stageText.text = "Stage " + (stage);
         glitch.horizontalShake = 0.1f;
         glitch.scanLineJitter = 0.25f;
         glitch.colorDrift = 1f;
