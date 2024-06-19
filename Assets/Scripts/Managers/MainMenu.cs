@@ -15,6 +15,7 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         anim.Play("Player_Run_Down_Loop");
+        AudioManager.GetSoundtrack("MainTheme").Play();
         data.LoadSave(0);
     }
 

@@ -10,7 +10,7 @@ public class Entity : MonoBehaviour
     public bool invincible = false;
     public bool canTakeKnockback = true;
     public ParticleSystem damagedParticles;
-    private MMHealthBar healthbar;
+    public MMHealthBar healthbar;
 
     public void Start(){
         currentHealth = maxHealth;

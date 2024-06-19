@@ -179,8 +179,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)){
-            if (Time.timeScale == 0f) ResumeGame();
-            else PauseGame();
+            PauseGame();
         }
         totalTime += Time.deltaTime;
         if (currentTime >= 60f){
@@ -353,6 +352,8 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame(){
         pauseMenu.SetActive(true);
+        AudioManager.PauseAllSoundtracks();
+        AudioManager.PauseAllSFXs();
         currentTimescale = Time.timeScale;
         Time.timeScale = 0f;
         inTransition = true;
@@ -360,6 +361,8 @@ public class GameManager : MonoBehaviour
 
     public void ResumeGame(){
         pauseMenu.SetActive(false);
+        AudioManager.UnpauseAllSoundtracks();
+        AudioManager.UnpauseAllSFXs();
         Time.timeScale = currentTimescale;
         inTransition = false;
     }
