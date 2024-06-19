@@ -4,16 +4,19 @@ to-do list
 - enemies getting knocked into walls ... detect if entity will hit into wall and if so, prevent kb
 - agree on size of screen
 - fix boss GUI
-- add ability to add player name upon pressing Play
 - QA test how we want enemies to get stronger
 - what if we kill all enemies early?
 - one wave per stage?
+- remove collisions between you and your ghosts
+- fireball visual is pointing wrong way
 
-- Pause gui for pausing
+
 - if boss dies, stop boss theme soundtrack
 - add gameplay
 
 add
+- eesh, difficulty GUI for enemies, scaling difficulty, bosses, ghosts for lasers and bullets, gui for previous stages of enemies and players 
+- pause gui in game
 - need a new name for game
 - tutorial
 --- autosave every level

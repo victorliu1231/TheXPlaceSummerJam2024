@@ -55,11 +55,15 @@ public class GameManager : MonoBehaviour
     public Vector3 weaponSpawnPositionTwo;
     public List<GameObject> weaponCollectibles;
     public Transform collectiblesParent;
+    [Header("Misc Bindings")]
+    public AnalogGlitch glitch;
+    [HideInInspector]public GameObject player;
+    public Transform enemiesParent;
+    public Transform ghostsParent;
+    public Transform spawnedWallsParent;
+    public PlayerRecorder playerRecorder;
     [Header("Misc")]
     public bool inTransition = false;
-    public AnalogGlitch glitch;
-    public GameObject player;
-    public Transform enemiesParent;
     public string playerName;
     public Vector3 spawnPosition;
     public float clockRadius = 12.5f;
@@ -135,7 +139,7 @@ public class GameManager : MonoBehaviour
             foreach (Transform child in generatorsParent){
                 enemyWaves.Add(child.GetComponent<CircularEnemyGenerator>());
             }
-            enemyWaves[level].gameObject.SetActive(true);
+            //enemyWaves[level].gameObject.SetActive(true);
             playerStrengthMultiplier += (level % everyXLevelsPlayerGetsStronger)*playerStrengthBoostMultiplier;
             enemyStrengthMultiplier += (level % everyXLevelsEnemyGetsStronger)*enemyStrengthBoostMultiplier;
         }
@@ -218,6 +222,12 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator NextStage(){
+        foreach (Transform child in ghostsParent){
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in spawnedWallsParent){
+            Destroy(child.gameObject);
+        }
         inTransition = true;
         stage++;
         stageText.text = "Stage " + (stage+1);
@@ -232,6 +242,8 @@ public class GameManager : MonoBehaviour
         inTransition = false;
         player.transform.position = spawnPosition;
         if (!isDebugging){
+            playerRecorder.InstantiateGhost();
+            
             foreach (Transform child in collectiblesParent){
                 Destroy(child.gameObject);
             }
@@ -249,6 +261,12 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator NextLevel(){
+        foreach (Transform child in ghostsParent){
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in spawnedWallsParent){
+            Destroy(child.gameObject);
+        }
         inTransition = true;
         level++;
         levelText.text = "Level " + (level + 1);

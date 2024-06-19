@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346147250611523877}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -120,12 +120,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c476bcadf65c11d43b8b20d1a8b9820b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownDuration: 0.5
   weaponType: 1
+  faceDirection: 0
   isInputControlled: 1
+  cooldownDuration: 0.5
   minRotateAngle: -45
   maxRotateAngle: 45
   weaponCollectible: {fileID: 5325344330621212836, guid: 831f4ea4e99218f41bc36028bec483ed, type: 3}
+  timeDelayBetweenPlayerPosStorageAndAttack: 0
   prefab: {fileID: 5488736018931721027, guid: cdf623efaa86af7458efbba1e4a533d3, type: 3}
   fireParticles: {fileID: 6422739336187769109}
 --- !u!1001 &8763123058207236308

@@ -5,16 +5,16 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public enum WeaponType {Melee, Ranged};
+    public enum FaceDirection { Up, Down, Left, Right};
     [Header("General Weapon Stats")]
     public WeaponType weaponType;
+    public FaceDirection faceDirection;
     public bool isInputControlled;
     private Animator anim;
     private float cooldownTimer = 0f;
     private Transform player;
     [Header("If Input Controlled")]
     public float cooldownDuration;
-    public float minRotateAngle;
-    public float maxRotateAngle;
     public GameObject weaponCollectible;
     [Header("If Enemy Controlled")]
     [Tooltip("This time delay is crucial for letting the player dodge instantaneous attacks like a laser beam")]
@@ -33,17 +33,75 @@ public class Weapon : MonoBehaviour
                 Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector3 lookDir = (mousePos - transform.position) * player.localScale.x;
                 float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
-                float rePositionAngle;
-                Player playerComponent = player.GetComponent<Player>();
-                if (playerComponent.faceDirection == Player.FaceDirection.Left || playerComponent.faceDirection == Player.FaceDirection.Right) rePositionAngle = 0f;
-                else if (playerComponent.faceDirection == Player.FaceDirection.Up) rePositionAngle = 90f;
-                else rePositionAngle = -90f;
-
-                if (GameManager.Instance.player.GetComponent<Player>().faceDirection == Player.FaceDirection.Up) angle = Mathf.Abs(angle);
-                if (GameManager.Instance.player.GetComponent<Player>().faceDirection == Player.FaceDirection.Down) angle = Mathf.Abs(angle) * -1;
-
-                if (angle < minRotateAngle + rePositionAngle) angle = minRotateAngle + rePositionAngle;
-                if (angle > maxRotateAngle + rePositionAngle) angle = maxRotateAngle + rePositionAngle;
+                Debug.Log(angle);
+                if (faceDirection == FaceDirection.Up){
+                    if ((-45f < angle && angle <= 45f-22.5f) || (-405f < angle && angle <= -315f-22.5f)) {
+                        faceDirection = FaceDirection.Right;
+                        transform.SetParent(player.GetComponent<Player>().rightWeaponBinding, false);
+                        GetComponent<SpriteRenderer>().flipY = false;
+                    }
+                    else if ((-135f < angle && angle <= -45f) || (-315f < angle && angle <= -225f)) {
+                        faceDirection = FaceDirection.Down;
+                        transform.SetParent(player.GetComponent<Player>().downWeaponBinding, false);
+                        GetComponent<SpriteRenderer>().flipY = false;
+                    }
+                    else if ((-225f + 22.5f < angle && angle <= -135f) || (135f + 22.5f < angle && angle <= 225f)) {
+                        faceDirection = FaceDirection.Left;
+                        transform.SetParent(player.GetComponent<Player>().leftWeaponBinding, false);
+                        GetComponent<SpriteRenderer>().flipY = true;
+                    }
+                }
+                if (faceDirection == FaceDirection.Right){
+                    if ((45f +22.5f < angle && angle <= 135f) || (-315f+22.5f < angle && angle <= -225f)) {
+                        faceDirection = FaceDirection.Up;
+                        transform.SetParent(player.GetComponent<Player>().upWeaponBinding, false);
+                        GetComponent<SpriteRenderer>().flipY = false;
+                    }
+                    else if ((-135f < angle && angle <= -45f - 22.5f) || (-315f < angle && angle <= -225f - 22.5f)) {
+                        faceDirection = FaceDirection.Down;
+                        transform.SetParent(player.GetComponent<Player>().downWeaponBinding, false);
+                        GetComponent<SpriteRenderer>().flipY = false;
+                    }
+                    else if ((-225f < angle && angle <= -135f) || (135f < angle && angle <= 225f)) {
+                        faceDirection = FaceDirection.Left;
+                        transform.SetParent(player.GetComponent<Player>().leftWeaponBinding, false);
+                        GetComponent<SpriteRenderer>().flipY = true;
+                    }
+                }
+                if (faceDirection == FaceDirection.Down){
+                    if ((45f < angle && angle <= 135f) || (-315f < angle && angle <= -225f)) {
+                        faceDirection = FaceDirection.Up;
+                        transform.SetParent(player.GetComponent<Player>().upWeaponBinding, false);
+                        GetComponent<SpriteRenderer>().flipY = false;
+                    }
+                    else if ((-45f +22.5f< angle && angle <= 45f) || (-405f +22.5f< angle && angle <= -315f)) {
+                        faceDirection = FaceDirection.Right;
+                        transform.SetParent(player.GetComponent<Player>().rightWeaponBinding, false);
+                        GetComponent<SpriteRenderer>().flipY = false;
+                    }
+                    else if ((-225f < angle && angle <= -135f - 22.5f) || (135f < angle && angle <= 225f - 22.5f)) {
+                        faceDirection = FaceDirection.Left;
+                        transform.SetParent(player.GetComponent<Player>().leftWeaponBinding, false);
+                        GetComponent<SpriteRenderer>().flipY = true;
+                    }
+                }
+                if (faceDirection == FaceDirection.Left){
+                    if ((45f < angle && angle <= 135f - 22.5f) || (-315f < angle && angle <= -225f - 22.5f)) {
+                        faceDirection = FaceDirection.Up;
+                        transform.SetParent(player.GetComponent<Player>().upWeaponBinding, false);
+                        GetComponent<SpriteRenderer>().flipY = false;
+                    }
+                    else if ((-45f < angle && angle <= 45f) || (-405f < angle && angle <= -315f)) {
+                        faceDirection = FaceDirection.Right;
+                        transform.SetParent(player.GetComponent<Player>().rightWeaponBinding, false);
+                        GetComponent<SpriteRenderer>().flipY = false;
+                    }
+                    else if ((-135f + 22.5f < angle && angle <= -45f) || (-315f + 22.5f < angle && angle <= -225f)) {
+                        faceDirection = FaceDirection.Down;
+                        transform.SetParent(player.GetComponent<Player>().downWeaponBinding, false);
+                        GetComponent<SpriteRenderer>().flipY = false;
+                    }
+                }
                 transform.rotation = Quaternion.Euler(0, 0, angle);
             }else {
                 Vector3 lookDir = player.position - transform.position;

@@ -6,7 +6,8 @@ public class Player : Entity
 {
     [HideInInspector]public Animator anim;
     public Weapon weaponInHand;
-    public Transform sideWeaponBinding;
+    public Transform rightWeaponBinding;
+    public Transform leftWeaponBinding;
     public Transform upWeaponBinding;
     public Transform downWeaponBinding;
     public enum FaceDirection{ Up, Down, Left, Right};
@@ -16,7 +17,7 @@ public class Player : Entity
         base.Start();
         anim = GetComponent<Animator>();
         weaponInHand = GetComponentInChildren<Weapon>();
-        if (weaponInHand != null) weaponInHand.transform.SetParent(sideWeaponBinding);
+        if (weaponInHand != null) weaponInHand.transform.SetParent(rightWeaponBinding);
         faceDirection = FaceDirection.Right;
     }
 
@@ -26,23 +27,26 @@ public class Player : Entity
         if (!GameManager.Instance.inTransition && !GameManager.Instance.isGameOver){
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
-            if (horizontal != 0){
-                anim.Play("Player_Run_Right");
-                Vector3 newScale = transform.localScale;
-                newScale.x = horizontal < 0 ? Mathf.Abs(transform.localScale.x)*-1f : Mathf.Abs(transform.localScale.x)*1f;
-                transform.localScale = newScale;
-                faceDirection = horizontal < 0 ? FaceDirection.Left : FaceDirection.Right;
-                weaponInHand?.transform.SetParent(sideWeaponBinding);
+            if (weaponInHand.faceDirection == Weapon.FaceDirection.Right){
+                if (horizontal > 0){
+                    anim.Play("Player_Run_Right");
+                } else {
+                    anim.Play("Player_Idle_Right");
+                }
+            } else if (weaponInHand.faceDirection == Weapon.FaceDirection.Left){
+                if (horizontal < 0){
+                    anim.Play("Player_Run_Left");
+                } else {
+                    anim.Play("Player_Idle_Left");
+                }
             }
-            else if (vertical > 0){
-                anim.Play("Player_Run_Up");
-                faceDirection = FaceDirection.Up;
-                weaponInHand?.transform.SetParent(upWeaponBinding);
+            else if (weaponInHand.faceDirection == Weapon.FaceDirection.Up){
+                if (vertical > 0) anim.Play("Player_Run_Up");
+                else anim.Play("Player_Up_Idle");
             }
-            else if (vertical < 0){
-                anim.Play("Player_Run_Down");
-                faceDirection = FaceDirection.Down;
-                weaponInHand?.transform.SetParent(downWeaponBinding);
+            else if (weaponInHand.faceDirection == Weapon.FaceDirection.Down){
+                if (vertical < 0) anim.Play("Player_Run_Down");
+                else anim.Play("Player_Down_Idle");
             }
             Vector3 targetPos = new Vector3(transform.position.x + horizontal, transform.position.y + vertical, transform.position.z);
             Vector3 pos = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);

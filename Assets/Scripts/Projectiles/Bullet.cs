@@ -13,20 +13,16 @@ public class Bullet : MonoBehaviour
     public float knockbackForce;
     public string targetTag;
     private SpriteRenderer spriteRenderer;
-    private int playerDir;
-    public bool isPlayerWeapon;
 
     void Start(){
         Destroy(gameObject, lifetime);
         spriteRenderer = GetComponent<SpriteRenderer>();
-        playerDir = GameManager.Instance.player.transform.localScale.x > 0 ? 1 : -1;
     }
 
     void Update(){
         if (!GameManager.Instance.isGameOver){
             // Move transform based on rotation
-            if (isPlayerWeapon) transform.position += transform.right * playerDir * speed * Time.deltaTime;
-            else transform.position += transform.right * speed * Time.deltaTime;
+            transform.position += transform.right * speed * Time.deltaTime;
         } else {
             gameObject.SetActive(false);
         }

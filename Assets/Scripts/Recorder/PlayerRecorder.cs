@@ -44,6 +44,7 @@ public class PlayerRecorder : MonoBehaviour
 
     private Vector2 startLocation;
     public GameObject playerGhost;
+    public Transform ghostsParent;
 
     void Start()
     {
@@ -76,14 +77,18 @@ public class PlayerRecorder : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            GameObject ghost = Instantiate(playerGhost, startLocation, Quaternion.identity);
-            Queue<Snapshot> newSnaps = new Queue<Snapshot>();
-            foreach (Snapshot snap in snapshots)
-            {
-                newSnaps.Enqueue(snap.CopySelf());
-            }
-            ghost.GetComponent<PlayerGhost>().snapshots = newSnaps;
+            InstantiateGhost();
         }
+    }
+
+    public void InstantiateGhost(){
+        GameObject ghost = Instantiate(playerGhost, startLocation, Quaternion.identity, ghostsParent);
+        Queue<Snapshot> newSnaps = new Queue<Snapshot>();
+        foreach (Snapshot snap in snapshots)
+        {
+            newSnaps.Enqueue(snap.CopySelf());
+        }
+        ghost.GetComponent<PlayerGhost>().snapshots = newSnaps;
     }
 
     public void FlushRecordings()

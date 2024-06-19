@@ -16,6 +16,7 @@ public class Enemy : Entity
     public bool isSpriteFlippable;
     public bool isAttackCooldownReduced = false;
     public SpriteRenderer attackCooldownSprite;
+    public bool hasWallInFrontOfIt;
 
     public void Start(){
         base.Start();
