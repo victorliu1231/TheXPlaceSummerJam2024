@@ -173,9 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e422db6705deea49a3bb95ea8a45dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenFadeInterps: 0.3
+  timeBetweenFadeInterps: 0.1
   fadeType: 0
-  timeDelay: 0.5
+  timeDelay: 0
   startColor: {r: 1, g: 1, b: 1, a: 0}
   endColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &16768353
@@ -437,9 +437,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e422db6705deea49a3bb95ea8a45dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenFadeInterps: 0.3
+  timeBetweenFadeInterps: 0.1
   fadeType: 0
-  timeDelay: 0.5
+  timeDelay: 32
   startColor: {r: 1, g: 1, b: 1, a: 0}
   endColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &122004929
@@ -590,9 +590,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e422db6705deea49a3bb95ea8a45dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenFadeInterps: 0.3
+  timeBetweenFadeInterps: 0.1
   fadeType: 1
-  timeDelay: 6
+  timeDelay: 3
   startColor: {r: 0.32941177, g: 0, b: 0, a: 1}
   endColor: {r: 0.32941177, g: 0, b: 0, a: 0}
 --- !u!114 &183734169
@@ -607,9 +607,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e422db6705deea49a3bb95ea8a45dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenFadeInterps: 0.3
+  timeBetweenFadeInterps: 0.1
   fadeType: 0
-  timeDelay: 0.5
+  timeDelay: 0
   startColor: {r: 0.32941177, g: 0, b: 0, a: 0}
   endColor: {r: 0.32941177, g: 0, b: 0, a: 1}
 --- !u!114 &183734170
@@ -1018,11 +1018,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e422db6705deea49a3bb95ea8a45dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenFadeInterps: 0.3
+  timeBetweenFadeInterps: 0.1
   fadeType: 1
-  timeDelay: 4
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  timeDelay: 3
+  startColor: {r: 1, g: 1, b: 1, a: 1}
+  endColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!114 &496488820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1035,9 +1035,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e422db6705deea49a3bb95ea8a45dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenFadeInterps: 0.3
+  timeBetweenFadeInterps: 0.1
   fadeType: 0
-  timeDelay: 0.5
+  timeDelay: 0
   startColor: {r: 1, g: 1, b: 1, a: 0}
   endColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &558734285
@@ -1093,9 +1093,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetweenFadeInterps: 0.1
   fadeType: 1
-  timeDelay: 1.5
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  timeDelay: 3
+  startColor: {r: 1, g: 1, b: 1, a: 1}
+  endColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!114 &558734288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1110,7 +1110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetweenFadeInterps: 0.1
   fadeType: 0
-  timeDelay: 0.5
+  timeDelay: 0
   startColor: {r: 1, g: 1, b: 1, a: 0}
   endColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &558734289
@@ -1261,11 +1261,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e422db6705deea49a3bb95ea8a45dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenFadeInterps: 0.3
+  timeBetweenFadeInterps: 0.1
   fadeType: 1
-  timeDelay: 5
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  timeDelay: 3
+  startColor: {r: 1, g: 1, b: 1, a: 1}
+  endColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!114 &1194196729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1278,9 +1278,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e422db6705deea49a3bb95ea8a45dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenFadeInterps: 0.3
+  timeBetweenFadeInterps: 0.1
   fadeType: 0
-  timeDelay: 0.5
+  timeDelay: 0
   startColor: {r: 1, g: 1, b: 1, a: 0}
   endColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1194196730
@@ -1431,9 +1431,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e422db6705deea49a3bb95ea8a45dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenFadeInterps: 0.3
+  timeBetweenFadeInterps: 0.1
   fadeType: 1
-  timeDelay: 6
+  timeDelay: 3
   startColor: {r: 0.32941177, g: 0, b: 0, a: 1}
   endColor: {r: 0.32941177, g: 0, b: 0, a: 0}
 --- !u!114 &1289381464
@@ -1448,9 +1448,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e422db6705deea49a3bb95ea8a45dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenFadeInterps: 0.3
+  timeBetweenFadeInterps: 0.1
   fadeType: 0
-  timeDelay: 0.5
+  timeDelay: 0
   startColor: {r: 0.32941177, g: 0, b: 0, a: 0}
   endColor: {r: 0.32941177, g: 0, b: 0, a: 1}
 --- !u!114 &1289381465
@@ -1739,11 +1739,11 @@ MonoBehaviour:
   timeBetweenTexts:
   - 4
   - 4
-  - 5
-  - 6
-  - 6
-  - 6
-  - 1.5
+  - 4
+  - 4
+  - 4
+  - 4
+  - 4
   - 4
   - 0
 --- !u!4 &1336283787
@@ -1946,11 +1946,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e422db6705deea49a3bb95ea8a45dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenFadeInterps: 0.3
+  timeBetweenFadeInterps: 0.1
   fadeType: 1
-  timeDelay: 4
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  timeDelay: 3
+  startColor: {r: 1, g: 1, b: 1, a: 1}
+  endColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!114 &1490731147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1963,9 +1963,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e422db6705deea49a3bb95ea8a45dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenFadeInterps: 0.3
+  timeBetweenFadeInterps: 0.1
   fadeType: 0
-  timeDelay: 0.5
+  timeDelay: 0
   startColor: {r: 1, g: 1, b: 1, a: 0}
   endColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1490731148
@@ -2116,9 +2116,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e422db6705deea49a3bb95ea8a45dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenFadeInterps: 0.3
+  timeBetweenFadeInterps: 0.1
   fadeType: 1
-  timeDelay: 6
+  timeDelay: 3
   startColor: {r: 0.32941177, g: 0, b: 0, a: 1}
   endColor: {r: 0.32941177, g: 0, b: 0, a: 0}
 --- !u!114 &1721260609
@@ -2133,9 +2133,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e422db6705deea49a3bb95ea8a45dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenFadeInterps: 0.3
+  timeBetweenFadeInterps: 0.1
   fadeType: 0
-  timeDelay: 0.5
+  timeDelay: 0
   startColor: {r: 0.32941177, g: 0, b: 0, a: 0}
   endColor: {r: 0.32941177, g: 0, b: 0, a: 1}
 --- !u!114 &1721260610
@@ -2330,11 +2330,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e422db6705deea49a3bb95ea8a45dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenFadeInterps: 0.3
+  timeBetweenFadeInterps: 0.1
   fadeType: 1
-  timeDelay: 4
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  endColor: {r: 0, g: 0, b: 0, a: 0}
+  timeDelay: 3
+  startColor: {r: 1, g: 1, b: 1, a: 1}
+  endColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!114 &2134009528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2347,9 +2347,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e422db6705deea49a3bb95ea8a45dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenFadeInterps: 0.3
+  timeBetweenFadeInterps: 0.1
   fadeType: 0
-  timeDelay: 0.5
+  timeDelay: 0
   startColor: {r: 1, g: 1, b: 1, a: 0}
   endColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &2134009529

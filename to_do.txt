@@ -6,13 +6,11 @@ to-do list
 - figure out why it doesn't auto-full screen
 - bullets and lasers and such should be 0.5 opacity
 - remove healthbar for player since they're invincible
-- fix movement anims,,,, yikes
+- fix movement anims
 
 add
-- tutorial
---- time slow + ghost system
 - mobile support lol?
-- better gameplay trailer if we're making this official
+- updated gameplay in trailer
 - spruce up itch page
 
 AFTERWARDS
