@@ -15,6 +15,7 @@ public class PersistentData : MonoBehaviour
     public GameObject genericNumBanner;
     public GameObject noSavesYet;
     public string playerName;
+    public bool justBootedUp = true;
 
     // currSaveData and currLevelDatas are private vars accessible through getters
     static SaveData currSaveData;
@@ -41,6 +42,7 @@ public class PersistentData : MonoBehaviour
         // Load in level datas for easier reference, since level id != elem index.
         if(currSaveData != null)
         {
+            Debug.Log("loading in settings");
             // Initialize settings from settings in currSaveData
             settings.fullScreen = currSaveData.fullScreen;
             settings.loadScreen(settings.fullScreen);

@@ -15,7 +15,6 @@ public class DialogueController : MonoBehaviour
         }
         texts[0].SetActive(true);
         StartCoroutine(ActivateDialogue());
-        Debug.Log("test");
     }
 
     IEnumerator ActivateDialogue(){

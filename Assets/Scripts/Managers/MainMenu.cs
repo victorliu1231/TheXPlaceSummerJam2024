@@ -9,14 +9,21 @@ public class MainMenu : MonoBehaviour
     public Animator anim;
     public string cutscene = "Cutscene_VL";
     public string tutorialScene = "Tutorial_VL";
-    public PersistentData data;
     public TextMeshProUGUI usernameText;
 
     void Start()
     {
         anim.Play("Player_Run_Down_Loop");
         AudioManager.GetSoundtrack("BossTheme").Play();
-        data.LoadSave(0);
+        if (PersistentData.Instance.justBootedUp) {
+            Debug.Log("loading save");
+            PersistentData.Instance.LoadSave(0);
+            Invoke("TurnBootedUpBoolFalse", 0.01f);
+        }
+    }
+
+    void TurnBootedUpBoolFalse(){
+        PersistentData.Instance.justBootedUp = false;
     }
 
     public void PlayGame(){
@@ -34,11 +41,11 @@ public class MainMenu : MonoBehaviour
     }
 
     public void GrabFromInputField(string input){
-        data.playerName = input;
+        PersistentData.Instance.playerName = input;
         DisplayReactionToInput();
     }
 
     public void DisplayReactionToInput(){
-        usernameText.text = data.playerName;
+        usernameText.text = PersistentData.Instance.playerName;
     }
 }

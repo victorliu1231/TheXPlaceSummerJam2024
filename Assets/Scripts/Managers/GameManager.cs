@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
         bossGUI.SetActive(false);
         player = GameObject.FindGameObjectWithTag("Player");
         GameObject data = GameObject.FindGameObjectWithTag("Data");
-        if (data != null) playerName = data.GetComponent<PersistentData>().playerName;
+        if (data != null) playerName = PersistentData.Instance.playerName;
 
         if (!isDebugging){
             if (!inTutorial){

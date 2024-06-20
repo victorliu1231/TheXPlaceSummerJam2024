@@ -19,7 +19,6 @@ public class Settings : MonoBehaviour
     public GameObject musicIconOff;
     
     void Awake(){
-        DontDestroyOnLoad(gameObject);
         Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
         fullScreen = false;
     }

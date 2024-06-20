@@ -1082,6 +1082,9 @@ MonoBehaviour:
   - 10
   - 30
   - 60
+  stageLayer:
+    serializedVersion: 2
+    m_Bits: 0
   secondHand: {fileID: 2078398827}
   minuteHand: {fileID: 1049488799}
   hourHand: {fileID: 290784589}
@@ -1093,7 +1096,7 @@ MonoBehaviour:
   youDiedText: {fileID: 535122578}
   youRanOutOfTimeText: {fileID: 1219098468}
   isGameOver: 0
-  currentTimescale: 1
+  blackScreen: {fileID: 0}
   weaponSpawnPositionOne: {x: 1.04, y: 0.055, z: 0}
   weaponSpawnPositionTwo: {x: -1.482, y: 0.055, z: 0}
   weaponCollectibles:
@@ -3883,18 +3886,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1237578095}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 1094413048}
         m_TargetAssemblyTypeName: SuperJankLinking, Assembly-CSharp
         m_MethodName: PlaySFX
@@ -3905,6 +3896,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: ButtonClick
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1094413048}
+        m_TargetAssemblyTypeName: SuperJankLinking, Assembly-CSharp
+        m_MethodName: SetSettingsActive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &452413823
@@ -7564,6 +7567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7124dc83353bb4b9d517bff06770fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings: {fileID: 0}
 --- !u!4 &1094413049
 Transform:
   m_ObjectHideFlags: 0
@@ -8355,7 +8359,7 @@ GameObject:
   - component: {fileID: 1237578096}
   - component: {fileID: 1237578097}
   m_Layer: 5
-  m_Name: Settings
+  m_Name: Settings (only for debugging)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10528,18 +10532,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1094413048}
-        m_TargetAssemblyTypeName: SuperJankLinking, Assembly-CSharp
-        m_MethodName: PlaySFX
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: ButtonClick
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 218690238}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: ResumeGame
@@ -10550,6 +10542,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1094413048}
+        m_TargetAssemblyTypeName: SuperJankLinking, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ButtonClick
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1491045805

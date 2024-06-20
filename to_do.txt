@@ -4,7 +4,9 @@ to-do list
 - figure out why it doesn't auto-full screen
 - weird bug where player ghost turns blue if hit by enemy (will re-arise if player is no longer invincible)
 - make webgl build and share to Jacob
-- settings gui doesn't persist between main menu and game, causing a crash when player replays game multiple times
+- settings gui doesn't persist between game going back to main menu or tutorial going back to main menu, causing a crash when player replays game multiple times
+- settings in tutorial does not currently overlap tutorial instructions
+- in the future, find a better way to persist settings between scenes (look it up) - probably just repopulate based on stored data tbh
 
 add
 - mobile support lol?
