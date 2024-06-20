@@ -110,10 +110,13 @@ public class PlayerGhost : Entity
     }
 
     void DropWeapon(){
-        Transform bindingParent = weaponInHand.transform.parent;
-        GameObject droppedWeaponCollectible = Instantiate(weaponInHand.weaponCollectible, transform.position, Quaternion.identity, GameManager.Instance.collectiblesParent);
-        foreach (Transform child in bindingParent){
-            Destroy(child.gameObject);
+        if (weaponInHand != null) {
+            Transform bindingParent = weaponInHand.transform.parent;
+            GameObject droppedWeaponCollectible = Instantiate(weaponInHand.weaponCollectible, transform.position, Quaternion.identity, GameManager.Instance.collectiblesParent);
+            droppedWeaponCollectible.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
+            foreach (Transform child in bindingParent){
+                Destroy(child.gameObject);
+            }
         }
     }
 
@@ -131,6 +134,7 @@ public class PlayerGhost : Entity
             if (weaponCollectible != null && weaponInHand == null){
                 GameObject newWeapon = Instantiate(weaponCollectible.weaponPrefab, transform.position, Quaternion.identity, rightWeaponBinding);
                 newWeapon.GetComponent<TimeSlowdown>().ChangeStage(GetComponent<TimeSlowdown>().stage);
+                newWeapon.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
                 weaponInHand = newWeapon.GetComponent<Weapon>();
                 weaponInHand.isInputControlled = false;
                 weaponInHand.isGhost = true;

@@ -306,6 +306,7 @@ GameObject:
   - component: {fileID: 2566065253554801814}
   - component: {fileID: 3796109858770210453}
   - component: {fileID: 8556668986207010447}
+  - component: {fileID: 1499102536020353433}
   m_Layer: 0
   m_Name: MeleeWeapon
   m_TagString: Untagged
@@ -343,6 +344,9 @@ MonoBehaviour:
   weaponType: 0
   faceDirection: 0
   isInputControlled: 0
+  isGhost: 0
+  ghostMousePos: {x: 0, y: 0}
+  target: {fileID: 0}
   cooldownDuration: 1
   weaponCollectible: {fileID: 0}
   timeDelayBetweenPlayerPosStorageAndAttack: 0
@@ -397,6 +401,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &1499102536020353433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6380309758576063218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710f9ae966d23354b847e3ca41014108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StageIndicator: {fileID: 0}
+  stage: 1
 --- !u!1 &8210773243307538579
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,12 +581,10 @@ MonoBehaviour:
   movementAnimName: 
   attackAnimName: 
   isSpriteFlippable: 0
+  spriteDirection: 0
   isAttackCooldownReduced: 0
   attackCooldownSprite: {fileID: 1335989503714710974}
   isGhost: 0
-  ghostLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!50 &8093481991878515236
 Rigidbody2D:
   serializedVersion: 4

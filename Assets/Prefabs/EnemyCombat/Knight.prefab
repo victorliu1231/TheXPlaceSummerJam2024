@@ -539,6 +539,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8090562946144272540}
   - component: {fileID: 7254130898719337351}
+  - component: {fileID: 6450153314007221651}
   m_Layer: 0
   m_Name: MeleeWeapon
   m_TagString: SwingableMeleeObject
@@ -588,6 +589,20 @@ MonoBehaviour:
   canCauseKnockback: 1
   knockbackForce: 1
   targetTag: Player
+--- !u!114 &6450153314007221651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4758335671836444018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710f9ae966d23354b847e3ca41014108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StageIndicator: {fileID: 0}
+  stage: 1
 --- !u!1001 &904589258146404084
 PrefabInstance:
   m_ObjectHideFlags: 0

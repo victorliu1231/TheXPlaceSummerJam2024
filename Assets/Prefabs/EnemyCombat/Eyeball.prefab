@@ -221,6 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3915357572804412860}
   - component: {fileID: 5200135988956051301}
+  - component: {fileID: 3666948671706689098}
   m_Layer: 0
   m_Name: RangedWeapon
   m_TagString: Laser
@@ -266,6 +267,21 @@ MonoBehaviour:
   timeDelayBetweenPlayerPosStorageAndAttack: 0.5
   prefab: {fileID: 519883922421658185, guid: 0d5a7ab3dc4c23b47beb6d0ce792a549, type: 3}
   fireParticles: {fileID: 0}
+  spawnOffset: 1
+--- !u!114 &3666948671706689098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3667810143705520643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710f9ae966d23354b847e3ca41014108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StageIndicator: {fileID: 0}
+  stage: 1
 --- !u!1 &3997309441016426892
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +449,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 1710704848, guid: b2533c97b9319234d9f377862f868efc, type: 3}
+  m_Sprite: {fileID: -749086485, guid: 2422a791149ede84dabe72ba7f0e3800, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -528,7 +544,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.937515, y: 0.851}
+    oldSize: {x: 0.9399645, y: 0.852}
     newSize: {x: 0.58, y: 0.71}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

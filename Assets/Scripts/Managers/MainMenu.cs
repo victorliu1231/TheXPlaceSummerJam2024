@@ -20,10 +20,12 @@ public class MainMenu : MonoBehaviour
     }
 
     public void PlayGame(){
+        AudioManager.GetSoundtrack("BossTheme").Stop();
         SceneManager.LoadScene(cutscene);
     }
 
     public void PlayTutorial(){
+        AudioManager.GetSoundtrack("BossTheme").Stop();
         SceneManager.LoadScene(tutorialScene);
     }
 

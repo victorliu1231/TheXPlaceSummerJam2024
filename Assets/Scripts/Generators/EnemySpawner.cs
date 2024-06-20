@@ -21,6 +21,7 @@ public class EnemySpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(spawnTime * GameManager.Instance.stage);
         GameObject enemy = Instantiate(go, transform.position, Quaternion.identity);
+        enemy.layer = LayerMask.NameToLayer("Stage1");
         
         if (GameManager.Instance.stage > 1)
         {

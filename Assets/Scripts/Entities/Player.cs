@@ -33,26 +33,35 @@ public class Player : Entity
         if (!GameManager.Instance.inTransition && !GameManager.Instance.isGameOver){
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
+            // If there is a weapon in hand, then the player will move in the direction the weapon is facing
             if (weaponInHand?.faceDirection == Weapon.FaceDirection.Right){
-                if (horizontal > 0){
-                    anim.Play("Player_Run_Right");
-                } else {
-                    anim.Play("Player_Idle_Right");
-                }
+                if (horizontal > 0) anim.Play("Player_Run_Right");
             } else if (weaponInHand?.faceDirection == Weapon.FaceDirection.Left){
-                if (horizontal < 0){
-                    anim.Play("Player_Run_Left");
-                } else {
-                    anim.Play("Player_Idle_Left");
-                }
+                if (horizontal < 0) anim.Play("Player_Run_Left");
             }
             else if (weaponInHand?.faceDirection == Weapon.FaceDirection.Up){
                 if (vertical > 0) anim.Play("Player_Run_Up");
-                else anim.Play("Player_Up_Idle");
             }
             else if (weaponInHand?.faceDirection == Weapon.FaceDirection.Down){
                 if (vertical < 0) anim.Play("Player_Run_Down");
-                else anim.Play("Player_Down_Idle");
+            } else { 
+                // This runs if there is no weapon in hand
+                if (horizontal > 0) {
+                    anim.Play("Player_Run_Right");
+                    stageIndicator.SetParent(stageIndicatorRightBinding, false);
+                }
+                else if (horizontal < 0) {
+                    anim.Play("Player_Run_Left");
+                    stageIndicator.SetParent(stageIndicatorLeftBinding, false);
+                }
+                else if (vertical > 0) {
+                    anim.Play("Player_Run_Up");
+                    stageIndicator.SetParent(stageIndicatorUpBinding, false);
+                }
+                else if (vertical < 0) {
+                    anim.Play("Player_Run_Down");
+                    stageIndicator.SetParent(stageIndicatorDownBinding, false);
+                }
             }
             Vector3 targetPos = new Vector3(transform.position.x + horizontal, transform.position.y + vertical, transform.position.z);
             Vector3 pos = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
@@ -91,6 +100,7 @@ public class Player : Entity
             if (weaponCollectible != null && weaponInHand == null){
                 GameObject newWeapon = Instantiate(weaponCollectible.weaponPrefab, transform.position, Quaternion.identity, rightWeaponBinding);
                 weaponInHand = newWeapon.GetComponent<Weapon>();
+                weaponInHand.GetComponent<TimeSlowdown>()?.ChangeStage(GameManager.Instance.stage);
                 Destroy(collider.gameObject);
             }
         }

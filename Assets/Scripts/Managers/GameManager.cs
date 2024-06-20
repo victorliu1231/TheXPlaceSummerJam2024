@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public float[] timeSlowdowns = new float[3]{1f, 2f, 3f};
     [Tooltip("The time in seconds that each stage ends at.")]
     public float[] stageEndTimes = new float[3]{20f, 40f, 60f};
+    public LayerMask stageLayer;
     [Header("Time")]
     public Transform secondHand;
     public Transform minuteHand;
@@ -53,7 +54,7 @@ public class GameManager : MonoBehaviour
     public GameObject youDiedText;
     public GameObject youRanOutOfTimeText;
     public bool isGameOver = false;
-    public float currentTimescale = 1f;
+    public GameObject blackScreen;
     [Header("Collectibles")]
     public Vector3 weaponSpawnPositionOne;
     public Vector3 weaponSpawnPositionTwo;
@@ -99,8 +100,7 @@ public class GameManager : MonoBehaviour
     [ContextMenu("Play Game")]
     public void PlayGame(){
         ResetLevel();
-        currentTimescale = 1f;
-        Time.timeScale = currentTimescale;
+        Time.timeScale = 1f;
         playerStrengthMultiplier = 1f;
         enemyStrengthMultiplier = 1f;
         minuteHand.localRotation = Quaternion.Euler(0, 0, 0);
@@ -155,6 +155,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetLevel(){
         stage = 1;
+        stageLayer = LayerMask.NameToLayer("Stage1");
         currentTime = 0f;
         if (!inTutorial){
             stageText.text = "Stage 1";
@@ -190,22 +191,18 @@ public class GameManager : MonoBehaviour
             if (currentTime >= 60f){
                 // see if all children are inactive or destroyed
                 bool allInactive = true;
-                Debug.Log(enemiesParent.childCount);
                 foreach (Transform child in enemiesParent){
                     if (child.gameObject.activeSelf){
                         allInactive = false;
                     }
                 }
                 if (enemiesParent.childCount == 0 || allInactive){
-                    Debug.Log("dead");
                     ResetLevel();
-                    StartCoroutine(NextLevel());
                 } else {
                     if (!isDebugging) {
                         StopAllCoroutines();
                         StartCoroutine(GameOver(true));
                     } else {
-                        Debug.Log("move on");
                         ResetLevel();
                         StartCoroutine(NextLevel());
                     }
@@ -215,7 +212,8 @@ public class GameManager : MonoBehaviour
                 hourHand.localRotation = Quaternion.Euler(0, 0, -GetHour()*hoursToDegrees);
                 minuteHand.localRotation = Quaternion.Euler(0, 0, -GetMinute()*minutesToDegrees);
                 //secondHand.localRotation = Quaternion.Euler(0, 0, -GetSecond()*secondsToDegrees);
-                if (currentTime >= stageEndTimes[stage-1]){
+                if (currentTime >= stageEndTimes[stage-1] && stage != 3){
+                    Debug.Log("moving onto next stage");
                     StartCoroutine(NextStage());
                 }
                 currentTime += Time.deltaTime * (1 + 0.1f * level);
@@ -265,6 +263,7 @@ public class GameManager : MonoBehaviour
         if (stage >= 2)
         {
             GameObject ghost = Instantiate(playerGhost, new Vector2(0, 0), Quaternion.identity, ghostsParent);
+            ghost.layer = LayerMask.NameToLayer("Stage1");
             Queue<Snapshot> g1 = new Queue<Snapshot>();
             foreach (Snapshot snap in ghost1)
             {
@@ -275,6 +274,7 @@ public class GameManager : MonoBehaviour
         if (stage >= 3)
         {
             GameObject ghost = Instantiate(playerGhost, new Vector2(0, 0), Quaternion.identity, ghostsParent);
+            ghost.layer = LayerMask.NameToLayer("Stage2");
             Queue<Snapshot> g2 = new Queue<Snapshot>();
             foreach (Snapshot snap in ghost2)
             {
@@ -308,6 +308,7 @@ public class GameManager : MonoBehaviour
 
         inTransition = true;
         stage++;
+        stageLayer = LayerMask.NameToLayer("Stage" + stage);
         player.GetComponent<TimeSlowdown>().ChangeStage(stage);
         if (!inTutorial) stageText.text = "Stage " + (stage);
         glitch.horizontalShake = 0.1f;
@@ -388,6 +389,7 @@ public class GameManager : MonoBehaviour
         } else {
             AudioManager.GetSoundtrack("MainTheme").Stop();
             AudioManager.GetSoundtrack("MainTheme").Play();
+            Debug.Log("next level is called");
         }
         inTransition = false;
         if (level % everyXLevelsPlayerGetsStronger == 0){
@@ -407,22 +409,41 @@ public class GameManager : MonoBehaviour
         AudioManager.StopAllSoundtracks();
         AudioManager.StopAllSFXs();
         AudioManager.GetSFX("GameOver").Play();
-        //player.GetComponent<Player>().anim.Play("Player_Death");
-        player.SetActive(false);
-        isGameOver = true;
+        foreach (Transform child in enemiesParent){
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in ghostsParent){
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in spawnedWallsParent){
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in collectiblesParent){
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in projectilesParent){
+            Destroy(child.gameObject);
+        }
         deathScreen.SetActive(true);
+        blackScreen.SetActive(true);
         if (ranOutOfTime){
             youRanOutOfTimeText.SetActive(true);
         } else {
             youDiedText.SetActive(true);
         }
+        player.GetComponent<Player>().anim.Play("Player_Death");
+        isGameOver = true;
+        PersistentData.Instance.CreateNewSave(0);
+        yield return new WaitForSeconds(nextLevelTransitionDuration);
+        blackScreen.SetActive(false);
+        player.SetActive(false);
+        AudioManager.GetSoundtrack("BossTheme").Play();
         yield return new WaitForSeconds(1f);
         playAgainButton.SetActive(true);
         for (int i = 0; i < 10; i++){
             playAgainButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.1f*i);
             yield return new WaitForSeconds(0.1f);
         }
-        AudioManager.GetSoundtrack("BossTheme").Play();
     }
 
     public void PlayAgain(){
@@ -430,6 +451,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void ReturnToMenu(){
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Main_Menu_VL");
     }
 
@@ -437,7 +459,6 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(true);
         AudioManager.PauseAllSoundtracks();
         AudioManager.PauseAllSFXs();
-        currentTimescale = Time.timeScale;
         Time.timeScale = 0f;
         inTransition = true;
     }
@@ -446,7 +467,7 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(false);
         AudioManager.UnpauseAllSoundtracks();
         AudioManager.UnpauseAllSFXs();
-        Time.timeScale = currentTimescale;
+        Time.timeScale = 1f;
         inTransition = false;
     }
 }

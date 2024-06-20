@@ -305,6 +305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7642328552635066627}
   - component: {fileID: 4751411028908051602}
+  - component: {fileID: 3839451841327688510}
   m_Layer: 0
   m_Name: RangedWeapon
   m_TagString: Bow
@@ -350,6 +351,21 @@ MonoBehaviour:
   timeDelayBetweenPlayerPosStorageAndAttack: 0.25
   prefab: {fileID: 6617575497658658542, guid: 4039e4e5251500b468fdbd23f80becc9, type: 3}
   fireParticles: {fileID: 0}
+  spawnOffset: 0
+--- !u!114 &3839451841327688510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3067230426267903273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710f9ae966d23354b847e3ca41014108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StageIndicator: {fileID: 0}
+  stage: 1
 --- !u!1 &6198902659785389750
 GameObject:
   m_ObjectHideFlags: 0

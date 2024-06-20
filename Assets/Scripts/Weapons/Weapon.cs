@@ -26,7 +26,6 @@ public class Weapon : MonoBehaviour
     public void Start(){
         anim = GetComponent<Animator>();
         player = GameManager.Instance.player.transform;
-        if (!isGhost) GetComponent<TimeSlowdown>()?.ChangeStage(GameManager.Instance.stage);
     }
 
     public void BindTarget(Transform target){
@@ -36,7 +35,7 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        if (transform.parent != null && transform.parent.parent != null && transform.parent.parent.gameObject.layer == LayerMask.NameToLayer("Ghost"))
+        if (transform.parent != null && transform.parent.parent != null && transform.parent.parent.gameObject.layer < GameManager.Instance.stageLayer)
         {
             isGhost = true;
         }
@@ -45,7 +44,7 @@ public class Weapon : MonoBehaviour
             isGhost = false;
         }
         if (!GameManager.Instance.inTransition && !GameManager.Instance.isGameOver){
-            if (isInputControlled || isGhost){
+            if ((isInputControlled || isGhost) && transform.parent.parent.tag == "Player"){
                 Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 PlayerGhost playerGhost = transform.parent.parent.GetComponent<PlayerGhost>();
                 Player playerScript = player.GetComponent<Player>();

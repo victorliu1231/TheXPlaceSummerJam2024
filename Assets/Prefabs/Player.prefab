@@ -297,7 +297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2315765175756839325}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: StageIndicatorLeftTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6514053950975923569}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: StageIndicatorDownTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -390,7 +390,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 254231955932762134}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: StageIndicatorUpTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -421,7 +421,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8226431370445017762}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: StageIndicatorRightTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -827,6 +827,10 @@ PrefabInstance:
     - target: {fileID: 5802529655828777141, guid: 531630cda5e9a9b4198875e5c60bcf2c, type: 3}
       propertyPath: m_Name
       value: StageIndicatorSmall
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802529655828777141, guid: 531630cda5e9a9b4198875e5c60bcf2c, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6066923768220641696, guid: 531630cda5e9a9b4198875e5c60bcf2c, type: 3}
       propertyPath: m_LocalPosition.x

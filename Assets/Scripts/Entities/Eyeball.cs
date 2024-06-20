@@ -17,6 +17,11 @@ public class Eyeball : Enemy
         seed = (int)transform.position.x + (int)transform.position.y;
     }
 
+    void Start(){
+        base.Start();
+        teleportCooldownTimer = teleportCooldownDuration; // speeds up first attack
+    }
+
     public override void Update(){
         if (!GameManager.Instance.isGameOver){
             if (target != null && !GameManager.Instance.inTransition){
@@ -44,8 +49,10 @@ public class Eyeball : Enemy
         if (anim != null) anim.Play(movementAnimName);
         yield return new WaitForSeconds(1.5f * Util.GetRecriprocalStage(GetComponent<TimeSlowdown>()));
         if (anim != null) anim.Play(attackAnimName);
-        yield return new WaitForSeconds(1.5f * Util.GetRecriprocalStage(GetComponent<TimeSlowdown>()));
+        yield return new WaitForSeconds(0.75f * Util.GetRecriprocalStage(GetComponent<TimeSlowdown>()));
         weaponInHand.Attack();
+        yield return new WaitForSeconds(1f * Util.GetRecriprocalStage(GetComponent<TimeSlowdown>()));
+        if (anim != null) anim.Play(movementAnimName);
     }
 
     void TeleportAwayFromPlayer(bool newSeed = true)

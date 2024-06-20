@@ -17,7 +17,7 @@ public class Bullet : Projectile
     void Start(){
         Destroy(gameObject, lifetime * Util.GetStage(GetComponent<TimeSlowdown>()));
         spriteRenderer = GetComponent<SpriteRenderer>();
-        if (!isGhost) GetComponent<TimeSlowdown>()?.ChangeStage(GameManager.Instance.stage);
+        if (!isGhost) GetComponent<TimeSlowdown>()?.ChangeStage(GameManager.Instance.stage, false);
     }
 
     void Update(){

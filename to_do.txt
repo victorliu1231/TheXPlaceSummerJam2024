@@ -1,21 +1,17 @@
 to-do list
 - what if we kill all enemies early? time should speed up
-- turn off rb collisions between current stage and ghosts, BUT not for bullets or weapons
 - are bullets and weapons 0.5x speed?
-- weird thing with NextLevel() still being ghost called somewhere in GameManager script when dying, causing double music to play
 - figure out why it doesn't auto-full screen
-- bullets and lasers and such should be 0.5 opacity
-- remove healthbar for player since they're invincible
-- fix movement anims
+- weird bug where player ghost turns blue if hit by enemy (will re-arise if player is no longer invincible)
+- make webgl build and share to Jacob
+- settings gui doesn't persist between main menu and game, causing a crash when player replays game multiple times
 
 add
 - mobile support lol?
 - updated gameplay in trailer
-- spruce up itch page
 
 AFTERWARDS
 - add more content
 - bosses? more pseudorandom levels?
 - better balancing
-- publishing online on itch.io
 - TheXPlace game profile

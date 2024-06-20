@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7346388320081523359}
   - component: {fileID: 1782846779414519349}
+  - component: {fileID: 8317780522380086344}
   m_Layer: 0
   m_Name: RangedWeapon
   m_TagString: FireballWeapon
@@ -55,6 +56,21 @@ MonoBehaviour:
   timeDelayBetweenPlayerPosStorageAndAttack: 0.25
   prefab: {fileID: 206115812581200755, guid: dce8c82cac8cb664e91e074cff888bbb, type: 3}
   fireParticles: {fileID: 0}
+  spawnOffset: 0
+--- !u!114 &8317780522380086344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536497995415102740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710f9ae966d23354b847e3ca41014108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StageIndicator: {fileID: 0}
+  stage: 1
 --- !u!1 &1668178637209323703
 GameObject:
   m_ObjectHideFlags: 0

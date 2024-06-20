@@ -5,33 +5,32 @@ using UnityEngine;
 public class TimeSlowdown : MonoBehaviour
 {
     public SpriteRenderer StageIndicator;
-
     public int stage = 1;
 
     void Start()
     {
-        ChangeStage(stage);
+        ChangeStage(stage, false);
     }
 
-    public void ChangeStage(int newStage)
+    public void ChangeStage(int newStage, bool changeLayer = true)
     {
         stage = newStage;
-        if (StageIndicator)
+        switch (stage)
         {
-            switch (stage)
-            {
-                case 1:
-                    StageIndicator.color = Color.red;
-                    break;
-                case 2:
-                    StageIndicator.color = Color.blue;
-                    break;
-                case 3:
-                    StageIndicator.color = Color.green;
-                    break;
-                default:
-                    break;
-            }
+            case 1:
+                if (StageIndicator) StageIndicator.color = Color.red;
+                if (changeLayer) gameObject.layer = LayerMask.NameToLayer("Stage1");
+                break;
+            case 2:
+                if (StageIndicator) StageIndicator.color = Color.blue;
+                if (changeLayer) gameObject.layer = LayerMask.NameToLayer("Stage2");
+                break;
+            case 3:
+                if (StageIndicator) StageIndicator.color = Color.green;
+                if (changeLayer) gameObject.layer = LayerMask.NameToLayer("Stage3");
+                break;
+            default:
+                break;
         }
     }
 }

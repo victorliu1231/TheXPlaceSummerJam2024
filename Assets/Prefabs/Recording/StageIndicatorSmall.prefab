@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6066923768220641696}
   - component: {fileID: 1226764391044479107}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: StageIndicatorSmall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

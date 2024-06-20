@@ -9,6 +9,8 @@ public class RangedWeapon : Weapon
     public GameObject prefab;
     [Tooltip("Fire particles that will be played when attacking")]
     public ParticleSystem fireParticles;
+    [Tooltip("The offset from the ranged weapon that projectiles will spawn at, multiplied by the projectile's scale.")]
+    public float spawnOffset;
 
     void Start(){
         base.Start();
@@ -30,11 +32,16 @@ public class RangedWeapon : Weapon
         if (!isInputControlled) yield return new WaitForSeconds(timeDelayBetweenPlayerPosStorageAndAttack);
         if (fireParticles != null) fireParticles.Play();
         if (gameObject.tag == "FireballWeapon") AudioManager.GetSFX("Fireball")?.Play();
-        GameObject projectile = Instantiate(prefab, transform.position, freezeWeaponRot, GameManager.Instance.projectilesParent);
+        //Vector3 rotatedOffset = transform.localEulerAngles * spawnOffset;
+        //Vector3 scaledOffset = rotatedOffset * prefab.transform.localScale.x;
+        Vector3 spawnPosition = transform.position;// + scaledOffset;
+
+        GameObject projectile = Instantiate(prefab, spawnPosition, freezeWeaponRot, GameManager.Instance.projectilesParent);
         if (GetComponent<TimeSlowdown>() != null) {
+            if (GetComponent<TimeSlowdown>().stage < GameManager.Instance.stage) projectile.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
             projectile.GetComponent<Projectile>().isGhost = base.isGhost;
-            projectile.GetComponent<TimeSlowdown>().ChangeStage(GetComponent<TimeSlowdown>().stage);
+            projectile.GetComponent<TimeSlowdown>().ChangeStage(GetComponent<TimeSlowdown>().stage, transform.parent.tag == "Enemy");
         }
-        projectile.GetComponent<SpriteRenderer>().flipX = transform.localEulerAngles.z < -90 || transform.localEulerAngles.z > 90;
+        if (projectile.GetComponent<Bullet>() != null) projectile.GetComponent<SpriteRenderer>().flipX = transform.localEulerAngles.z < -90 || transform.localEulerAngles.z > 90;
     }
 }

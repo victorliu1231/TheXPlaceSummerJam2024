@@ -77,6 +77,7 @@ public class Enemy : Entity
                     GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
                     target = GameManager.Instance.player.transform;
                     weaponInHand.BindTarget(target);
+                    weaponInHand.gameObject.GetComponent<TimeSlowdown>().ChangeStage(dealer.GetComponent<TimeSlowdown>().stage, true);
                 }
             }
         }

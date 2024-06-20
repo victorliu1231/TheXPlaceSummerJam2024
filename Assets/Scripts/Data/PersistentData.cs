@@ -43,7 +43,7 @@ public class PersistentData : MonoBehaviour
         {
             // Initialize settings from settings in currSaveData
             settings.fullScreen = currSaveData.fullScreen;
-            settings.loadScreen(false);
+            settings.loadScreen(settings.fullScreen);
             AudioManager.Instance.volumeBGM = currSaveData.volumeBGM;
             AudioManager.Instance.OnMusicVolumeChanged(AudioManager.Instance.volumeBGM);
             AudioManager.Instance.volumeSFX = currSaveData.volumeSFX;

@@ -18,12 +18,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ghost
+  - 
   - Water
   - UI
-  - Player
-  - 
-  - 
+  - Stage1
+  - Stage2
+  - Stage3
   - 
   - 
   - 

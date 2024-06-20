@@ -15,6 +15,7 @@ public class DialogueController : MonoBehaviour
         }
         texts[0].SetActive(true);
         StartCoroutine(ActivateDialogue());
+        Debug.Log("test");
     }
 
     IEnumerator ActivateDialogue(){
@@ -32,6 +33,7 @@ public class DialogueController : MonoBehaviour
     }
 
     public void LoadGame(){
+        AudioManager.GetSoundtrack("BossTheme").Stop();
         SceneManager.LoadScene("Game_VL");
     }
 }

@@ -12,4 +12,12 @@ public class SuperJankLinking : MonoBehaviour
     public void PlaySFX(string name){
         AudioManager.GetSFX(name)?.Play();
     }
+
+    public void StopSoundtrack(string name){
+        AudioManager.GetSoundtrack(name)?.Stop();
+    }
+
+    public void StopSFX(string name){
+        AudioManager.GetSFX(name)?.Stop();
+    }
 }
