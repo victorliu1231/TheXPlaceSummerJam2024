@@ -174,7 +174,7 @@ MonoBehaviour:
   isGhost: 0
   ghostMousePos: {x: 0, y: 0}
   target: {fileID: 0}
-  cooldownDuration: 1
+  cooldownDuration: 0.5
   weaponCollectible: {fileID: 3895740193949117924, guid: 3e4437b9a137b6f4b9d3771d28708ae0, type: 3}
   timeDelayBetweenPlayerPosStorageAndAttack: 0
   meleeDamage: 4

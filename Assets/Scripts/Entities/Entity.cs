@@ -12,7 +12,7 @@ public class Entity : MonoBehaviour
     public ParticleSystem damagedParticles;
     public float immunityTime = 0.4f;
     public MMHealthBar healthbar;
-    [HideInInspector]public bool canReceiveDamage = true;
+    public bool canReceiveDamage = true;
 
     public void Start(){
         currentHealth = maxHealth;

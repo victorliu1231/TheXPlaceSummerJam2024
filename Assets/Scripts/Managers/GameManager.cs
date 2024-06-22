@@ -350,8 +350,6 @@ public class GameManager : MonoBehaviour
         foreach (Transform child in ghostsParent){
             Destroy(child.gameObject);
         }
-        playerRecorder.FlushRecordings();
-        if (player.GetComponent<Player>().weaponInHand != null) Destroy(player.GetComponent<Player>().weaponInHand.gameObject);
         yield return new WaitForSeconds(nextStageTransitionDuration);
         glitch.horizontalShake = 0f;
         glitch.colorDrift = 0f;
@@ -373,6 +371,8 @@ public class GameManager : MonoBehaviour
                     ghost2.Enqueue(snap.CopySelf());
                 }
             }
+            playerRecorder.FlushRecordings();
+            if (player.GetComponent<Player>().weaponInHand != null) Destroy(player.GetComponent<Player>().weaponInHand.gameObject);
             InstantiateGhosts();
             Destroy(currentLevelInstance);
             currentLevelInstance = Instantiate(currentLevelTemplate, Vector2.zero, Quaternion.identity);

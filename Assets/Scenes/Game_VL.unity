@@ -13191,9 +13191,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7820149371872340854, guid: 04f5ff957dedd924cb824e76b41d0f99, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8864386700688688459, guid: 04f5ff957dedd924cb824e76b41d0f99, type: 3}
       propertyPath: invincible
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8864386700688688459, guid: 04f5ff957dedd924cb824e76b41d0f99, type: 3}
       propertyPath: canTakeKnockback

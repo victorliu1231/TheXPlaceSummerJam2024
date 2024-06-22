@@ -6,7 +6,8 @@ to-do list
 - upload screenshots of gameplay to itch.io
 - weird bugs with ghost1 being ghost1 from level 1 - should be fixed tho
 - error sfx is too quiet by default and plays too late
-- major bug uh oh with ghosts not spawning
+- when you kill the enemies in one stage, should they respawn again? idk. could poll this
+- laser beam glitchy bc its chunky for whatever reason idk why
 
 add
 - mobile support lol?
