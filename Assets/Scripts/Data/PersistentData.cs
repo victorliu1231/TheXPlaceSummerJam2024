@@ -43,13 +43,13 @@ public class PersistentData : MonoBehaviour
         if(currSaveData != null)
         {
             // Initialize settings from settings in currSaveData
-            settings.fullScreen = currSaveData.fullScreen;
-            settings.loadScreen(settings.fullScreen);
+            if (settings != null) settings.fullScreen = currSaveData.fullScreen;
+            if (settings != null) settings.loadScreen(settings.fullScreen);
             AudioManager.Instance.volumeBGM = currSaveData.volumeBGM;
             AudioManager.Instance.OnMusicVolumeChanged(AudioManager.Instance.volumeBGM);
             AudioManager.Instance.volumeSFX = currSaveData.volumeSFX;
             AudioManager.Instance.OnSFXVolumeChanged(AudioManager.Instance.volumeSFX);
-            settings.loadVolumeSliders(AudioManager.Instance.volumeBGM, AudioManager.Instance.volumeSFX);
+            if (settings != null) settings.loadVolumeSliders(AudioManager.Instance.volumeBGM, AudioManager.Instance.volumeSFX);
 
             // Clear out previous high scores
             foreach (Transform child in contentPanel)
@@ -90,7 +90,7 @@ public class PersistentData : MonoBehaviour
                 Destroy(child.gameObject);
             }
             noSavesYet.SetActive(true);
-            settings.loadScreen(true);
+            if (settings != null) settings.loadScreen(true);
         }
     }
 

@@ -40,6 +40,14 @@ public class SuperJankLinking : MonoBehaviour
         AudioManager.GetSFX(name)?.Play();
     }
 
+    public void PlayButton(){
+        if (PersistentData.Instance.playerName != ""){
+            AudioManager.GetSFX("ButtonClick").Play();
+        } else {
+            AudioManager.GetSFX("Error").Play();
+        }
+    }
+
     public void StopSoundtrack(string name){
         AudioManager.GetSoundtrack(name)?.Stop();
     }

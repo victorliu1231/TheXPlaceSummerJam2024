@@ -124,7 +124,7 @@ MonoBehaviour:
   speed: 2.5
   currentHealth: 0
   maxHealth: 150
-  invincible: 0
+  invincible: 1
   canTakeKnockback: 0
   damagedParticles: {fileID: 2130153873001132457}
   immunityTime: 0.4

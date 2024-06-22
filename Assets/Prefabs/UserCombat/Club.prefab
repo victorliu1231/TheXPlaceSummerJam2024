@@ -181,7 +181,7 @@ MonoBehaviour:
   secAbleToHit: 0.5
   hitParticles: {fileID: 3588011392971140670}
   canCauseKnockback: 1
-  knockbackForce: 0.4
+  knockbackForce: 0.8
   targetTag: Enemy
 --- !u!50 &-294155176800212944
 Rigidbody2D:
