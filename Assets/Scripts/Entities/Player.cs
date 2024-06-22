@@ -35,15 +35,19 @@ public class Player : Entity
             float vertical = Input.GetAxis("Vertical");
             // If there is a weapon in hand, then the player will move in the direction the weapon is facing
             if (weaponInHand?.faceDirection == Weapon.FaceDirection.Right){
-                if (horizontal > 0) anim.Play("Player_Run_Right");
+                if (horizontal != 0) anim.Play("Player_Run_Right");
+                else anim.Play("Player_Idle_Right");
             } else if (weaponInHand?.faceDirection == Weapon.FaceDirection.Left){
-                if (horizontal < 0) anim.Play("Player_Run_Left");
+                if (horizontal != 0) anim.Play("Player_Run_Left");
+                else anim.Play("Player_Idle_Left");
             }
             else if (weaponInHand?.faceDirection == Weapon.FaceDirection.Up){
-                if (vertical > 0) anim.Play("Player_Run_Up");
+                if (vertical != 0) anim.Play("Player_Run_Up");
+                else anim.Play("Player_Idle_Up");
             }
             else if (weaponInHand?.faceDirection == Weapon.FaceDirection.Down){
-                if (vertical < 0) anim.Play("Player_Run_Down");
+                if (vertical != 0) anim.Play("Player_Run_Down");
+                else anim.Play("Player_Idle_Down");
             } else { 
                 // This runs if there is no weapon in hand
                 if (horizontal > 0) {

@@ -42,7 +42,6 @@ public class PersistentData : MonoBehaviour
         // Load in level datas for easier reference, since level id != elem index.
         if(currSaveData != null)
         {
-            Debug.Log("loading in settings");
             // Initialize settings from settings in currSaveData
             settings.fullScreen = currSaveData.fullScreen;
             settings.loadScreen(settings.fullScreen);
@@ -91,6 +90,7 @@ public class PersistentData : MonoBehaviour
                 Destroy(child.gameObject);
             }
             noSavesYet.SetActive(true);
+            settings.loadScreen(true);
         }
     }
 
@@ -117,7 +117,7 @@ public class PersistentData : MonoBehaviour
         }
         newSave.playerDatas = newSave.playerDatas.OrderBy(playerData => playerData.playerTotalTime).ToList();
 
-        if (!GameManager.Instance.isDebugging) newSave.fullScreen = settings.fullScreen;
+        if (!GameManager.Instance.isDebugging && settings != null) newSave.fullScreen = settings.fullScreen;
         else newSave.fullScreen = false;
         newSave.volumeBGM = AudioManager.Instance.volumeBGM;
         newSave.volumeSFX = AudioManager.Instance.volumeSFX;

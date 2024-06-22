@@ -29,7 +29,7 @@ public class MeleeWeapon : Weapon
 
     IEnumerator MeleeAttack(){
         if (collider != null) collider.enabled = true;
-        yield return new WaitForSeconds(secAbleToHit * Util.GetStage(GetComponent<TimeSlowdown>()));
+        yield return new WaitForSeconds(secAbleToHit);
         if (collider != null) collider.enabled = false;
     }
 
@@ -37,6 +37,7 @@ public class MeleeWeapon : Weapon
         if (other.gameObject.tag == targetTag || other.gameObject.tag == "Wall"){
             if (other.gameObject.tag == targetTag) other.gameObject.GetComponent<Entity>().TakeDamage(meleeDamage, transform.position, canCauseKnockback, knockbackForce, gameObject);
             Invoke("PlayParticles", secAbleToHit * Util.GetStage(GetComponent<TimeSlowdown>()));
+            if (transform.parent.parent.tag == "Player") Debug.Log("Hit " + other.gameObject.name + " with " + meleeDamage + " damage!");
         }
     }
 

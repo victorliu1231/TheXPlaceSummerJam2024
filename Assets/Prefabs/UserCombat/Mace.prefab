@@ -178,9 +178,9 @@ MonoBehaviour:
   weaponCollectible: {fileID: 2141717048667143818, guid: db7c1d678d6744c4e93d9c1fc36cd615, type: 3}
   timeDelayBetweenPlayerPosStorageAndAttack: 0
   meleeDamage: 15
-  secAbleToHit: 0.5
+  secAbleToHit: 0.1
   hitParticles: {fileID: 7846972839225162595}
-  canCauseKnockback: 1
+  canCauseKnockback: 0
   knockbackForce: 0.2
   targetTag: Enemy
 --- !u!50 &612915539531590453

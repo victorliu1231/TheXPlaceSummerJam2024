@@ -155,13 +155,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4cd189512cd98e498318ac15145b119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 0.5
   currentHealth: 0
   maxHealth: 75
   invincible: 0
   canTakeKnockback: 1
   damagedParticles: {fileID: 579603187098490698}
+  immunityTime: 0.4
   healthbar: {fileID: 0}
+  canReceiveDamage: 1
   attackCooldownDuration: 4
   target: {fileID: 0}
   canCauseKnockback: 1
@@ -207,7 +209,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.06501498, y: -0.23654214}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -218,7 +220,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7694227, y: 0.952}
+  m_Size: {x: 0.50936264, y: 0.47891575}
   m_EdgeRadius: 0
 --- !u!114 &6853442235414659038
 MonoBehaviour:
@@ -540,6 +542,7 @@ GameObject:
   - component: {fileID: 8090562946144272540}
   - component: {fileID: 7254130898719337351}
   - component: {fileID: 6450153314007221651}
+  - component: {fileID: 2120759645457374081}
   m_Layer: 0
   m_Name: MeleeWeapon
   m_TagString: SwingableMeleeObject
@@ -587,7 +590,7 @@ MonoBehaviour:
   secAbleToHit: 0.5
   hitParticles: {fileID: 6908682965100514196}
   canCauseKnockback: 1
-  knockbackForce: 1
+  knockbackForce: 0.3
   targetTag: Player
 --- !u!114 &6450153314007221651
 MonoBehaviour:
@@ -603,6 +606,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StageIndicator: {fileID: 0}
   stage: 1
+--- !u!61 &2120759645457374081
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4758335671836444018}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0042400956, y: -0.22896592}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.087629, y: 0.6212169}
+  m_EdgeRadius: 0
 --- !u!1001 &904589258146404084
 PrefabInstance:
   m_ObjectHideFlags: 0

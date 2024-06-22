@@ -121,13 +121,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 325dce135d273e34a9eddcba9d46313f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 2.5
   currentHealth: 0
   maxHealth: 100
   invincible: 1
-  canTakeKnockback: 1
+  canTakeKnockback: 0
   damagedParticles: {fileID: 2130153873001132457}
-  healthbar: {fileID: 0}
+  immunityTime: 0.4
+  healthbar: {fileID: 4569073648686807921}
+  canReceiveDamage: 1
   anim: {fileID: 0}
   weaponInHand: {fileID: 0}
   leftWeaponBinding: {fileID: 2894077453167260345}
@@ -541,7 +543,7 @@ MonoBehaviour:
   InitialRotationAngles: {x: 0, y: 0, z: 0}
   ForegroundColor:
     serializedVersion: 2
-    key0: {r: 1, g: 0, b: 0, a: 1}
+    key0: {r: 1, g: 0.504717, b: 0.504717, a: 1}
     key1: {r: 1, g: 0, b: 0, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
@@ -571,7 +573,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   DelayedColor:
     serializedVersion: 2
-    key0: {r: 1, g: 0.639, b: 0, a: 1}
+    key0: {r: 1, g: 0.83152056, b: 0.5330188, a: 1}
     key1: {r: 1, g: 0.639, b: 0, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}

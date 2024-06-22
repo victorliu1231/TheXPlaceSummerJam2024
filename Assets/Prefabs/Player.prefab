@@ -189,13 +189,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0233452f7a40024418472f1ccc1cb6a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 2.5
   currentHealth: 0
   maxHealth: 100
   invincible: 1
-  canTakeKnockback: 1
+  canTakeKnockback: 0
   damagedParticles: {fileID: 1264693322304043607}
+  immunityTime: 0.4
   healthbar: {fileID: 8821703157587444264}
+  canReceiveDamage: 1
   anim: {fileID: 0}
   weaponInHand: {fileID: 0}
   rightWeaponBinding: {fileID: 40316890108669037}
@@ -261,7 +263,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.1083455}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -272,7 +274,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.58, y: 0.71}
+  m_Size: {x: 0.58, y: 0.4933089}
   m_EdgeRadius: 0
 --- !u!114 &7449746087245418754
 MonoBehaviour:
@@ -528,7 +530,7 @@ MonoBehaviour:
   InitialRotationAngles: {x: 0, y: 0, z: 0}
   ForegroundColor:
     serializedVersion: 2
-    key0: {r: 1, g: 0, b: 0, a: 1}
+    key0: {r: 1, g: 0.514151, b: 0.514151, a: 1}
     key1: {r: 1, g: 0, b: 0, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
@@ -558,7 +560,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   DelayedColor:
     serializedVersion: 2
-    key0: {r: 1, g: 0.639, b: 0, a: 1}
+    key0: {r: 1, g: 0.8213097, b: 0.504717, a: 1}
     key1: {r: 1, g: 0.639, b: 0, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}

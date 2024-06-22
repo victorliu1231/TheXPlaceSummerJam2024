@@ -56,11 +56,11 @@ public class PlayerGhost : Entity
             }
             else if (weaponInHand?.faceDirection == Weapon.FaceDirection.Up)
             {
-                anim.Play("Player_Up_Idle");
+                anim.Play("Player_Idle_Up");
             }
             else if (weaponInHand?.faceDirection == Weapon.FaceDirection.Down)
             {
-                anim.Play("Player_Down_Idle");
+                anim.Play("Player_Idle_Down");
             }
 
             if (snapshots.Count > 0)

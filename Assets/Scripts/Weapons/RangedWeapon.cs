@@ -42,6 +42,5 @@ public class RangedWeapon : Weapon
             projectile.GetComponent<Projectile>().isGhost = base.isGhost;
             projectile.GetComponent<TimeSlowdown>().ChangeStage(GetComponent<TimeSlowdown>().stage, transform.parent.tag == "Enemy");
         }
-        if (projectile.GetComponent<Bullet>() != null) projectile.GetComponent<SpriteRenderer>().flipX = transform.localEulerAngles.z < -90 || transform.localEulerAngles.z > 90;
     }
 }

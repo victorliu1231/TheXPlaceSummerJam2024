@@ -270,7 +270,7 @@ MonoBehaviour:
   secAbleToHit: 0.5
   hitParticles: {fileID: 0}
   canCauseKnockback: 1
-  knockbackForce: 0.5
+  knockbackForce: 0.1
   targetTag: Player
 --- !u!61 &6022762390791781579
 BoxCollider2D:
@@ -304,7 +304,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.020936847, y: -0.010468423}
+  m_Offset: {x: 0.027419448, y: -0.20072153}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -315,7 +315,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1457613, y: 1.3644315}
+  m_Size: {x: 1.2157729, y: 0.9839253}
   m_EdgeRadius: 0
 --- !u!114 &5974765090145440641
 MonoBehaviour:
@@ -517,7 +517,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5972387626328969242}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -568,7 +568,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.27987653}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -579,7 +579,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.95035076, y: 1.1760001}
+  m_Size: {x: 0.95035076, y: 0.61624706}
   m_EdgeRadius: 0
 --- !u!95 &905814659097721628
 Animator:
@@ -614,13 +614,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2aabcf2e4183c48b9bb2a767ac2911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
+  speed: 0.25
   currentHealth: 0
   maxHealth: 100
   invincible: 0
   canTakeKnockback: 1
   damagedParticles: {fileID: 6646369796595870480}
+  immunityTime: 0.4
   healthbar: {fileID: 0}
+  canReceiveDamage: 1
   attackCooldownDuration: 0.25
   target: {fileID: 0}
   canCauseKnockback: 1

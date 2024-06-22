@@ -1,11 +1,8 @@
 to-do list
-- why is level template the same eveyr level?
 - weird bug where player ghost turns blue if hit by enemy (will re-arise if player is no longer invincible)
 - make webgl build and share to Jacob
-- archer arrows firing in wrong direction
-- movement stage indicators acting up (not transforming properly)
-- so ghost collisions? or no collisions?
-- maybe no weapon kb
+- fullscreen on/off is accidentally reversed
+- turn on player hp again?
 
 add
 - mobile support lol?

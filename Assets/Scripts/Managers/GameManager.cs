@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public bool isTimeSpedUp = false;
     public GameObject timeSpeedUpText;
     public EnemySpawner[] enemySpawners;
+    private bool isTickSecondCoroutineOn = false;
     [Header("Level")]
     public int level = 0;
     public int levelsBetweenBosses = 5;
@@ -78,7 +79,6 @@ public class GameManager : MonoBehaviour
     public Vector3 spawnPosition;
     public float clockRadius = 12.5f;
     public GameObject pauseMenu;
-    private bool isGoingToNextLevel = false;
     [Header("Tutorial")]
     public bool inTutorial = false;
     public GameObject doneWithTutorialGameObject;
@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
         totalTime = 0f;
         isGameOver = false;
         inTransition = false;
-        StartCoroutine(TickSecondHand());
+        if (!isTickSecondCoroutineOn) StartCoroutine(TickSecondHand());
         deathScreen.SetActive(false);
         playAgainButton.SetActive(false);
         youDiedText.SetActive(false);
@@ -193,7 +193,9 @@ public class GameManager : MonoBehaviour
         }
         totalTime += Time.deltaTime;
         if (!inTutorial){
-            if (currentTime >= 60f){
+            if (currentTime >= stageEndTimes[2] && !inTransition){
+                Debug.Log("past stage 3 endtime");
+                inTransition = true;
                 // see if all children are inactive or destroyed
                 bool allInactive = true;
                 foreach (Transform child in enemiesParent){
@@ -219,26 +221,30 @@ public class GameManager : MonoBehaviour
                 minuteHand.localRotation = Quaternion.Euler(0, 0, -GetMinute()*minutesToDegrees);
                 //secondHand.localRotation = Quaternion.Euler(0, 0, -GetSecond()*secondsToDegrees);
 
-                // Checks if all enemies have spawned from enemy spawner
-                bool haveAllEnemiesSpawned = true;
-                foreach (EnemySpawner enemySpawner in enemySpawners){
-                    haveAllEnemiesSpawned = haveAllEnemiesSpawned && enemySpawner.hasSpawnedEnemy;
-                }
-                // If all enemies have spawned AND they are all killed, then speed up time.
-
-                if (currentTime >= stageEndTimes[stage-1] && stage != 3 && !isTimeSpedUp){
+                if (currentTime >= stageEndTimes[stage-1] && !isTimeSpedUp){
                     Debug.Log("moving onto next stage");
                     StartCoroutine(NextStage());
                 }
-                if (haveAllEnemiesSpawned && enemiesParent.childCount == 0 && !isGameOver){
+                bool haveAllEnemiesSpawned = false;
+                if (!isDebugging){
+                    // Checks if all enemies have spawned from enemy spawner
+                    haveAllEnemiesSpawned = true;
+                    foreach (EnemySpawner enemySpawner in enemySpawners){
+                        haveAllEnemiesSpawned = haveAllEnemiesSpawned && enemySpawner.hasSpawnedEnemy;
+                    }
+                    // If all enemies have spawned AND they are all killed, then speed up time.
+                }
+                if (haveAllEnemiesSpawned && enemiesParent.childCount == 0 && !isGameOver && currentTime < 55f){
+                    isTimeSpedUp = true;
                     currentTime += Time.deltaTime * 4;
                     secondHand.localRotation = Quaternion.Euler(0, 0, -GetSecond()*secondsToDegrees);
-                    isTimeSpedUp = true;
                     stage = 3;
                     timeSpeedUpText.SetActive(true);
+                    isTickSecondCoroutineOn = false;
                 } else {
-                    currentTime += Time.deltaTime * (1 + 0.1f * level);
                     isTimeSpedUp = false;
+                    if (!isTickSecondCoroutineOn) StartCoroutine(TickSecondHand());
+                    currentTime += Time.deltaTime * (1 + 0.1f * level);
                     timeSpeedUpText.SetActive(false);
                 }
             }
@@ -260,8 +266,8 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator TickSecondHand(){
-        while (!isTimeSpedUp && !isGoingToNextLevel){
-            Debug.Log("tick");
+        isTickSecondCoroutineOn = true;
+        while (!isTimeSpedUp){
             float originalSecond = GetSecond();
             for (int i = 0; i < 4; i++){
                 secondHand.localRotation = Quaternion.Euler(0, 0, -(originalSecond-0.05f)*secondsToDegrees);
@@ -311,26 +317,6 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator NextStage(){
-        foreach (Transform child in enemiesParent){
-            Destroy(child.gameObject);
-        }
-        foreach (Transform child in ghostsParent){
-            Destroy(child.gameObject);
-        }
-        foreach (Transform child in spawnedWallsParent){
-            Destroy(child.gameObject);
-        }
-        foreach (Transform child in projectilesParent){
-            Destroy(child.gameObject);
-        }
-        foreach (Transform child in enemiesParent)
-        {
-            Destroy(child.gameObject);
-        }
-        foreach (Transform child in collectiblesParent){
-            Destroy(child.gameObject);
-        }
-
         inTransition = true;
         stage++;
         stageLayer = LayerMask.NameToLayer("Stage" + stage);
@@ -341,6 +327,27 @@ public class GameManager : MonoBehaviour
         glitch.colorDrift = 1f;
         glitch.verticalJump = 0.4f;
         AudioManager.GetSFX("TimeWarp")?.Play();
+        if (!isDebugging){
+            foreach (Transform child in enemiesParent){
+                Destroy(child.gameObject);
+            }
+            foreach (Transform child in spawnedWallsParent){
+                Destroy(child.gameObject);
+            }
+            foreach (Transform child in projectilesParent){
+                Destroy(child.gameObject);
+            }
+            foreach (Transform child in enemiesParent)
+            {
+                Destroy(child.gameObject);
+            }
+            foreach (Transform child in collectiblesParent){
+                Destroy(child.gameObject);
+            }
+        }
+        foreach (Transform child in ghostsParent){
+            Destroy(child.gameObject);
+        }
         yield return new WaitForSeconds(nextStageTransitionDuration);
         glitch.horizontalShake = 0f;
         glitch.colorDrift = 0f;
@@ -377,6 +384,13 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator NextLevel(){
+        inTransition = true;
+        level++;
+        levelText.text = "Level " + (level + 1);
+        glitch.scanLineJitter = 1f;
+        glitch.verticalJump = 0.4f;
+        PersistentData.Instance.CreateNewSave(0);
+        AudioManager.GetSFX("TimeWarp")?.Play();
         foreach (Transform child in enemiesParent){
             Destroy(child.gameObject);
         }
@@ -392,19 +406,11 @@ public class GameManager : MonoBehaviour
         foreach (Transform child in projectilesParent){
             Destroy(child.gameObject);
         }
-        inTransition = true;
-        isGoingToNextLevel = true;
-        level++;
-        levelText.text = "Level " + (level + 1);
-        glitch.scanLineJitter = 1f;
-        glitch.verticalJump = 0.4f;
-        PersistentData.Instance.CreateNewSave(0);
-        AudioManager.GetSFX("TimeWarp")?.Play();
+        if (player.GetComponent<Player>().weaponInHand != null) Destroy(player.GetComponent<Player>().weaponInHand.gameObject);
         yield return new WaitForSeconds(nextLevelTransitionDuration);
         ResetLevel();
-        isGoingToNextLevel = false;
         isTimeSpedUp = false;
-        StartCoroutine(TickSecondHand());
+        if (!isTickSecondCoroutineOn) StartCoroutine(TickSecondHand());
         player.GetComponent<TimeSlowdown>().ChangeStage(1);
         player.transform.position = spawnPosition;
         AudioManager.GetSoundtrack("MainTheme").Stop();
@@ -412,6 +418,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("next level is called");
         inTransition = false;
         Destroy(currentLevelInstance);
+        currentLevelTemplate = allLevels[Random.Range(0, allLevels.Count - 1)];
         currentLevelInstance = Instantiate(currentLevelTemplate, Vector2.zero, Quaternion.identity);
         enemySpawners = currentLevelInstance.GetComponentsInChildren<EnemySpawner>();
         /* if (level % everyXLevelsPlayerGetsStronger == 0){
@@ -428,6 +435,7 @@ public class GameManager : MonoBehaviour
     }
 
     public IEnumerator GameOver(bool ranOutOfTime){
+        glitch.scanLineJitter = 0f;
         AudioManager.StopAllSoundtracks();
         AudioManager.StopAllSFXs();
         AudioManager.GetSFX("GameOver").Play();

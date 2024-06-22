@@ -205,13 +205,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe3f6785b9b9ef249a5d8663b31238e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 0.5
   currentHealth: 0
   maxHealth: 50
   invincible: 0
   canTakeKnockback: 1
   damagedParticles: {fileID: 1898117889781853980}
+  immunityTime: 0.4
   healthbar: {fileID: 0}
+  canReceiveDamage: 1
   attackCooldownDuration: 5
   target: {fileID: 0}
   canCauseKnockback: 1
@@ -284,7 +286,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.10667628}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -295,7 +297,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.422, y: 0.842}
+  m_Size: {x: 0.422, y: 0.62864745}
   m_EdgeRadius: 0
 --- !u!114 &8630249459818601939
 MonoBehaviour:
