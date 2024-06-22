@@ -191,61 +191,63 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape)){
             PauseGame();
         }
-        totalTime += Time.deltaTime;
         if (!inTutorial){
-            if (currentTime >= stageEndTimes[2] && !inTransition){
-                Debug.Log("past stage 3 endtime");
-                inTransition = true;
-                // see if all children are inactive or destroyed
-                bool allInactive = true;
-                foreach (Transform child in enemiesParent){
-                    if (child.gameObject.activeSelf){
-                        allInactive = false;
+            if (!isGameOver){
+                totalTime += Time.deltaTime;
+                if (currentTime >= stageEndTimes[2] && !inTransition){
+                    Debug.Log("past stage 3 endtime");
+                    inTransition = true;
+                    // see if all children are inactive or destroyed
+                    bool allInactive = true;
+                    foreach (Transform child in enemiesParent){
+                        if (child.gameObject.activeSelf){
+                            allInactive = false;
+                        }
                     }
-                }
-                if (enemiesParent.childCount == 0 || allInactive){
-                    ResetLevel();
-                    StartCoroutine(NextLevel());
-                } else {
-                    if (!isDebugging) {
-                        StopAllCoroutines();
-                        StartCoroutine(GameOver(true));
-                    } else {
+                    if (enemiesParent.childCount == 0 || allInactive){
                         ResetLevel();
                         StartCoroutine(NextLevel());
+                    } else {
+                        if (!isDebugging) {
+                            StopAllCoroutines();
+                            StartCoroutine(GameOver(true));
+                        } else {
+                            ResetLevel();
+                            StartCoroutine(NextLevel());
+                        }
                     }
                 }
-            }
-            else if (!inTransition){
-                hourHand.localRotation = Quaternion.Euler(0, 0, -GetHour()*hoursToDegrees);
-                minuteHand.localRotation = Quaternion.Euler(0, 0, -GetMinute()*minutesToDegrees);
-                //secondHand.localRotation = Quaternion.Euler(0, 0, -GetSecond()*secondsToDegrees);
+                else if (!inTransition){
+                    hourHand.localRotation = Quaternion.Euler(0, 0, -GetHour()*hoursToDegrees);
+                    minuteHand.localRotation = Quaternion.Euler(0, 0, -GetMinute()*minutesToDegrees);
+                    //secondHand.localRotation = Quaternion.Euler(0, 0, -GetSecond()*secondsToDegrees);
 
-                if (currentTime >= stageEndTimes[stage-1] && !isTimeSpedUp){
-                    Debug.Log("moving onto next stage");
-                    StartCoroutine(NextStage());
-                }
-                bool haveAllEnemiesSpawned = false;
-                if (!isDebugging){
-                    // Checks if all enemies have spawned from enemy spawner
-                    haveAllEnemiesSpawned = true;
-                    foreach (EnemySpawner enemySpawner in enemySpawners){
-                        haveAllEnemiesSpawned = haveAllEnemiesSpawned && enemySpawner.hasSpawnedEnemy;
+                    if (currentTime >= stageEndTimes[stage-1] && !isTimeSpedUp){
+                        Debug.Log("moving onto next stage");
+                        StartCoroutine(NextStage());
                     }
-                    // If all enemies have spawned AND they are all killed, then speed up time.
-                }
-                if (haveAllEnemiesSpawned && enemiesParent.childCount == 0 && !isGameOver && currentTime < 55f){
-                    isTimeSpedUp = true;
-                    currentTime += Time.deltaTime * 4;
-                    secondHand.localRotation = Quaternion.Euler(0, 0, -GetSecond()*secondsToDegrees);
-                    stage = 3;
-                    timeSpeedUpText.SetActive(true);
-                    isTickSecondCoroutineOn = false;
-                } else {
-                    isTimeSpedUp = false;
-                    if (!isTickSecondCoroutineOn) StartCoroutine(TickSecondHand());
-                    currentTime += Time.deltaTime * (1 + 0.1f * level);
-                    timeSpeedUpText.SetActive(false);
+                    bool haveAllEnemiesSpawned = false;
+                    if (!isDebugging){
+                        // Checks if all enemies have spawned from enemy spawner
+                        haveAllEnemiesSpawned = true;
+                        foreach (EnemySpawner enemySpawner in enemySpawners){
+                            haveAllEnemiesSpawned = haveAllEnemiesSpawned && enemySpawner.hasSpawnedEnemy;
+                        }
+                        // If all enemies have spawned AND they are all killed, then speed up time.
+                    }
+                    if (haveAllEnemiesSpawned && enemiesParent.childCount == 0 && currentTime < 55f){
+                        isTimeSpedUp = true;
+                        currentTime += Time.deltaTime * 4;
+                        secondHand.localRotation = Quaternion.Euler(0, 0, -GetSecond()*secondsToDegrees);
+                        stage = 3;
+                        timeSpeedUpText.SetActive(true);
+                        isTickSecondCoroutineOn = false;
+                    } else {
+                        isTimeSpedUp = false;
+                        if (!isTickSecondCoroutineOn) StartCoroutine(TickSecondHand());
+                        currentTime += Time.deltaTime * (1 + 0.1f * level);
+                        timeSpeedUpText.SetActive(false);
+                    }
                 }
             }
         } else {

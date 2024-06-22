@@ -191,8 +191,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2.5
   currentHealth: 0
-  maxHealth: 100
-  invincible: 1
+  maxHealth: 150
+  invincible: 0
   canTakeKnockback: 0
   damagedParticles: {fileID: 1264693322304043607}
   immunityTime: 0.4
@@ -493,7 +493,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6500887453534250413
 Transform:
   m_ObjectHideFlags: 0

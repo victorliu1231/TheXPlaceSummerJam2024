@@ -3,6 +3,8 @@ to-do list
 - make webgl build and share to Jacob
 - fullscreen on/off is accidentally reversed
 - turn on player hp again?
+- show score upon death screen and if they reached a new high score
+- add in resolution dropdown to screen if not too difficult
 
 add
 - mobile support lol?
