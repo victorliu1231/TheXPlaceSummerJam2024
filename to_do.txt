@@ -1,16 +1,16 @@
 to-do list
-- what if we kill all enemies early? time should speed up
-- are bullets and weapons 0.5x speed?
-- figure out why it doesn't auto-full screen
+- why is level template the same eveyr level?
 - weird bug where player ghost turns blue if hit by enemy (will re-arise if player is no longer invincible)
 - make webgl build and share to Jacob
-- settings gui doesn't persist between game going back to main menu or tutorial going back to main menu, causing a crash when player replays game multiple times
-- settings in tutorial does not currently overlap tutorial instructions
-- in the future, find a better way to persist settings between scenes (look it up) - probably just repopulate based on stored data tbh
+- archer arrows firing in wrong direction
+- movement stage indicators acting up (not transforming properly)
+- so ghost collisions? or no collisions?
+- maybe no weapon kb
 
 add
 - mobile support lol?
 - updated gameplay in trailer
+- story mode
 
 AFTERWARDS
 - add more content

@@ -133,7 +133,7 @@ public class PlayerGhost : Entity
             WeaponCollectible weaponCollectible = collider.gameObject.GetComponent<WeaponCollectible>();
             if (weaponCollectible != null && weaponInHand == null){
                 GameObject newWeapon = Instantiate(weaponCollectible.weaponPrefab, transform.position, Quaternion.identity, rightWeaponBinding);
-                newWeapon.GetComponent<TimeSlowdown>().ChangeStage(GetComponent<TimeSlowdown>().stage);
+                newWeapon.GetComponent<TimeSlowdown>().ChangeStage(GetComponent<TimeSlowdown>().stage, false);
                 newWeapon.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
                 weaponInHand = newWeapon.GetComponent<Weapon>();
                 weaponInHand.isInputControlled = false;

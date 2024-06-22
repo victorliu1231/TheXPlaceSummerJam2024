@@ -43,8 +43,10 @@ public class Entity : MonoBehaviour
             // take knockback based on position of attacker and knockback force and modify transform.position
             if (canTakeKnockback && canCauseKnockback){
                 Vector2 knockbackDirection = (new Vector2(transform.position.x, transform.position.y) - attackerPosition).normalized;
-                // modify position of entity instead of using rigidbody dynamics
-                transform.position = new Vector3(transform.position.x + knockbackDirection.x * knockbackForce, transform.position.y + knockbackDirection.y * knockbackForce, transform.position.z);
+                // modify position using rigidbody dynamics
+                if (GetComponent<Rigidbody2D>() is not null){
+                    GetComponent<Rigidbody2D>().AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+                }
             }
         }
     }

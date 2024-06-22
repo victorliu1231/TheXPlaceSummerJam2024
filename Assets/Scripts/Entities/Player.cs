@@ -100,7 +100,7 @@ public class Player : Entity
             if (weaponCollectible != null && weaponInHand == null){
                 GameObject newWeapon = Instantiate(weaponCollectible.weaponPrefab, transform.position, Quaternion.identity, rightWeaponBinding);
                 weaponInHand = newWeapon.GetComponent<Weapon>();
-                weaponInHand.GetComponent<TimeSlowdown>()?.ChangeStage(GameManager.Instance.stage);
+                weaponInHand.GetComponent<TimeSlowdown>()?.ChangeStage(GameManager.Instance.stage, false);
                 Destroy(collider.gameObject);
             }
         }

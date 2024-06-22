@@ -12,7 +12,10 @@ public class GameManager : MonoBehaviour
 	public static GameManager Instance { get { return _instance; } }
 
     public List<GameObject> allLevels = new List<GameObject>();
-
+    [Header("Time Speed Up")]
+    public bool isTimeSpedUp = false;
+    public GameObject timeSpeedUpText;
+    public EnemySpawner[] enemySpawners;
     [Header("Level")]
     public int level = 0;
     public int levelsBetweenBosses = 5;
@@ -75,6 +78,7 @@ public class GameManager : MonoBehaviour
     public Vector3 spawnPosition;
     public float clockRadius = 12.5f;
     public GameObject pauseMenu;
+    private bool isGoingToNextLevel = false;
     [Header("Tutorial")]
     public bool inTutorial = false;
     public GameObject doneWithTutorialGameObject;
@@ -122,6 +126,7 @@ public class GameManager : MonoBehaviour
             if (!inTutorial){
                 currentLevelTemplate = allLevels[Random.Range(0, allLevels.Count - 1)];
                 currentLevelInstance = Instantiate(currentLevelTemplate, Vector2.zero, Quaternion.identity);
+                enemySpawners = currentLevelInstance.GetComponentsInChildren<EnemySpawner>();
             }
             AudioManager.GetSoundtrack("MainTheme").Play();
             player.transform.position = spawnPosition;
@@ -198,6 +203,7 @@ public class GameManager : MonoBehaviour
                 }
                 if (enemiesParent.childCount == 0 || allInactive){
                     ResetLevel();
+                    StartCoroutine(NextLevel());
                 } else {
                     if (!isDebugging) {
                         StopAllCoroutines();
@@ -212,11 +218,29 @@ public class GameManager : MonoBehaviour
                 hourHand.localRotation = Quaternion.Euler(0, 0, -GetHour()*hoursToDegrees);
                 minuteHand.localRotation = Quaternion.Euler(0, 0, -GetMinute()*minutesToDegrees);
                 //secondHand.localRotation = Quaternion.Euler(0, 0, -GetSecond()*secondsToDegrees);
-                if (currentTime >= stageEndTimes[stage-1] && stage != 3){
+
+                // Checks if all enemies have spawned from enemy spawner
+                bool haveAllEnemiesSpawned = true;
+                foreach (EnemySpawner enemySpawner in enemySpawners){
+                    haveAllEnemiesSpawned = haveAllEnemiesSpawned && enemySpawner.hasSpawnedEnemy;
+                }
+                // If all enemies have spawned AND they are all killed, then speed up time.
+
+                if (currentTime >= stageEndTimes[stage-1] && stage != 3 && !isTimeSpedUp){
                     Debug.Log("moving onto next stage");
                     StartCoroutine(NextStage());
                 }
-                currentTime += Time.deltaTime * (1 + 0.1f * level);
+                if (haveAllEnemiesSpawned && enemiesParent.childCount == 0 && !isGameOver){
+                    currentTime += Time.deltaTime * 4;
+                    secondHand.localRotation = Quaternion.Euler(0, 0, -GetSecond()*secondsToDegrees);
+                    isTimeSpedUp = true;
+                    stage = 3;
+                    timeSpeedUpText.SetActive(true);
+                } else {
+                    currentTime += Time.deltaTime * (1 + 0.1f * level);
+                    isTimeSpedUp = false;
+                    timeSpeedUpText.SetActive(false);
+                }
             }
         } else {
             // if in tutorial
@@ -236,7 +260,8 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator TickSecondHand(){
-        while (true){
+        while (!isTimeSpedUp && !isGoingToNextLevel){
+            Debug.Log("tick");
             float originalSecond = GetSecond();
             for (int i = 0; i < 4; i++){
                 secondHand.localRotation = Quaternion.Euler(0, 0, -(originalSecond-0.05f)*secondsToDegrees);
@@ -342,6 +367,7 @@ public class GameManager : MonoBehaviour
             InstantiateGhosts();
             Destroy(currentLevelInstance);
             currentLevelInstance = Instantiate(currentLevelTemplate, Vector2.zero, Quaternion.identity);
+            enemySpawners = currentLevelInstance.GetComponentsInChildren<EnemySpawner>();
         }
     }
 
@@ -367,6 +393,7 @@ public class GameManager : MonoBehaviour
             Destroy(child.gameObject);
         }
         inTransition = true;
+        isGoingToNextLevel = true;
         level++;
         levelText.text = "Level " + (level + 1);
         glitch.scanLineJitter = 1f;
@@ -375,29 +402,24 @@ public class GameManager : MonoBehaviour
         AudioManager.GetSFX("TimeWarp")?.Play();
         yield return new WaitForSeconds(nextLevelTransitionDuration);
         ResetLevel();
+        isGoingToNextLevel = false;
+        isTimeSpedUp = false;
+        StartCoroutine(TickSecondHand());
         player.GetComponent<TimeSlowdown>().ChangeStage(1);
         player.transform.position = spawnPosition;
-        if ((level + 1) % levelsBetweenBosses == 0){
-            bossGUI.SetActive(true);
-            AudioManager.GetSoundtrack("BossTheme").Play();
-            yield return new WaitForSeconds(1.5f);
-            bossGUI.SetActive(false);
-            float angle = Random.Range(0f, 360f);
-            float x = transform.position.x + clockRadius * Mathf.Cos(angle * Mathf.Deg2Rad);
-            float y = transform.position.y + clockRadius * Mathf.Sin(angle * Mathf.Deg2Rad);
-            Instantiate(bosses[(level+1)/levelsBetweenBosses], new Vector2(x,y), Quaternion.identity, enemiesParent);
-        } else {
-            AudioManager.GetSoundtrack("MainTheme").Stop();
-            AudioManager.GetSoundtrack("MainTheme").Play();
-            Debug.Log("next level is called");
-        }
+        AudioManager.GetSoundtrack("MainTheme").Stop();
+        AudioManager.GetSoundtrack("MainTheme").Play();
+        Debug.Log("next level is called");
         inTransition = false;
-        if (level % everyXLevelsPlayerGetsStronger == 0){
+        Destroy(currentLevelInstance);
+        currentLevelInstance = Instantiate(currentLevelTemplate, Vector2.zero, Quaternion.identity);
+        enemySpawners = currentLevelInstance.GetComponentsInChildren<EnemySpawner>();
+        /* if (level % everyXLevelsPlayerGetsStronger == 0){
             playerStrengthMultiplier += playerStrengthBoostMultiplier;
         }
         if (level % everyXLevelsEnemyGetsStronger == 0){
             enemyStrengthMultiplier += enemyStrengthBoostMultiplier;
-        }
+        } */
     }
 
     [ContextMenu("Test Next Level")]
