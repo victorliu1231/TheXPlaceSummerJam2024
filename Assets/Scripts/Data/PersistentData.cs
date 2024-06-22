@@ -77,7 +77,7 @@ public class PersistentData : MonoBehaviour
                     HighScoreBanner highScoreBanner = newPlayerData.GetComponent<HighScoreBanner>();
                     highScoreBanner.playerNameText.text = currSaveData.playerDatas[i].playerName;
                     highScoreBanner.playerLevelText.text = $"Level {currSaveData.playerDatas[i].playerLevel}";
-                    highScoreBanner.playerTotalTimeText.text = $"{(int)currSaveData.playerDatas[i].playerTotalTime % 3600}H {(int)currSaveData.playerDatas[i].playerTotalTime / 60}M {(int)currSaveData.playerDatas[i].playerTotalTime % 60}S";
+                    highScoreBanner.playerTotalTimeText.text = $"{(int)(currSaveData.playerDatas[i].playerTotalTime / 3600)}H {(int)(currSaveData.playerDatas[i].playerTotalTime / 60)}M {(int)(currSaveData.playerDatas[i].playerTotalTime % 60)}S";
                     if (i > 2){
                         highScoreBanner.playerRankText.text = (i + 1).ToString();
                     }
