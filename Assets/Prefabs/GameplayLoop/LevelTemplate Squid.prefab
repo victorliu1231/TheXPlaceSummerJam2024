@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnTime: 0
-  spawnObject: {fileID: 2141717048667143818, guid: db7c1d678d6744c4e93d9c1fc36cd615, type: 3}
+  spawnObject: {fileID: 3895740193949117924, guid: 3e4437b9a137b6f4b9d3771d28708ae0, type: 3}
 --- !u!4 &7005731158866220237 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8919401010202609032, guid: b9adc9a8dd97fb440aa2e8548026fd2d, type: 3}

@@ -17,6 +17,7 @@ public class Entity : MonoBehaviour
     public void Start(){
         currentHealth = maxHealth;
         if (healthbar == null) healthbar = GetComponentInChildren<MMHealthBar>();
+        if (invincible) healthbar.gameObject.SetActive(false);
     }
 
     public virtual void TakeDamage(float damage, Vector2 attackerPosition, bool canCauseKnockback, float knockbackForce, GameObject dealer = null){

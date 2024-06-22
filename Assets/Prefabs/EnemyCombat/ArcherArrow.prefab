@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGhost: 0
-  damage: 10
+  damage: 20
   speed: 5
   lifetime: 10
   hitParticles: {fileID: 0}

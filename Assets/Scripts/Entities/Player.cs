@@ -84,6 +84,11 @@ public class Player : Entity
         }
     }
 
+    public void ResetHealth(){
+        currentHealth = maxHealth;
+        healthbar.UpdateBar(currentHealth, 0, maxHealth, true);
+    }
+
     void DropWeapon(){
         Transform bindingParent = weaponInHand.transform.parent;
         GameObject droppedWeaponCollectible = Instantiate(weaponInHand.weaponCollectible, transform.position, Quaternion.identity, GameManager.Instance.collectiblesParent);

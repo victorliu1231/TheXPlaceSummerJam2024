@@ -214,11 +214,11 @@ MonoBehaviour:
   immunityTime: 0.4
   healthbar: {fileID: 0}
   canReceiveDamage: 1
-  attackCooldownDuration: 5
+  attackCooldownDuration: 2.5
   target: {fileID: 0}
   canCauseKnockback: 1
   weaponInHand: {fileID: 1782846779414519349}
-  distanceStartAttacking: 3
+  distanceStartAttacking: 6
   anim: {fileID: 0}
   movementAnimName: Wizard_Movement
   attackAnimName: Wizard_Attack
@@ -227,7 +227,7 @@ MonoBehaviour:
   isAttackCooldownReduced: 0
   attackCooldownSprite: {fileID: 6655074706812150591}
   isGhost: 0
-  supportCooldownDuration: 5
+  supportCooldownDuration: 2.5
   speedUpAlliesMultiplier: 0.66
   durationAlliesSpedUp: 10
   radiusToSupport: 2

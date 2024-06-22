@@ -266,7 +266,7 @@ MonoBehaviour:
   cooldownDuration: 0
   weaponCollectible: {fileID: 0}
   timeDelayBetweenPlayerPosStorageAndAttack: 0
-  meleeDamage: 5
+  meleeDamage: 10
   secAbleToHit: 0.5
   hitParticles: {fileID: 0}
   canCauseKnockback: 1

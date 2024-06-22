@@ -574,11 +574,11 @@ MonoBehaviour:
   immunityTime: 0.4
   healthbar: {fileID: 0}
   canReceiveDamage: 1
-  attackCooldownDuration: 4
+  attackCooldownDuration: 2.5
   target: {fileID: 0}
   canCauseKnockback: 1
   weaponInHand: {fileID: 4751411028908051602}
-  distanceStartAttacking: 3
+  distanceStartAttacking: 6
   anim: {fileID: 0}
   movementAnimName: Archer_Movement
   attackAnimName: Archer_Attack

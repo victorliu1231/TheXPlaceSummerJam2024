@@ -19,7 +19,9 @@
 /[Bb]uilds5/
 /[Tt]estBuild/
 /[Bb]uildNoHealthBar/
+/[Bb]uildWithoHealthBar/
 /[Ww]ebGLBuild/
+/[Ww]ebGLBuildWithHealthbar/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 

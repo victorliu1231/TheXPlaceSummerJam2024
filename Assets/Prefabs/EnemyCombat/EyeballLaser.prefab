@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGhost: 0
-  damage: 20
+  damage: 30
   lifetime: 0.5
   hitParticlesPrefab: {fileID: 8200997794482322057}
   canCauseKnockback: 1

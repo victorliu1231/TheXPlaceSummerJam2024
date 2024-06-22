@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4cd189512cd98e498318ac15145b119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
+  speed: 1
   currentHealth: 0
   maxHealth: 75
   invincible: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
   immunityTime: 0.4
   healthbar: {fileID: 0}
   canReceiveDamage: 1
-  attackCooldownDuration: 4
+  attackCooldownDuration: 2.5
   target: {fileID: 0}
   canCauseKnockback: 1
   weaponInHand: {fileID: 7254130898719337351}

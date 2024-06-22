@@ -1,6 +1,5 @@
 to-do list
 - weird bug where player ghost turns blue if hit by enemy (will re-arise if player is no longer invincible)
-- make webgl build and share to Jacob
 - turn on player hp again?
 - show score upon death screen and if they reached a new high score
 - upload screenshots of gameplay to itch.io
@@ -8,6 +7,7 @@ to-do list
 - error sfx is too quiet by default and plays too late
 - when you kill the enemies in one stage, should they respawn again? idk. could poll this
 - laser beam glitchy bc its chunky for whatever reason idk why
+- should laser beam from player only fire across map and not bidirectional
 
 add
 - mobile support lol?
