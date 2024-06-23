@@ -12,7 +12,7 @@ public class RangedWeapon : Weapon
     [Tooltip("The offset from the ranged weapon that projectiles will spawn at, multiplied by the projectile's scale.")]
     public float spawnOffset;
 
-    void Start(){
+    new void Start(){
         base.Start();
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponCollectible : MonoBehaviour{
     public GameObject weaponPrefab;
-    private Collider2D collider;
+    private new Collider2D collider;
 
     void Start(){
         collider = GetComponent<Collider2D>();

@@ -15,6 +15,7 @@ TagManager:
   - FireballWeapon
   - SwingableMeleeObject
   - Settings
+  - PopupCanvas
   layers:
   - Default
   - TransparentFX

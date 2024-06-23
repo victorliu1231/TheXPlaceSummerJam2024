@@ -25,7 +25,7 @@ public class PlayerGhost : Entity
     private Vector2 lastSnapPos;
     private bool hasSnapped = false;
 
-    void Start()
+    new void Start()
     {
         base.Start();
         anim = GetComponent<Animator>();
@@ -33,6 +33,11 @@ public class PlayerGhost : Entity
         if (weaponInHand != null) weaponInHand.transform.SetParent(rightWeaponBinding);
         stageIndicator.SetParent(stageIndicatorRightBinding);
         faceDirection = FaceDirection.Right;
+        if (GameManager.Instance.inTutorial){
+            maxHealth = 100000;
+            currentHealth = maxHealth;
+            healthbar.UpdateBar(currentHealth, 0, maxHealth, true);
+        }
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
 

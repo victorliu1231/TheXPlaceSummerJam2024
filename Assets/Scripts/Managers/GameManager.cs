@@ -5,6 +5,7 @@ using TMPro;
 using Kino;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -60,8 +61,11 @@ public class GameManager : MonoBehaviour
     [Header("Death Screen")]
     public GameObject deathScreen;
     public GameObject playAgainButton;
+    public GameObject gameOverMainMenuButton;
     public GameObject youDiedText;
     public GameObject youRanOutOfTimeText;
+    public TextMeshProUGUI totalTimeText;
+    public GameObject newLongestRunText;
     public bool isGameOver = false;
     public GameObject blackScreen;
     [Header("Collectibles")]
@@ -93,7 +97,9 @@ public class GameManager : MonoBehaviour
     [Header("Tutorial")]
     public bool inTutorial = false;
     public GameObject doneWithTutorialGameObject;
+    public GameObject doneWithTutorialGameObject2;
     public bool isBeginTime = false;
+    public TextMeshProUGUI explainTimeMultiplierTutorialText;
     
     [Header("Debugging")]
     public bool isDebugging = true;
@@ -128,10 +134,13 @@ public class GameManager : MonoBehaviour
         isNewTimeMultiplerDisplayOn = false;
         if (!isTickSecondCoroutineOn) StartCoroutine(TickSecondHand());
         deathScreen.SetActive(false);
-        playAgainButton.SetActive(false);
-        youDiedText.SetActive(false);
-        youRanOutOfTimeText.SetActive(false);
-        bossGUI.SetActive(false);
+        if (playAgainButton != null) playAgainButton.SetActive(false);
+        if (gameOverMainMenuButton != null) gameOverMainMenuButton.SetActive(false);
+        if (youDiedText != null) youDiedText.SetActive(false);
+        if (youRanOutOfTimeText != null) youRanOutOfTimeText.SetActive(false);
+        if (totalTimeText != null) totalTimeText.enabled = false;
+        if (newLongestRunText != null) newLongestRunText.SetActive(false);
+        if (bossGUI != null) bossGUI.SetActive(false);
         GameObject data = GameObject.FindGameObjectWithTag("Data");
         if (data != null) playerName = PersistentData.Instance.playerName;
 
@@ -155,6 +164,11 @@ public class GameManager : MonoBehaviour
             }
             playerStrengthMultiplier += (level % everyXLevelsPlayerGetsStronger)*playerStrengthBoostMultiplier;
             enemyStrengthMultiplier += (level % everyXLevelsEnemyGetsStronger)*enemyStrengthBoostMultiplier; */
+        }
+        if (inTutorial){
+            if (explainTimeMultiplierTutorialText != null) {
+                explainTimeMultiplierTutorialText.text = $"every {everyXLevelsSpeedUpTime} levels, the time multiplier increases by {timeSpeedUpBoost} x.\n\nSo at level 6, the clock will be moving at 1.5 x speed.";
+            }
         }
     }
 
@@ -246,8 +260,12 @@ public class GameManager : MonoBehaviour
                     StartCoroutine(NextStage());
                 }
                 if (isBeginTime) currentTime += Time.deltaTime;
-                if (enemiesParent.childCount == 0 && currentTime >= 30 && !inTransition){
+                if (enemiesParent.childCount == 0 && currentTime >= 35 && !inTransition){
                     doneWithTutorialGameObject.SetActive(true);
+                    doneWithTutorialGameObject2.SetActive(true);
+                } else {
+                    doneWithTutorialGameObject.SetActive(false);
+                    doneWithTutorialGameObject2.SetActive(false);
                 }
             }
         }
@@ -413,7 +431,6 @@ public class GameManager : MonoBehaviour
         levelText.text = "Level " + (level + 1);
         glitch.scanLineJitter = 1f;
         glitch.verticalJump = 0.4f;
-        PersistentData.Instance.CreateNewSave(0);
         AudioManager.GetSFX("TimeWarp")?.Play();
         
         yield return new WaitForSeconds(nextLevelTransitionDuration);
@@ -459,7 +476,17 @@ public class GameManager : MonoBehaviour
         blackScreen.SetActive(false);
         player.SetActive(false);
         AudioManager.GetSoundtrack("BossTheme").Play();
-        playAgainButton.SetActive(true);
+        if (playAgainButton != null) playAgainButton.SetActive(true);
+        if (gameOverMainMenuButton != null) gameOverMainMenuButton.SetActive(true);
+        if (totalTimeText != null) {
+            totalTimeText.enabled = true;
+            totalTimeText.text = $"Total Time: {(int)(totalTime / 3600)}H {(int)(totalTime / 60)}M {(int)(totalTime % 60)}S";
+        }
+        if (newLongestRunText != null){
+            List<PlayerData> playerDatas = PersistentData.currSaveData.playerDatas.OrderBy(playerData => playerData.playerTotalTime).ToList();
+            playerDatas.Reverse();
+            if (playerDatas.Count == 1 || totalTime > playerDatas[1].playerTotalTime) newLongestRunText.SetActive(true);
+        } 
     }
 
     public void PlayAgain(){
@@ -469,6 +496,7 @@ public class GameManager : MonoBehaviour
     public void ReturnToMenu(){
         Time.timeScale = 1f;
         SceneManager.LoadScene("Main_Menu_VL");
+        PersistentData.Instance.Invoke("Rebind",0.1f); // have to call invoke bc sceene loads in at end of frame
     }
 
     public void PauseGame(){

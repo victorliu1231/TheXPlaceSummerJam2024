@@ -17,7 +17,7 @@ public class Eyeball : Enemy
         seed = (int)transform.position.x + (int)transform.position.y;
     }
 
-    void Start(){
+    new void Start(){
         base.Start();
         teleportCooldownTimer = teleportCooldownDuration; // speeds up first attack
     }

@@ -2134,7 +2134,7 @@ GameObject:
   - component: {fileID: 273643667}
   - component: {fileID: 273643670}
   - component: {fileID: 273643669}
-  - component: {fileID: 273643668}
+  - component: {fileID: 273643671}
   m_Layer: 5
   m_Name: ViewPort
   m_TagString: Untagged
@@ -2162,19 +2162,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &273643668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 273643666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowMaskGraphic: 0
 --- !u!114 &273643669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2188,7 +2175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.8352941}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2213,6 +2200,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 273643666}
   m_CullTransparentMesh: 1
+--- !u!114 &273643671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273643666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
 --- !u!1 &301959735
 GameObject:
   m_ObjectHideFlags: 0
@@ -3062,7 +3063,7 @@ GameObject:
   - component: {fileID: 499791167}
   m_Layer: 5
   m_Name: PopupCanvas
-  m_TagString: Untagged
+  m_TagString: PopupCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3637,13 +3638,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 1379430343}
-  contentPanel: {fileID: 660030189}
+  popupCanvas: {fileID: 0}
+  highScorePanel: {fileID: 0}
   numOneBanner: {fileID: 1948277495261954093, guid: 32180f786bd6ab74a94531cfe47be130, type: 3}
   numTwoBanner: {fileID: 2512887299089577956, guid: 08ff1aa25cd72694ab06a50064fa2712, type: 3}
   numThreeBanner: {fileID: 4477994705635652365, guid: 6c2b1ac1c5ec59b4bb9b1f686a7e4307, type: 3}
   genericNumBanner: {fileID: 5829558452732843740, guid: 81dcde52b7a163a41bcdf5795cdebfcc, type: 3}
   noSavesYet: {fileID: 810497733}
   playerName: 
+  level: 0
+  totalTime: 0
   justBootedUp: 1
 --- !u!4 &560114538
 Transform:
@@ -4042,7 +4046,7 @@ GameObject:
   - component: {fileID: 660030190}
   m_Layer: 5
   m_Name: Content
-  m_TagString: Untagged
+  m_TagString: HighScorePanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4944,8 +4948,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000015259, y: -0.0214}
-  m_SizeDelta: {x: 878, y: 553}
+  m_AnchoredPosition: {x: 0, y: -0.022797}
+  m_SizeDelta: {x: 1041.43, y: 553}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &810497735
 MonoBehaviour:
@@ -4967,7 +4971,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: No Saves Yet!
+  m_text: 'No High Scores Yet.
+
+
+    Play the game to get a high score!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf570010b29d0e647ae3c3613344e498, type: 2}
   m_sharedMaterial: {fileID: -8391152487728178958, guid: cf570010b29d0e647ae3c3613344e498, type: 2}
@@ -6480,7 +6487,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: bcfe80354fe71a14789003e906ab3e0a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: dac171b1a6e798b4281b7704a8e3ef7b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -7928,7 +7935,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 50
   m_Viewport: {fileID: 273643667}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
@@ -7966,7 +7973,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1c0c7a5e886103e489f8bf2fb554a2f0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 99c2e96930f431141a1f2bdc0b2a2d23, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -10120,18 +10127,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 723320273}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: PlayTutorial
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1439343700}
         m_TargetAssemblyTypeName: SuperJankLinking, Assembly-CSharp
         m_MethodName: PlaySFX
@@ -10142,6 +10137,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: ButtonClick
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 723320273}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: PlayTutorial
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1640013123
@@ -10380,16 +10387,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 18275}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
+      - m_Target: {fileID: 1439343700}
+        m_TargetAssemblyTypeName: SuperJankLinking, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: ButtonClick
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1655080533
@@ -12178,18 +12185,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 723320273}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: PlayGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1439343700}
         m_TargetAssemblyTypeName: SuperJankLinking, Assembly-CSharp
         m_MethodName: PlayButton
@@ -12200,6 +12195,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: ButtonClick
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 723320273}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: PlayGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1989337677

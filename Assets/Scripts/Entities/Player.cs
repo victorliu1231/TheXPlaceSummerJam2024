@@ -18,13 +18,18 @@ public class Player : Entity
     public enum FaceDirection{ Up, Down, Left, Right};
     public FaceDirection faceDirection;
 
-    void Start(){
+    new void Start(){
         base.Start();
         anim = GetComponent<Animator>();
         weaponInHand = GetComponentInChildren<Weapon>();
         if (weaponInHand != null) weaponInHand.transform.SetParent(rightWeaponBinding);
         stageIndicator.SetParent(stageIndicatorRightBinding);
         faceDirection = FaceDirection.Right;
+        if (GameManager.Instance.inTutorial){
+            maxHealth = 100000;
+            currentHealth = maxHealth;
+            healthbar.UpdateBar(currentHealth, 0, maxHealth, true);
+        }
     }
 
     // Update is called once per frame

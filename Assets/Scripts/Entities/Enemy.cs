@@ -21,7 +21,7 @@ public class Enemy : Entity
     public SpriteRenderer attackCooldownSprite;
     public bool isGhost;
 
-    public void Start(){
+    public new void Start(){
         base.Start();
         anim = GetComponent<Animator>();
         if (GameManager.Instance.isDebugging) {

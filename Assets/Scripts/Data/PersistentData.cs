@@ -8,17 +8,20 @@ public class PersistentData : MonoBehaviour
     private static PersistentData _instance;
 	public static PersistentData Instance { get { return _instance; } }
     public Settings settings;
-    public Transform contentPanel;
+    public Transform popupCanvas;
+    public Transform highScorePanel;
     public GameObject numOneBanner;
     public GameObject numTwoBanner;
     public GameObject numThreeBanner;
     public GameObject genericNumBanner;
     public GameObject noSavesYet;
     public string playerName;
+    public int level;
+    public float totalTime;
     public bool justBootedUp = true;
 
     // currSaveData and currLevelDatas are private vars accessible through getters
-    static SaveData currSaveData;
+    public static SaveData currSaveData;
 
     void Awake() 
     {
@@ -28,7 +31,16 @@ public class PersistentData : MonoBehaviour
         else {
             _instance = this;
             DontDestroyOnLoad(gameObject);
+
+            BindHighScorePanel();
         }
+    }
+
+    public void BindHighScorePanel(){
+        Debug.Log("high score panel being bound");
+        popupCanvas = GameObject.FindGameObjectWithTag("PopupCanvas").transform;
+        highScorePanel = popupCanvas.GetChild(1).GetChild(2).GetChild(0).GetChild(0);
+        noSavesYet = popupCanvas.GetChild(1).GetChild(4).gameObject;
     }
 
     // Save index 0 is always auto save; Save >= 1 (up to max) is manual save. 
@@ -52,7 +64,7 @@ public class PersistentData : MonoBehaviour
             if (settings != null) settings.loadVolumeSliders(AudioManager.Instance.volumeBGM, AudioManager.Instance.volumeSFX);
 
             // Clear out previous high scores
-            foreach (Transform child in contentPanel)
+            foreach (Transform child in highScorePanel)
             {
                 Destroy(child.gameObject);
             }
@@ -61,36 +73,63 @@ public class PersistentData : MonoBehaviour
                 noSavesYet.SetActive(true);
             } else {
                 // Add in previous high scores
-                GameObject newPlayerData;
-                currSaveData.playerDatas = currSaveData.playerDatas.OrderBy(playerData => playerData.playerTotalTime).ToList();
-                for (int i = 0; i < currSaveData.playerDatas.Count; i++)
-                {
-                    if (i == 0){
-                        newPlayerData = Instantiate(numOneBanner, contentPanel);
-                    } else if (i == 1){
-                        newPlayerData = Instantiate(numTwoBanner, contentPanel);
-                    } else if (i == 2){
-                        newPlayerData = Instantiate(numThreeBanner, contentPanel);
-                    } else {
-                        newPlayerData = Instantiate(genericNumBanner, contentPanel);
-                    }
-                    HighScoreBanner highScoreBanner = newPlayerData.GetComponent<HighScoreBanner>();
-                    highScoreBanner.playerNameText.text = currSaveData.playerDatas[i].playerName;
-                    highScoreBanner.playerLevelText.text = $"Level {currSaveData.playerDatas[i].playerLevel}";
-                    highScoreBanner.playerTotalTimeText.text = $"{(int)(currSaveData.playerDatas[i].playerTotalTime / 3600)}H {(int)(currSaveData.playerDatas[i].playerTotalTime / 60)}M {(int)(currSaveData.playerDatas[i].playerTotalTime % 60)}S";
-                    if (i > 2){
-                        highScoreBanner.playerRankText.text = (i + 1).ToString();
-                    }
-                }
+                UpdateLeaderboard();
             }
         } else {
             // Clear out previous high scores
-            foreach (Transform child in contentPanel)
+            foreach (Transform child in highScorePanel)
             {
                 Destroy(child.gameObject);
             }
             noSavesYet.SetActive(true);
             if (settings != null) settings.loadScreen(true);
+        }
+    }
+
+    public void Rebind(){
+        currSaveData = null;
+        DataManager.readFile(ref currSaveData, 0);
+        BindHighScorePanel();
+        UpdateLeaderboard();
+    }
+
+    public void UpdateLeaderboard(){
+        if(currSaveData != null)
+        {
+            noSavesYet.SetActive(false);
+            GameObject newBanner;
+            currSaveData.playerDatas = currSaveData.playerDatas.OrderBy(playerData => playerData.playerTotalTime).ToList();
+            currSaveData.playerDatas.Reverse();
+            foreach (Transform child in highScorePanel)
+            {
+                Destroy(child.gameObject);
+            }
+            
+            for (int i = 0; i < currSaveData.playerDatas.Count; i++)
+            {
+                if (i == 0){
+                    newBanner = Instantiate(numOneBanner, highScorePanel);
+                } else if (i == 1){
+                    newBanner = Instantiate(numTwoBanner, highScorePanel);
+                } else if (i == 2){
+                    newBanner = Instantiate(numThreeBanner, highScorePanel);
+                } else {
+                    newBanner = Instantiate(genericNumBanner, highScorePanel);
+                }
+                HighScoreBanner highScoreBanner = newBanner.GetComponent<HighScoreBanner>();
+                highScoreBanner.playerNameText.text = currSaveData.playerDatas[i].playerName;
+                highScoreBanner.playerLevelText.text = $"Level {currSaveData.playerDatas[i].playerLevel}";
+                highScoreBanner.playerTotalTimeText.text = $"{(int)(currSaveData.playerDatas[i].playerTotalTime / 3600)}H {(int)(currSaveData.playerDatas[i].playerTotalTime / 60)}M {(int)(currSaveData.playerDatas[i].playerTotalTime % 60)}S";
+                if (i > 2){
+                    highScoreBanner.playerRankText.text = (i + 1).ToString();
+                }
+            }
+        } else {
+            foreach (Transform child in highScorePanel)
+            {
+                Destroy(child.gameObject);
+            }
+            noSavesYet.SetActive(true);
         }
     }
 
@@ -115,13 +154,12 @@ public class PersistentData : MonoBehaviour
             newSave.playerDatas = new List<PlayerData>();
             newSave.playerDatas.Add(newPlayerData);
         }
-        newSave.playerDatas = newSave.playerDatas.OrderBy(playerData => playerData.playerTotalTime).ToList();
 
         if (!GameManager.Instance.isDebugging && settings != null) newSave.fullScreen = settings.fullScreen;
         else newSave.fullScreen = false;
         newSave.volumeBGM = AudioManager.Instance.volumeBGM;
         newSave.volumeSFX = AudioManager.Instance.volumeSFX;
-
+        currSaveData = newSave;
         // write the current save data to the saveIndex save
         DataManager.writeFile(ref newSave, saveIndex);
     }

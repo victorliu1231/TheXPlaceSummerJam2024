@@ -11,9 +11,9 @@ public class MeleeWeapon : Weapon
     public bool canCauseKnockback = true;
     public float knockbackForce;
     public string targetTag;
-    private Collider2D collider;
+    private new Collider2D collider;
 
-    void Start(){
+    new void Start(){
         base.Start();
         collider = GetComponent<Collider2D>();
         if (collider != null) collider.enabled = false;
