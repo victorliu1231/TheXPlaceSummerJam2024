@@ -18,10 +18,14 @@
 /[Bb]uild5/
 /[Bb]uilds5/
 /[Tt]estBuild/
-/[Bb]uildNoHealthBar/
-/[Bb]uildWithHealthBar/
-/[Ww]ebGLBuild/
-/[Ww]ebGLBuildWithHealthbar/
+/WindowsBuildNoHealthBar/
+/WindowsBuildWithHealthBar/
+/MacBuildNoHealthBar/
+/MacBuildWithHealthBar/
+/LinuxBuildNoHealthBar/
+/LinuxBuildWithHealthBar/
+/WebGLBuildWithNoHealthbar/
+/WebGLBuildWithHealthbar/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 

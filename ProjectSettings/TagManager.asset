@@ -16,6 +16,9 @@ TagManager:
   - SwingableMeleeObject
   - Settings
   - PopupCanvas
+  - HighScorePanel
+  - EnemyWeapon
+  - EnemyDamageable
   layers:
   - Default
   - TransparentFX
