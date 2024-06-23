@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class WeaponCollectible : MonoBehaviour{
     public GameObject weaponPrefab;
-    private new Collider2D collider;
+    public new Collider2D collider2D;
 
-    void Start(){
-        collider = GetComponent<Collider2D>();
-        collider.enabled = false;
+    void Awake(){
+        collider2D = GetComponent<Collider2D>();
+        collider2D.enabled = false;
         Invoke("EnableCollider", 1f);
     }
 
     void EnableCollider(){
-        collider.enabled = true;
+        collider2D.enabled = true;
     }
 }

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8382661064684102830}
   m_Layer: 0
   m_Name: EyeballLaser
-  m_TagString: Untagged
+  m_TagString: EnemyDamageable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,6 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGhost: 0
   damage: 30
+  parentType: 1
   lifetime: 0.5
   hitParticlesPrefab: {fileID: 8200997794482322057}
   canCauseKnockback: 1

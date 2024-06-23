@@ -102,11 +102,18 @@ MonoBehaviour:
   weaponType: 1
   faceDirection: 0
   isInputControlled: 1
+  isGhost: 0
+  ghostMousePos: {x: 0, y: 0}
+  target: {fileID: 0}
   cooldownDuration: 2
   weaponCollectible: {fileID: 1229137696050744660, guid: ffb42e37e1c039641ae4e64bef26696d, type: 3}
   timeDelayBetweenPlayerPosStorageAndAttack: 0
   prefab: {fileID: 1453286740839070790, guid: 733fe38acc7560149a7b9e29c20e5b66, type: 3}
   fireParticles: {fileID: 8095681906563546390}
+  spawnOffset: 0
+  limitMaxActiveProjectiles: 1
+  maxActiveProjectiles: 3
+  numActiveProjectiles: 0
 --- !u!114 &-4539225380288245021
 MonoBehaviour:
   m_ObjectHideFlags: 0

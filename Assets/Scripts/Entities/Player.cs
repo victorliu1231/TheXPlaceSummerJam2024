@@ -111,7 +111,7 @@ public class Player : Entity
     void OnTriggerEnter2D(Collider2D collider){
         if (collider.gameObject.tag == "Collectible"){
             WeaponCollectible weaponCollectible = collider.gameObject.GetComponent<WeaponCollectible>();
-            if (weaponCollectible != null && weaponInHand == null){
+            if (weaponCollectible != null && weaponInHand == null && weaponCollectible.collider2D.enabled){
                 GameObject newWeapon = Instantiate(weaponCollectible.weaponPrefab, transform.position, Quaternion.identity, rightWeaponBinding);
                 weaponInHand = newWeapon.GetComponent<Weapon>();
                 weaponInHand.GetComponent<TimeSlowdown>()?.ChangeStage(GameManager.Instance.stage, false);

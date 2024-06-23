@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6236624273567864512}
   m_Layer: 0
   m_Name: ArcherArrow
-  m_TagString: Untagged
+  m_TagString: EnemyWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGhost: 0
   damage: 20
+  parentType: 1
   speed: 5
   lifetime: 10
   hitParticles: {fileID: 0}

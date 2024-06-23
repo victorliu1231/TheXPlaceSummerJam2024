@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Bullet : Projectile
 {
-    public float damage;
     public float speed;
     public float lifetime;
     public ParticleSystem hitParticles;
@@ -18,6 +17,9 @@ public class Bullet : Projectile
         Destroy(gameObject, lifetime * Util.GetStage(GetComponent<TimeSlowdown>()));
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (!isGhost) GetComponent<TimeSlowdown>()?.ChangeStage(GameManager.Instance.stage, false);
+        //if (GetComponent<TimeSlowdown>() != null && parentType == ParentType.Player){
+        //    damage = damage * 1f / GetComponent<TimeSlowdown>().stage;
+        //}
     }
 
     void Update(){

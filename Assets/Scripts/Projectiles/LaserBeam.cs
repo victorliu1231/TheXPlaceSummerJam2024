@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LaserBeam : Projectile
 {
-    public float damage;
     [Tooltip("If lifetime < 0, then the laser will not destroy itself")]
     public float lifetime;
     public GameObject hitParticlesPrefab;
@@ -19,6 +18,9 @@ public class LaserBeam : Projectile
             Destroy(gameObject, lifetime * Util.GetStage(GetComponent<TimeSlowdown>()));
             if (!isGhost) GetComponent<TimeSlowdown>()?.ChangeStage(GameManager.Instance.stage);
         }
+        //if (GetComponent<TimeSlowdown>() != null && parentType == ParentType.Player){
+        //    damage = damage * 1f / GetComponent<TimeSlowdown>().stage;
+        //}
     }
 
     void OnTriggerEnter2D(Collider2D other){

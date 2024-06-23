@@ -1,6 +1,5 @@
 gameplay features to add / bugs to fix
-- weird item duplication glitch where if you drop a weapon near ghost just at the right time, it duplicates the item
-- laser beam glitchy bc its chunky for whatever reason idk why
+- weird item duplication glitch where if you drop a weapon near ghost just at the right time, it duplicates the item - probably because item is not destroyed fast enough
 - mark which ghosts you've hit in your previous stages upon new timeline so that the player doesn't repeat hit em
 
 branding list
@@ -15,9 +14,9 @@ balancing list
 - one thing to consider is making the club into laser mechanic explicit?
 - laserbeam cheese strategy prevent somehow
 --- multiple routes
---- laser beam can only have 3 active charges
+--- laser beam can only have 3 active charges (probably best option)
 --- lock weapons to specific stages
---- further stages do less damage
+--- further stages do less damage (idk this doesn't solve the laser cheese strategy)
 - make player able to phase thru enemies?
 - lasgun and club did no damage?
 

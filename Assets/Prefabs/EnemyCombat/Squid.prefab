@@ -272,6 +272,7 @@ MonoBehaviour:
   canCauseKnockback: 1
   knockbackForce: 0.1
   targetTag: Player
+  parentType: 1
 --- !u!61 &6022762390791781579
 BoxCollider2D:
   m_ObjectHideFlags: 0

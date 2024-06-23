@@ -12,11 +12,16 @@ public class MeleeWeapon : Weapon
     public float knockbackForce;
     public string targetTag;
     private new Collider2D collider;
+    public enum ParentType { Player, Enemy};
+    public ParentType parentType;
 
     new void Start(){
         base.Start();
         collider = GetComponent<Collider2D>();
         if (collider != null) collider.enabled = false;
+        //if (GetComponent<TimeSlowdown>() != null && parentType == ParentType.Player){
+        //    meleeDamage = meleeDamage * 1f / GetComponent<TimeSlowdown>().stage;
+        //}
     }
 
     public override void Attack(){

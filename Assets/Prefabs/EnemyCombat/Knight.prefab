@@ -592,6 +592,7 @@ MonoBehaviour:
   canCauseKnockback: 1
   knockbackForce: 0.3
   targetTag: Player
+  parentType: 1
 --- !u!114 &6450153314007221651
 MonoBehaviour:
   m_ObjectHideFlags: 0
